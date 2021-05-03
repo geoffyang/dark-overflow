@@ -19,12 +19,12 @@ module.exports = {
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Profile', key: 'id' }
+        references: { model: 'Profiles', key: 'id' }
       },
       categoryId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Category', key: 'id' }
+        references: { model: 'Categories', key: 'id' }
       },
       createdAt: {
         allowNull: false,

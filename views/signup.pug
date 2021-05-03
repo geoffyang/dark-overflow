@@ -3,7 +3,7 @@ include utils.pug
 
 block content
     +validationErrorSummary(errors)
-    form(action="/signup", method="post")
+    form(action="/users/signup", method="post")
         input(type="hidden" name ="_csrf" value = csrfToken)
         +field("Username", "userName", user.userName  )
         +field("First Name", "firstName", user.firstName  )
