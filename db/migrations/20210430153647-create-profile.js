@@ -26,16 +26,23 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true
       },
+      hashedPassword: {
+        type: Sequelize.STRING.BINARY,
+        allowNull: false
+      },
       needsJob: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
+        // allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       offeringJob: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
+        // allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       score: {
         allowNull: false,
+        defaultValue: "0",
         type: Sequelize.INTEGER
       },
       createdAt: {
