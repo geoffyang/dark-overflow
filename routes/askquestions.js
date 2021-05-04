@@ -26,12 +26,14 @@ router.post('/', csrfProtection, asyncHandler(async (req, res, next) => {
     res.render('askQuestions', {
         csrfToken: req.csrfToken()
     })
-
-    const { questionText, chooseCategory } = req.body;
-    const question = Question.build({
+    const { userId } = req.session.auth;
+    const { title, text , chosenCategory } = req.body;
+    console.log(chosenCategory)
+    const question = await Question.create({
+        userId,
         title: title,
         text: text,
-        // categoryID: chosenCategory, //this is currently not ID value
+        categoryId: chosenCategory,
         // userID: xxx,
         score: 0
     })
