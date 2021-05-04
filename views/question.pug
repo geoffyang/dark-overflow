@@ -1,8 +1,8 @@
 extends layout.pug
-include utils.pug.
+include utils.pug
 
 block content
     div
-        each val, key in question
+        each val, key in question.dataValues
             li= key + ' *** ' + val
 
