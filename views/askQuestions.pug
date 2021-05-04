@@ -4,11 +4,13 @@ include utils.pug.
 block content
     div
         p Would you like to ask a question?
-    form(action="/askquestion" method="post")
+    form(action="/askQuestions" method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
-        +field("text", "text")
-        select(name='chooseCategory', id="")
+        +field("Title", "title", "")
+        +field("Question", "text", "")
+        select(name='chosenCategory', id="")
             each category in categoryList
                 option=category
         input(type="submit") Submit
 
+//mixin field(labelText, fieldName, fieldValue, fieldType = 'text', placeholder = null)

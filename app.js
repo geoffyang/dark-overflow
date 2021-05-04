@@ -46,7 +46,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/questions', questionsRouter);
-app.use('/askquestions', askQuestionsRouter);
+app.use('/askQuestions', askQuestionsRouter);
 
 app.use('/answers', answersRouter);
 
