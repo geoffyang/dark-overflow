@@ -13,7 +13,8 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('Questions', [
-      { text: 'What?',
+      { title: 'A question',
+        text: 'What?',
         score: 0,
         userId: 1,
         categoryId: 1,
