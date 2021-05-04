@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     commentId: DataTypes.INTEGER
   }, {});
   CommentVote.associate = function(models) {
-    // associations can be defined here
+    CommentVote.belongsTo (models.Profile, {foreignKey: 'userId'})
+    CommentVote.belongsTo (models.Comment, {foreignKey: 'commentId'}) 
   };
   return CommentVote;
 };
