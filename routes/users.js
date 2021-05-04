@@ -117,7 +117,9 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
   const loginErrors = validationResult(req);
   let errors = [];
   if (loginErrors.isEmpty()) {
+    
     const user = await db.Profile.findOne({ where: { userName } });
+    console.log("THIS IS THE LINE **********************", user)
     if (user) {
       const authorized = await bcrypt.compare(password, user.hashedPassword.toString());
       if (authorized) {
@@ -143,7 +145,7 @@ router.post("/logout", (req, res) => {
 
   logoutUser(req, res)
 
-  res.redirect('/');
+  req.session.save(() => res.redirect("/"))
 
 });
 
