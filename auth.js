@@ -40,7 +40,7 @@ const logoutUser = (req, res) => {
 
 const requireAuth = (req, res, next) => {
     console.log(res)
-    if (res.locals.authenticated) {
+    if (!res.locals.authenticated) {
         res.redirect('/users/signup');
     } else {
         next();
