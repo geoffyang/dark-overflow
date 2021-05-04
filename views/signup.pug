@@ -2,6 +2,7 @@ extends layout.pug
 include utils.pug
 
 block content
+
     div(class = "signup_errors")
         +validationErrorSummary(errors)
     div(class = "signup_user")
@@ -14,3 +15,4 @@ block content
             +field("Password", "password", "", "password" ) )
             +field("Confirm Password", "confirmPassword", "", "password" ) )
             button(type="submit") Submit
+

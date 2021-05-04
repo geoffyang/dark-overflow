@@ -11,7 +11,13 @@ module.exports = (sequelize, DataTypes) => {
     score: DataTypes.INTEGER
   }, {});
   Profile.associate = function(models) {
-    // associations can be defined here
+    Profile.hasMany(models.Question, { foreignKey: 'userId'})
+    Profile.hasMany(models.Answer, { foreignKey: 'userId'})
+    Profile.hasMany(models.QuestionVote, { foreignKey: 'userId'})
+    Profile.hasMany(models.AnswerVote, { foreignKey: 'userId'})
+    Profile.hasMany(models.CommentVote, { foreignKey: 'userId'})
+    Profile.hasMany(models.Comment, { foreignKey: 'userId'})
+
   };
   return Profile;
 };
