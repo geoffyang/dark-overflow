@@ -142,9 +142,12 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
 router.post("/logout", (req, res) => {
 
   logoutUser(req, res)
-  res.status(403).redirect("/")
+
+  req.session.save(() => res.redirect("/"))
+
 
 });
+
 
 
 
