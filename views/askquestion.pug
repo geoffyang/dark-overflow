@@ -1,14 +1,15 @@
 extends layout.pug
-include utils.pug.
+include utils.pug
 
 block content
     div
         p Would you like to ask a question?
-    form(action="/askquestion" method="post")
+    form(action="/askquestions" method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
-        +field("text", "text")
+        +field("Title", "title")
+        +field("Question", "text")
         select(name='chooseCategory', id="")
             each category in categoryList
-                option=category
-        input(type="submit") Submit
+                option(value=category.id)=category.name
+        button(type="submit") Submit
 

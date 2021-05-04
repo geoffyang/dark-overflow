@@ -9,22 +9,26 @@ const { Question, Category } = require('../db/models');
 
 router.get('/', csrfProtection, async (req, res, next) => {
 
+    const categoryList =  await Category.findAll();
     res.render('askquestion', {
         title: "Ask a Question",
         csrfToken: req.csrfToken(),
-
+        categoryList
     })
 })
 
 router.post('/', csrfProtection, asyncHandler(async (req, res, next) => {
     // add userName to DB build
 
-
+    const { userId } = req.session.auth;
     const categoryList = await Category.findAll();
-    const { text, chooseCategory } = req.body;
-    const question = Question.build({
+    const { title, text, chooseCategory } = req.body;
+    const question = await Question.create({
+        userId,
+        title,
         text: text,
-        categoryID: chooseCategory
+        categoryId: chooseCategory,
+        score: 0
 
     })
     res.render('question', {
