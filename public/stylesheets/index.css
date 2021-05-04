@@ -1,10 +1,22 @@
+/*------------------root variable setup------------------------*/
 :root {
   --main-background: #222831;
   --secondary-background: #2d4059;
   --accent-color: #ff5722;
   --text-color: #eeeeee;
 }
+
+/*----------------------Basic body setup----------------------*/
+
 * {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-kerning: auto;
+  font-size: 15px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-variant-ligatures: normal;
+  font-weight: normal;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -19,6 +31,9 @@ header {
   align-items: center;
   padding: 15px 5px;
 }
+
+/*------------------------Navbar setup-------------------------*/
+
 .nav_bar {
   background-color: var(--secondary-background);
 }
@@ -54,7 +69,6 @@ img {
   color: var(--accent-color);
 }
 .login_signup {
-
   padding: 0px 50px;
 }
 
@@ -70,5 +84,7 @@ img {
 }
 .login_button:hover,
 .signup_button:hover {
-  background-color: #ff5622ab;
+  background-color: #ff562285;
 }
+
+/*--------------------------signup setup------------------------*/
