@@ -10,7 +10,7 @@ block content
         +field("Question", "text", "")
         select(name='chosenCategory', id="")
             each category in categoryList
-                option=category.name
+                option(value=category.id)=category.name
         button(type="submit") Submit
 
 
