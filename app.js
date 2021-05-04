@@ -13,7 +13,7 @@ const askQuestionsRouter = require('./routes/askquestions');
 const answersRouter = require('./routes/answers');
 const answerQuestionRouter = require('./routes/answerquestion');
 
-const { restoreUser } = require('./auth.js')
+const { restoreUser, requireAuth } = require('./auth.js')
 
 const app = express();
 
@@ -42,7 +42,6 @@ app.use(
 store.sync();
 
 app.use(restoreUser);
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
