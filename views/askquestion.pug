@@ -7,7 +7,7 @@ block content
     form(action="/askquestion" method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
         +field("text", "text")
-        +select(name='dropDown', id="")
+        select(name='chooseCategory', id="")
             each category in categoryList
                 option=category
         input(type="submit") Submit

@@ -17,7 +17,16 @@ router.get('/', csrfProtection, async (req, res, next) => {
 })
 
 router.post('/', csrfProtection, asyncHandler(async (req, res, next) => {
+    // add userName to DB build
+
+
     const categoryList = await Category.findAll();
+    const { text, chooseCategory } = req.body;
+    const question = Question.build({
+        text: text,
+        categoryID: chooseCategory
+
+    })
     res.render('question', {
         csrfToken: req.csrfToken(),
         categoryList
