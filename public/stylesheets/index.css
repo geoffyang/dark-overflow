@@ -17,7 +17,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0%;
+  padding: 15px 5px;
+}
+.nav_bar {
+  background-color: var(--secondary-background);
 }
 .logo {
   justify-self: stretch;
@@ -26,14 +29,12 @@ header {
   width: 100%;
   object-fit: contain;
 }
+
 img {
-  max-width: 200px;
+  max-width: 150px;
   max-height: 100%;
 }
-.nav_bar {
-  background-color: var(--secondary-background);
 
-}
 .nav_container {
   list-style: none;
 }
@@ -43,9 +44,24 @@ img {
   padding: 0px 10px;
 }
 
+.nav_container li a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+}
+
+.nav_container li a:hover {
+  color: var(--accent-color);
+}
+.login_signup {
+
+  padding: 0px 50px;
+}
+
 .login_button,
 .signup_button {
-  padding: 9px 25px;
+  padding: 5px 15px;
+  margin: 5px;
   background-color: var(--accent-color);
   border: none;
   border-radius: 50px;
@@ -55,13 +71,4 @@ img {
 .login_button:hover,
 .signup_button:hover {
   background-color: #ff5622ab;
-}
-
-.nav_container li a {
-  color: var(--text-color);
-  text-decoration: none;
-  transition: all 0.3s ease 0s;
-}
-.nav_container li a:hover {
-  color: var(--accent-color);
 }
