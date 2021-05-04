@@ -7,33 +7,33 @@ const { Question, Category } = require('../db/models');
 
 // to-do: add form validators
 
+// GET /askQuestions:
 router.get('/', csrfProtection, async (req, res, next) => {
 
-    const categoryList =  await Category.findAll();
-    res.render('askquestion', {
+    const question = Question.build({});
+    const categoryList = await Category.findAll();
+    res.render('askQuestions', {
         title: "Ask a Question",
         csrfToken: req.csrfToken(),
         categoryList
     })
 })
 
+// POST /askQuestions:
 router.post('/', csrfProtection, asyncHandler(async (req, res, next) => {
     // add userName to DB build
 
-    const { userId } = req.session.auth;
-    const categoryList = await Category.findAll();
-    const { title, text, chooseCategory } = req.body;
-    const question = await Question.create({
-        userId,
-        title,
-        text: text,
-        categoryId: chooseCategory,
-        score: 0
-
+    res.render('askQuestions', {
+        csrfToken: req.csrfToken()
     })
-    res.render('question', {
-        csrfToken: req.csrfToken(),
-        categoryList
+
+    const { questionText, chooseCategory } = req.body;
+    const question = Question.build({
+        title: title,
+        text: text,
+        // categoryID: chosenCategory, //this is currently not ID value
+        // userID: xxx,
+        score: 0
     })
 }))
 

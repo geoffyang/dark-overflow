@@ -21,15 +21,16 @@
   margin: 0;
   padding: 0;
 }
-body {
-  background-color: var(--main-background);
-  color: var(--text-color);
-}
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 5px;
+}
+body {
+  text-align: center;
+  background-color: var(--main-background);
+  color: var(--text-color);
 }
 
 /*------------------------Navbar setup-------------------------*/
@@ -88,3 +89,35 @@ img {
 }
 
 /*--------------------------signup setup------------------------*/
+
+.signup_form {
+  margin: 50px auto;
+  display: flex;
+  height: 400px;
+  align-items: center;
+  justify-content: center;
+  max-width: 700px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: var(--secondary-background);
+}
+.signup_form h1 {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+.signup_errors {
+  background-color: red;
+}
+.signup_user form {
+  display: flex;
+  flex-wrap: wrap;
+}
+.signup_user form .field {
+  size: 300px;
+}
+
+.signup_user form .form-control {
+  margin: 20px 0 12px 0;
+  width: calc(100% / 2- 20px);
+}
