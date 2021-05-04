@@ -18,7 +18,8 @@ module.exports = {
       },
       score: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        default: 0
       },
       userId: {
         allowNull: false,
