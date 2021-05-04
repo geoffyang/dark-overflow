@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
     score: DataTypes.INTEGER
   }, {});
   Profile.associate = function(models) {
-    Profile.belongsTo(models.Question, { foreignKey: userId})
-    Profile.belongsTo(models.Answer, { foreignKey: userId})
-    Profile.belongsTo(models.QuestionVote, { foreignKey: userId})
-    Profile.belongsTo(models.AnswerVote, { foreignKey: userId})
-    Profile.belongsTo(models.CommentVote, { foreignKey: userId})
-    Profile.belongsTo(models.Comment, { foreignKey: userId})
+    Profile.hasMany(models.Question, { foreignKey: 'userId'})
+    Profile.hasMany(models.Answer, { foreignKey: 'userId'})
+    Profile.hasMany(models.QuestionVote, { foreignKey: 'userId'})
+    Profile.hasMany(models.AnswerVote, { foreignKey: 'userId'})
+    Profile.hasMany(models.CommentVote, { foreignKey: 'userId'})
+    Profile.hasMany(models.Comment, { foreignKey: 'userId'})
 
   };
   return Profile;
