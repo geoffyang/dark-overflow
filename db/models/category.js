@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {});
   Category.associate = function(models) {
-    Category.hasMany (models.Question, {foreignKey: categoryId})
+    Category.hasMany (models.Question, {foreignKey: 'categoryId'})
   };
   return Category;
 };

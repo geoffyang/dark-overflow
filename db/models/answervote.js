@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     answerId: DataTypes.INTEGER
   }, {});
   AnswerVote.associate = function(models) {
-    AnswerVote.belongsTo (models.Profile, {foreignKey: userId})
-    AnswerVote.belongsTo (models.Answer, {foreignKey: answerId}) 
+    AnswerVote.belongsTo (models.Profile, {foreignKey: 'userId'})
+    AnswerVote.belongsTo (models.Answer, {foreignKey: 'answerId'}) 
   };
   return AnswerVote;
 };
