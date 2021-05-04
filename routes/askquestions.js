@@ -5,7 +5,7 @@ const { Question, Category } = require('../db/models');
 const { check, validationResult } = require('express-validator');
 const { requireAuth } = require('../auth')
 
-// to-do: add form validators
+
 
 // GET /askQuestions:
 router.get('/', requireAuth, csrfProtection, async (req, res, next) => {
