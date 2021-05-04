@@ -2,30 +2,31 @@ doctype html
 html
   head
     block head
-    header(class = 'nav_bar')
-      //1 far left -- logo which navigates to landing page
-      a(href="/" class = logo)
-        img(src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png")
-      //2 search bar
-      <input type="text" placeholder="Search..">
-      nav(class = "nav_container")
-        ul
-          li(class = "categories_button")
-            a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
-          li(class = "ask_question_button")
-            a(href ='/askquestions') Ask a question
+      link(rel="stylesheet" href="/stylesheets/index.css")
+      header(class = 'nav_bar')
+        //1 far left -- logo which navigates to landing page
+        a(href="/" class = logo)
+          img(src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png")
+        //2 search bar
+        <input type="text" placeholder="Search..">
+        nav(class = "nav_container")
+          ul
+            li(class = "categories_button")
+              a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
+            li(class = "ask_question_button")
+              a(href ='/askquestions') Ask a question
 
-      //5 if logged in, need logout button on far right
-      if locals.authenticated
-        div
-          span Welcome #{user.userName}
-          form(action= "/users/logout" method= "post" )
-            button(type= "submit") Logout
-      else
-          div(class = "login_signup")
-            a
-              button(href="/users/login" class="login_button") Sign in
+        //5 if logged in, need logout button on far right
+        if locals.authenticated
+          div
+            span Welcome #{user.userName}
+            form(action= "/users/logout" method= "post" )
+              button(type= "submit") Logout
+        else
+            div(class = "login_signup")
+              a(href="/users/login" )
+                button(class="login_button") Sign in
 
-            a
-              button(href="/users/signup" class = "signup_button") Sign up
+              a(href="/users/signup" )
+                button(class = "signup_button") Sign up
     block content
