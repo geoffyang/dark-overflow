@@ -1,3 +1,67 @@
-h1 {
-    color: #555555;
+:root {
+  --main-background: #222831;
+  --secondary-background: #2d4059;
+  --accent-color: #ff5722;
+  --text-color: #eeeeee;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: var(--main-background);
+  color: var(--text-color);
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0%;
+}
+.logo {
+  justify-self: stretch;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+img {
+  max-width: 200px;
+  max-height: 100%;
+}
+.nav_bar {
+  background-color: var(--secondary-background);
+
+}
+.nav_container {
+  list-style: none;
+}
+
+.nav_container li {
+  display: inline-block;
+  padding: 0px 10px;
+}
+
+.login_button,
+.signup_button {
+  padding: 9px 25px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+.login_button:hover,
+.signup_button:hover {
+  background-color: #ff5622ab;
+}
+
+.nav_container li a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+}
+.nav_container li a:hover {
+  color: var(--accent-color);
 }
