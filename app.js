@@ -9,7 +9,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const questionsRouter = require('./routes/questions');
-const askQuestionsRouter = require('./routes/askQuestions');
+const askQuestionsRouter = require('./routes/askquestions');
 const answersRouter = require('./routes/answers');
 const answerQuestionRouter = require('./routes/answerquestion');
 
