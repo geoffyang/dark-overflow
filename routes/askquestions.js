@@ -11,10 +11,11 @@ const { Question, Category } = require('../db/models');
 router.get('/', csrfProtection, async (req, res, next) => {
 
     const question = Question.build({});
-
+    const categoryList = await Category.findAll();
     res.render('askQuestions', {
         title: "Ask a Question",
         csrfToken: req.csrfToken(),
+        categoryList
     })
 })
 
@@ -22,11 +23,8 @@ router.get('/', csrfProtection, async (req, res, next) => {
 router.post('/', csrfProtection, asyncHandler(async (req, res, next) => {
     // add userName to DB build
 
-    // render form with category options from DB
-    const categoryList = await Category.findAll();
     res.render('askQuestions', {
-        csrfToken: req.csrfToken(),
-        categoryList
+        csrfToken: req.csrfToken()
     })
 
     const { questionText, chooseCategory } = req.body;
