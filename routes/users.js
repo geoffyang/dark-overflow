@@ -143,11 +143,9 @@ router.post("/logout", (req, res) => {
 
   logoutUser(req, res)
 
-  req.session.save(() => res.redirect("/"))
-
+  res.redirect('/');
 
 });
-
 
 
 
