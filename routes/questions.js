@@ -30,11 +30,11 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // GET /questions/:id/vote/votetype
-router.post('/:id(\\d+)/vote/:votetype(\\d+)', asyncHandler(async (req, res) => {
+router.post('/:id(\\d+)/vote/:votetype(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
     const voteSum = parseInt(req.params.votetype, 10);
     if (voteSum === 2) voteSum = -1;
-    const {userId} = req.session.auth;
+    const { userId } = req.session.auth;
     const vote = await QuestionVote.create({ userId, questionId, voteSum });
     res.send();
 }));
