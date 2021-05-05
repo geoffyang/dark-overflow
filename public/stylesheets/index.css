@@ -73,7 +73,7 @@ img {
   padding: 0px 50px;
 }
 
-.login_button,
+.login-button,
 .signup-button {
   padding: 5px 15px;
   margin: 5px;
@@ -83,8 +83,8 @@ img {
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
-.login_button:hover,
-.signup_button:hover {
+.login-button:hover,
+.signup-button:hover {
   background-color: #ff562285;
 }
 
@@ -97,7 +97,8 @@ max-width: 500px;
   padding: 25px 30px;
   border-radius: 10px;
   margin: 100px auto;
-   box-shadow: 0 5px 10px rgba(0,0,0,0.15)
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  border: 1px solid var(--accent-color);
 }
 .signup_user .title {
   font-size: 25px;
@@ -107,17 +108,75 @@ max-width: 500px;
 
 .signup_user form .form-group {
   display: flex;
-   flex-wrap: wrap;
+  flex-wrap: wrap;
   justify-content: space-between;
 
 }
 
+.signup_user .details {
+  margin-top: 20px;
+}
+
 .signup_errors {
   background-color: red;
+  max-width: 350px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.signup_errors ul {
+  list-style-type: none;
 }
 .signup_user .form-control {
 
-   margin: 0px 0 12px 0;
+  margin: 0px 0 0px 0;
+  width: calc(100%/2- 20px);
+  height: 45px;
+}
+
+
+/*--------------------------login setup------------------------*/
+.login_user {
+max-width: 500px;
+  width: 100%;
+  background: var(--secondary-background);
+  padding: 25px 30px;
+  border-radius: 10px;
+  margin: 100px auto;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  border: 1px solid var(--accent-color);
+}
+.login_user .title {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.login_user form .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+
+.login_user .details {
+  margin-top: 20px;
+}
+
+.login_errors {
+  background-color: red;
+  max-width: 350px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.login_errors ul {
+  list-style-type: none;
+}
+
+.login_user .form-control {
+
+  margin: 0px 0 0px 0;
   width: calc(100%/2- 20px);
   height: 45px;
 }
