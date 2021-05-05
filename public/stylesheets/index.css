@@ -74,7 +74,8 @@ img {
 }
 
 .login-button,
-.signup-button {
+.signup-button,
+.ask-question-button {
   padding: 5px 15px;
   margin: 5px;
   background-color: var(--accent-color);
@@ -84,7 +85,8 @@ img {
   transition: all 0.3s ease 0s;
 }
 .login-button:hover,
-.signup-button:hover {
+.signup-button:hover,
+.ask-question-button:hover {
   background-color: #ff562285;
 }
 
@@ -175,6 +177,67 @@ max-width: 500px;
 }
 
 .login_user .form-control {
+
+  margin: 0px 0 0px 0;
+  width: calc(100%/2- 20px);
+  height: 45px;
+}
+
+/*--------------------------askquestion page setup------------------------*/
+.ask_question {
+max-width: 500px;
+  width: 100%;
+  background: var(--secondary-background);
+  padding: 25px 30px;
+  border-radius: 10px;
+  margin: 100px auto;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  border: 1px solid var(--accent-color);
+}
+.ask_question .title {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.ask_question form .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+.ask-question-form-spacing {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ask_question form .form-group input{
+  width: 350px;
+  padding: 10px;
+}
+
+.ask_question form .form-group textarea{
+  height: 400px;
+  width: 350px;
+  padding: 10px;
+}
+
+.ask_question .details {
+  margin-top: 20px;
+}
+
+.ask_question_errors {
+  background-color: red;
+  max-width: 350px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.ask_question_errors ul {
+  list-style-type: none;
+}
+
+.ask_question .form-control {
 
   margin: 0px 0 0px 0;
   width: calc(100%/2- 20px);
