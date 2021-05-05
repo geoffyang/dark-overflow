@@ -9,7 +9,7 @@ const loginUser = (req, res, user) => {
 const restoreUser = async (req, res, next) => {
     if (req.session.auth) {
         const {userId } = req.session.auth;
-        
+
         try {
             const user = await db.Profile.findByPk(userId);
 
@@ -31,10 +31,10 @@ const restoreUser = async (req, res, next) => {
 
 
 const logoutUser = (req, res) => {
-    
+
     delete req.session.auth;
-    
-    
+
+
 }
 
 const requireAuth = (req, res, next) => {
