@@ -47,7 +47,7 @@ router.post('/', requireAuth, csrfProtection, questionValidators, asyncHandler(a
     if (questionErrors.isEmpty()) {
         
         await question.save();
-        return res.redirect(`/`)
+        return res.redirect(`/questions/${question.id}`)
 
     } else {
         errors = questionErrors.array().map((error) => error.msg);
