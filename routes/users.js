@@ -58,14 +58,14 @@ const userValidators = [
     .withMessage("Passwords don't match.")
 ];
 
-/* GET users listing. */
+/* GET /users/signup */
 router.get('/signup', csrfProtection, function (req, res, next) {
 
   const user = db.Profile.build({})
 
   res.render('signup', { user, csrfToken: req.csrfToken() });
 });
-
+// POST /users/signup
 router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, res, next) => {
   const {
     userName,
@@ -104,6 +104,7 @@ const loginValidators = [
     .withMessage('Please provide a value for Password')
 ];
 
+// GET /users/login
 router.get('/login', csrfProtection, (req, res) => {
   res.render('login', {
     csrfToken: req.csrfToken(),
@@ -111,13 +112,14 @@ router.get('/login', csrfProtection, (req, res) => {
   })
 })
 
+// POST /users/login
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
 
   const { userName, password } = req.body;
   const loginErrors = validationResult(req);
   let errors = [];
   if (loginErrors.isEmpty()) {
-    
+
     const user = await db.Profile.findOne({ where: { userName } });
     console.log("THIS IS THE LINE **********************", user)
     if (user) {
@@ -148,7 +150,5 @@ router.post("/logout", (req, res) => {
   req.session.save(() => res.redirect("/"))
 
 });
-
-
 
 module.exports = router;
