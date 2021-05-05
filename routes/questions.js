@@ -23,7 +23,6 @@ router.get('/:id', async (req, res, next) => {
         ]
     });
 
-    console.log(question.dataValues.Answers)
     res.render('question', {
         question
     })
