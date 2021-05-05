@@ -1,7 +1,6 @@
 const db = require("./db/models");
 
 const loginUser = (req, res, user) => {
-    console.log(req.session);
     req.session.auth = {
         userId: user.id
     }
@@ -39,7 +38,6 @@ const logoutUser = (req, res) => {
 }
 
 const requireAuth = (req, res, next) => {
-    console.log(res)
     if (!res.locals.authenticated) {
         res.redirect('/users/signup');
     } else {

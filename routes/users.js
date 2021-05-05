@@ -121,7 +121,7 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
   if (loginErrors.isEmpty()) {
 
     const user = await db.Profile.findOne({ where: { userName } });
-    console.log("THIS IS THE LINE **********************", user)
+
     if (user) {
       const authorized = await bcrypt.compare(password, user.hashedPassword.toString());
       if (authorized) {
