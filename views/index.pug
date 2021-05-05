@@ -1,23 +1,23 @@
 extends layout
 
 block content
-  h1= title
-  div
-    p Top 10 Questions
-  div
+  h1(class='landing-page-title') Welcome to Dark Overflow - Get Answers to Your JavaScript Questions
+  div(class='landing-page-top-10')
+    p TOP 10 QUESTIONS
+  div(class='landing-question-box-container')
+    - var n =1
     each question in questions
-      div(style={"background": 'green'  })
-        p Question Div 1
-        p=question.dataValues.title
-        p=question.dataValues.text
-        p=question.dataValues.score
-        p=question.Profile.dataValues.userName
-
-
-
-  div
-    a( href="/users/login" style="color: #FFF8DC;") Back to login
-  div
-      a( href="/questions/1" style="color: #FFF8DC;") Question #1
-  div
-      a( href="/askQuestions" style="color: #FFF8DC;") Ask a question
+      div(class=`landing-question-${n++} landing-question-box` )
+        div(class='landing-question-title-text-wrapper')
+          div(class='landing-question-box-title')
+            a(href=`/questions/${question.dataValues.id}` class='landing-question-box-title')=question.dataValues.title
+          hr(class='landing-question-box-top-divider')
+          div(class='landing-question-box-text')
+            p=question.dataValues.text
+        hr(class='landing-question-box-top-divider')
+        div(class='landing-question-box-category')
+          p=`${question.Category.dataValues.name}`
+        div(class='landing-question-box-score')
+          p=`Score: ${question.dataValues.score}`
+        div(class='landing-question-box-userName')
+          p=`Asked by: ${question.Profile.dataValues.userName}`
