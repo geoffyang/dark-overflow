@@ -77,7 +77,8 @@ img {
 .signup-button,
 .ask-question-button,
 .search-button,
-.logout-button {
+.logout-button,
+.search-category-selector {
   padding: 5px 15px;
   margin: 5px;
   background-color: var(--accent-color);
@@ -86,11 +87,13 @@ img {
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
+
 .login-button:hover,
 .signup-button:hover,
 .ask-question-button:hover,
 .search-button:hover,
-.logout-button:hover  {
+.logout-button:hover,
+.search-category-selector:hover  {
   background-color: #ff562285;
 }
 
