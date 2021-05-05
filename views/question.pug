@@ -1,6 +1,10 @@
 extends layout.pug
 include utils.pug
 
+block head
+    script(src="https://kit.fontawesome.com/898a425ea4.js" crossorigin="anonymous")
+    script(src="/javascripts/question.js")
+
 block content
     div
         h1=question.title
@@ -10,10 +14,12 @@ block content
             textarea(name="text")
             button(type="submit") Submit
         div(id="votesDiv")
-            i(class="far fa-caret-square-up")
-            i(class="far fa-caret-square-down")
-        if isUser
-            a.delete-question-btn(href="#", id = question.id) Delete
+            p=question.id
+            a.upVoteButton(href="#", id=question.id) Vote here
+                i(class="far fa-caret-square-up")
+                i(class="far fa-caret-square-down")
+                if isUser
+                    a.delete-question-btn(href="#", id = question.id) Delete
     else
         span Please #[a(href="/users/login") log in] to answer questions.
     div(id='answersDiv') Answers:
