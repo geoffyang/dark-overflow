@@ -3,7 +3,7 @@ html
   head
     block head
       link(rel="stylesheet" href="/stylesheets/index.css")
-      
+      script(src="/javascripts/layout.js")
 
       header(class = 'nav_bar')
         //1 far left -- logo which navigates to landing page
@@ -16,7 +16,11 @@ html
         nav(class = "nav_container")
           ul
             li(class = "categories_button")
-              a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
+              select(name='chosenCategory', id="", class='search-category-selector')
+                  option(value=null) Choose a question category
+                  each category in categoryList
+                      option(value=category.id)=category.name
+              //- a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
             li(class = "ask_question_button")
               a(href ='/askQuestions') Ask a question
 

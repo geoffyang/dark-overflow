@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { Question, Answer, QuestionVote, AnswerVote } = require("../db/models");
+const { Question, Answer, QuestionVote, AnswerVote , Category} = require("../db/models");
 const { requireAuth } = require("../auth");
 const { asyncHandler } = require("./utils");
 const { check, validationResult } = require('express-validator');
@@ -27,10 +27,12 @@ router.get('/:id', async (req, res, next) => {
   const { userId } = req.session.auth;
   if (userId === question.userId) isUser = true;
 
+  const categoryList = await Category.findAll();
   console.log(question.dataValues.Answers);
   res.render("question", {
     isUser,
     question,
+    categoryList
   });
 });
 

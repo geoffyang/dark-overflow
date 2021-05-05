@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h1(class='search-page-title') Search Results
+    h1(class='search-page-title')=title
     div(class='search-question-box-container')
         - var n =1
         each question in questions
