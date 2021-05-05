@@ -1,18 +1,23 @@
 extends layout
 
-append head
-  //- add page specific styles by appending to the head
-  link(rel="stylesheet" href="/stylesheets/index.css")
-  //- add page specific js
-  script(src="/javascripts/index.js" type="module" defer)
-
 block content
-
   h1= title
-  p Welcome to your Project Skeleton
+  div
+    p Top 10 Questions
+  div
+    each question in questions
+      div(style={"background": 'green'  })
+        p Question Div 1
+        p=question.dataValues.title
+        p=question.dataValues.text
+        p=question.dataValues.score
+        p=question.Profile.dataValues.userName
+
+
+
   div
     a( href="/users/login" style="color: #FFF8DC;") Back to login
-    div
+  div
       a( href="/questions/1" style="color: #FFF8DC;") Question #1
-    div
+  div
       a( href="/askQuestions" style="color: #FFF8DC;") Ask a question
