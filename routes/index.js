@@ -1,11 +1,22 @@
 var express = require('express');
 var router = express.Router();
-const { csrfProtection, asyncHandler, } = require("./utils");
+const { asyncHandler } = require("./utils");
+const { Profile, Question } = require('../db/models')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', asyncHandler(async (req, res, next) => {
   res.set('Cache-Control', 'no-store')
-  res.render('index', { title: 'a/A Express Skeleton Home' });
-});
+
+  const questions = await Question.findAll({
+    include: Profile,
+    order: [['score', 'DESC']],
+    limit: 10
+  })
+
+  res.render('index', {
+    title: 'Welcome to Dark Overflow, get answers to your javascript problems.',
+    questions
+  });
+}));
 
 module.exports = router;
