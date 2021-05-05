@@ -13,14 +13,24 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('Questions', [
-      { title: 'A question',
+      {
+        title: 'A question',
         text: 'What?',
+        score: 0,
+        userId: 100,
+        categoryId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        title: 'What is a database fact table?',
+        text: 'For that matter, what is a dimension table?',
         score: 0,
         userId: 1,
         categoryId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
-      }
+      },
     ], {});
   },
 
