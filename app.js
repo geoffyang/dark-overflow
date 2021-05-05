@@ -12,6 +12,7 @@ const questionsRouter = require('./routes/questions');
 const askQuestionsRouter = require('./routes/askquestions');
 const answersRouter = require('./routes/answers');
 const answerQuestionRouter = require('./routes/answerquestion');
+const searchRouter = require('./routes/searchresults')
 
 const { restoreUser, requireAuth } = require('./auth.js')
 
@@ -50,7 +51,7 @@ app.use('/askQuestions', askQuestionsRouter);
 
 app.use('/answers', answersRouter);
 app.use('/answerquestion', answerQuestionRouter);
-
+app.use('/searchresults', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

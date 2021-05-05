@@ -29,9 +29,13 @@ router.get('/', asyncHandler(async (req, res, next) => {
     limit: 10
   })
 
+
+  const categoryList = await Category.findAll();
+
   res.render('index', {
     title: 'Welcome to Dark Overflow, get answers to your javascript problems.',
-    questions: orderedQuestions
+    questions: orderedQuestions,
+    categoryList
   });
 }));
 

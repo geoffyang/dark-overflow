@@ -11,13 +11,13 @@ module.exports = {
         name: 'John Doe',
         isBetaMember: false
       }], {});
-    */
-    
+
+*/
     return queryInterface.bulkInsert('Answers', [{
         text: 'this',
         score: 0,
         questionId: 1,
-        userId: 1,
+        userId: 100,
         createdAt: new Date(),
         updatedAt: new Date()
       }], {});

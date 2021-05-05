@@ -18,11 +18,10 @@ block content
             span Vote here
             i(class="far fa-caret-square-up", id=question.id)
             i(class="far fa-caret-square-down" id=question.id)
+
     else
         span Please #[a(href="/users/login") log in] to answer questions.
     div(id='answersDiv') Answers:
         each answer in question.dataValues.Answers
             div=answer.text
-
-
 

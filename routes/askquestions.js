@@ -53,7 +53,6 @@ router.post('/', requireAuth, csrfProtection, questionValidators, asyncHandler(a
         errors = questionErrors.array().map((error) => error.msg);
     }
 
-    console.log(errors);
     res.render('askQuestions', {
         errors,
         csrfToken: req.csrfToken(),

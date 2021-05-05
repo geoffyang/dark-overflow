@@ -59,12 +59,12 @@ const userValidators = [
 ];
 
 /* GET /users/signup */
-router.get('/signup', csrfProtection, function (req, res, next) {
+router.get('/signup', csrfProtection, asyncHandler (async(req, res, next) => {
 
   const user = db.Profile.build({})
-
-  res.render('signup', { user, csrfToken: req.csrfToken() });
-});
+  const categoryList = await db.Category.findAll();
+  res.render('signup', { user, csrfToken: req.csrfToken(), categoryList });
+}));
 // POST /users/signup
 router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, res, next) => {
   const {
@@ -84,12 +84,14 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, 
     loginUser(req, res, user);
     res.redirect('/');
   } else {
+    const categoryList = await db.Category.findAll();
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('signup', {
       title: 'Register',
       errors,
       user,
       csrfToken: req.csrfToken(),
+      categoryList
     });
   }
 
@@ -105,12 +107,14 @@ const loginValidators = [
 ];
 
 // GET /users/login
-router.get('/login', csrfProtection, (req, res) => {
+router.get('/login', csrfProtection, asyncHandler(async(req, res) => {
+  const categoryList = await db.Category.findAll();
   res.render('login', {
     csrfToken: req.csrfToken(),
-    title: 'Login'
+    title: 'Login',
+    categoryList
   })
-})
+}));
 
 // POST /users/login
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
@@ -121,6 +125,7 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
   if (loginErrors.isEmpty()) {
 
     const user = await db.Profile.findOne({ where: { userName } });
+
     if (user) {
       const authorized = await bcrypt.compare(password, user.hashedPassword.toString());
       if (authorized) {
@@ -134,10 +139,12 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
     errors = loginErrors.array().map((error) => error.msg);
   }
 
+  const categoryList = await db.Category.findAll();
   res.render('login', {
     errors,
     csrfToken: req.csrfToken(),
-    title: 'Login'
+    title: 'Login',
+    categoryList
   });
 
 }));

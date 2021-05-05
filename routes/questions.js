@@ -1,10 +1,12 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+const { Question, Answer, QuestionVote, AnswerVote , Category} = require("../db/models");
+const { requireAuth } = require("../auth");
 const { asyncHandler } = require("./utils");
+
 const sequelize = require('sequelize');
 const { Question, Answer, QuestionVote, AnswerVote } = require('../db/models')
 const { check, validationResult } = require('express-validator');
-const { requireAuth } = require('../auth')
 
 // GET /questions/:id
 router.get('/:id', async (req, res, next) => {
@@ -35,10 +37,50 @@ router.get('/:id', async (req, res, next) => {
         question.score = 0;
     }
     await question.save();
-    res.render('question', { question})
+    const categoryList = await Category.findAll();
+    res.render('question', { question, categoryList})
 })
 
 // POST /questions/:id/vote/votetype
+
+  /* James' code
+  let isUser;
+  const { userId } = req.session.auth;
+  if (userId === question.userId) isUser = true;
+
+  
+  console.log(question.dataValues.Answers);
+  res.render("question", {
+    isUser,
+    question,
+    categoryList
+  });
+});
+*/
+router.delete("/:id",
+   requireAuth,
+  asyncHandler(async (req, res) => {
+    const question = await Question.findByPk(parseInt(req.params.id, 10),{
+          include: [
+      {
+        model: Answer,
+        include: [
+          {
+            model: AnswerVote,
+          },
+        ],
+      },
+      {
+        model: QuestionVote,
+      },
+    ],
+  });
+    const { userId } = req.session.auth;
+    question.destroy();
+    res.send();
+  })
+);
+// GET /questions/:id/vote/votetype
 router.post('/:id(\\d+)/vote/:votetype(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
     let voteSum = parseInt(req.params.votetype, 10);
@@ -64,6 +106,7 @@ router.delete('/:id(\\d+)/vote', requireAuth, asyncHandler(async (req, res) => {
     vote.destroy();
     res.send();
 }));
+
 
 
 module.exports = router;

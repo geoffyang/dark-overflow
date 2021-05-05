@@ -17,7 +17,7 @@ module.exports = {
         title: 'A question',
         text: 'What?',
         score: 0,
-        userId: 1,
+        userId: 100,
         categoryId: 1,
         createdAt: new Date(),
         updatedAt: new Date()

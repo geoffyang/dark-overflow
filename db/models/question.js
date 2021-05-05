@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Question = sequelize.define('Question', {
     title: DataTypes.STRING,
     text: DataTypes.TEXT,
-    score: DataTypes.INTEGER, 
+    score: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     categoryId: DataTypes.INTEGER
   }, {});
@@ -11,8 +11,16 @@ module.exports = (sequelize, DataTypes) => {
     Question.belongsTo (models.Profile, {foreignKey: 'userId'})
     Question.belongsTo (models.Category, {foreignKey: 'categoryId'})
 
-    Question.hasMany (models.QuestionVote, {foreignKey: 'questionId'})    
-    Question.hasMany(models.Answer, {foreignKey: 'questionId'})
+    Question.hasMany(models.QuestionVote, {
+      foreignKey: "questionId",
+      onDelete: "CASCADE",
+      hooks: true,
+    });
+    Question.hasMany(models.Answer, {
+      foreignKey: "questionId",
+      onDelete: "CASCADE",
+      hooks: true,
+    });
 
   };
   return Question;

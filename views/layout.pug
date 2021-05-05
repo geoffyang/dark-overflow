@@ -3,18 +3,24 @@ html
   head
     block head
       link(rel="stylesheet" href="/stylesheets/index.css")
-      
+      script(src="/javascripts/layout.js")
 
       header(class = 'nav_bar')
         //1 far left -- logo which navigates to landing page
         a(href="/" class = logo)
           img(src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png")
         //2 search bar
-        <input type="text" placeholder="Search..">
+        form(action="/searchresults", method="post")
+          input(type="text" name="searchString" placeholder="Search..")
+          button(type="submit" class ="search-button" ) Go
         nav(class = "nav_container")
           ul
             li(class = "categories_button")
-              a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
+              select(name='chosenCategory', id="", class='search-category-selector')
+                  option(value=null) Choose a question category
+                  each category in categoryList
+                      option(value=category.id)=category.name
+              //- a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
             li(class = "ask_question_button")
               a(href ='/askQuestions') Ask a question
 
@@ -24,7 +30,7 @@ html
           div
             span Welcome #{user.userName}
             form(action= "/users/logout" method= "post" )
-              button(type= "submit") Logout
+              button(type= "submit" class="logout-button") Logout
         else
             div(class = "login_signup")
               a(href="/users/login" )
