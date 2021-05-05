@@ -74,7 +74,7 @@ img {
 }
 
 .login_button,
-.signup_button {
+.signup-button {
   padding: 5px 15px;
   margin: 5px;
   background-color: var(--accent-color);
@@ -90,34 +90,34 @@ img {
 
 /*--------------------------signup setup------------------------*/
 
-.signup_form {
-  margin: 50px auto;
-  display: flex;
-  height: 400px;
-  align-items: center;
-  justify-content: center;
-  max-width: 700px;
+.signup_user {
+max-width: 500px;
   width: 100%;
+  background: var(--secondary-background);
+  padding: 25px 30px;
   border-radius: 10px;
-  background-color: var(--secondary-background);
+  margin: 100px auto;
+   box-shadow: 0 5px 10px rgba(0,0,0,0.15)
 }
-.signup_form h1 {
+.signup_user .title {
   font-size: 25px;
   font-weight: 500;
   color: var(--text-color);
 }
+
+.signup_user form .form-group {
+  display: flex;
+   flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+
 .signup_errors {
   background-color: red;
 }
-.signup_user form {
-  display: flex;
-  flex-wrap: wrap;
-}
-.signup_user form .field {
-  size: 300px;
-}
+.signup_user .form-control {
 
-.signup_user form .form-control {
-  margin: 20px 0 12px 0;
-  width: calc(100% / 2- 20px);
+   margin: 0px 0 12px 0;
+  width: calc(100%/2- 20px);
+  height: 45px;
 }

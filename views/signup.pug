@@ -2,17 +2,24 @@ extends layout.pug
 include utils.pug
 
 block content
-    div(class="signup_form")
-        div(class = "signup_errors")
-            +validationErrorSummary(errors)
-        div(class = "signup_user")
-            h1 Sign Up
-            form(action="/users/signup", method="post")
-                input(type="hidden" name ="_csrf" value = csrfToken)
-                +field("Username", "userName", user.userName,"","Enter your username" )
-                +field("First Name", "firstName", user.firstName, "", "Enter your first name"  )
-                +field("Last Name", "lastName", user.lastName, "", "Enter your last name"  )
-                +field("Email", "email", user.email, "email", "Enter your email"  )
-                +field("Password", "password", "", "password", "Enter your password" )
-                +field("Confirm your password", "confirmPassword", "", "password", "Confirm password" )
-                button(type="submit") Submit
+    div(class = "signup_errors")
+       +validationErrorSummary(errors)
+    div(class = "signup_user")
+        div(class = 'title') Sign Up
+            div(class = 'details')
+                form(action="/users/signup", method="post")
+                    input(type="hidden" name ="_csrf" value = csrfToken)
+
+                    +field("Username", "userName", user.userName,"","Enter your username" )
+
+                    +field("First Name", "firstName", user.firstName, "", "Enter your first name"  )
+
+                    +field("Last Name", "lastName", user.lastName, "", "Enter your last name"  )
+
+                    +field("Email", "email", user.email, "email", "Enter your email"  )
+
+                    +field("Password", "password", "", "password", "Enter your password" )
+
+                    +field("Confirm your password", "confirmPassword", "", "password", "Confirm password" )
+                div()
+                    button(type="submit" class ="signup-button" ) Submit
