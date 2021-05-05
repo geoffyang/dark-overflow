@@ -3,6 +3,16 @@ include utils.pug
 
 block content
     div
-        each val, key in question.dataValues
-            li= key + ': ' + val
+        h1=question.title
+        h2=question.text
+    if locals.authenticated
+        form(action=`/answerquestion/${question.id}`, method="post")
+            textarea(name="text")
+            button(type="submit") Submit
+    else
+        span Please #[a(href="/users/login") log in] to answer questions.
+    div(id='answersDiv')
+        each answer in question.dataValues.Answers
+            div=answer.text
+        
 
