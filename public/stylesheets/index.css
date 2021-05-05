@@ -213,11 +213,13 @@ max-width: 500px;
 
 .ask_question form .form-group input{
   width: 350px;
+  padding: 10px;
 }
 
 .ask_question form .form-group textarea{
   height: 400px;
   width: 350px;
+  padding: 10px;
 }
 
 .ask_question .details {
