@@ -62,6 +62,8 @@ router.get("/:id", async (req, res, next) => {
     const { userId } = req.session.auth;
     if (userId === question.userId) isQuestionAsker = true;
   }
+
+  
   res.render('question', { question, categoryList, isQuestionAsker })
 })
 

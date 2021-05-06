@@ -16,6 +16,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     });
 });
 
+
 const deleteItem = async function (type, route, id, reroute) {
     console.groupCollapsed(id);
 
