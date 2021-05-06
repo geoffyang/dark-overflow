@@ -326,8 +326,6 @@ max-width: 500px;
   grid-area: landing-question-10;
 }
 
-
-
 .landing-question-box-container {
   justify-content: center;
   display: grid;
@@ -341,6 +339,7 @@ max-width: 500px;
     "landing-question-9 landing-question-10 ";
     gap: 40px 120px;
 }
+
 
 .landing-question-box {
   color: var(--text-color);
@@ -401,6 +400,84 @@ max-width: 500px;
   position: relative;
   left: 220px;
   bottom: -5px;
+}
+
+/*--------------------------question page setup------------------------*/
+.question-page-question-box-container {
+  display:grid;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+.question-page-question-box {
+  color: var(--text-color);
+  background-color: var(--secondary-background);
+  border: 1px solid var(--accent-color);
+  border-radius: 2rem;
+  padding:30px;
+  width: 1200px;
+  text-align: left;
+}
+
+/* .question-page-question-title-text-wrapper {
+
+} */
+
+.question-page-question-box-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-decoration: none;
+  padding: 3px;
+  margin-bottom: 5px;
+  border-radius: 1rem;
+  overflow-y: hidden;
+}
+
+.question-page-question-box-top-divider {
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.question-page-question-box-text {
+  margin-bottom:8px;
+}
+
+.question-page-question-box-category {
+  position: relative;
+  bottom: -40px;
+  left: 10px;
+  background-color: var(--main-background);
+  padding: 7px 10px;
+  display: inline-block;
+  border-radius: 2rem;
+}
+
+.question-page-question-box-score {
+  position: relative;
+  left: 1000px;
+  bottom: -30px;
+}
+
+.question-page-question-box-userName {
+  position: relative;
+  left: 1000px;
+  bottom: 15px;
+  overflow: hidden;
+}
+
+.question-page-question-voting-icons {
+  display:flex;
+  flex-direction: row;
+  position: relative;
+  left: 1100px;
+  bottom: -48px;
+}
+
+.question-page-upvote-question-icon {
+  margin-right: 10px;
 }
 
 /*--------------------------search results page setup------------------------*/

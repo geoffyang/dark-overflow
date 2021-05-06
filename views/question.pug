@@ -5,18 +5,31 @@ include utils.pug
         script(src="/javascripts/question.js")
 
     block content
-        div
-            h1=question.title
-            h2=question.text
+        div(class='question-page-question-box-container')
+            div(class='question-page-question-box')
+                div(class='question-page-question-title-text-wrapper')
+                    div(class='question-page-question-box-title')=question.title
+                hr(class='question-page-question-box-top-divider')
+                div(class='question-page-question-box-text')
+                    p=question.text
+                hr(class='question-page-question-box-top-divider')
+                div(class='question-page-question-box-category')
+                    p=`${question.Category.dataValues.name}`
+                if locals.authenticated
+                    div(class="question-page-question-voting-icons")
+                        div(class='question-page-upvote-question-icon')
+                            i(class="far fa-caret-square-up", id=question.id)
+                        div(class='question-page-downvote-question-icon')
+                            i(class="far fa-caret-square-down" id=question.id)
+                div(class='question-page-question-box-score')
+                    p=`Score: ${question.dataValues.score}`
+                div(class='question-page-question-box-userName')
+                    p=`Asked by: ${question.Profile.dataValues.userName}`
         if locals.authenticated
             form(action=`/answerquestion/${question.id}`, method="post")
                 textarea(name="text")
                 button(type="submit") Submit
-            div(id="votesDiv")
-                p=`Question Score: ${question.dataValues.score}`
-                span Vote on question quality
-                i(class="far fa-caret-square-up", id=question.id)
-                i(class="far fa-caret-square-down" id=question.id)
+            
             div(id='answersDiv') Answers:
                 each answer in question.dataValues.Answers
                     div=answer.text
