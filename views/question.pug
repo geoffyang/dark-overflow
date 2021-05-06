@@ -21,7 +21,7 @@ include utils.pug
                 each answer in question.dataValues.Answers
                     div=answer.text
                     if answer.userId = user.id
-                        a(class = "delete-answer-btn" href="#", id = question.id) Delete answer
+                        a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
                     div=p=`Answer Score: ${answer.score}`
                         span Vote on answer quality
                         <i class="fas fa-plus-circle"></i>

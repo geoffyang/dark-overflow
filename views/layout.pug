@@ -4,6 +4,7 @@ html
     block head
       link(rel="stylesheet" href="/stylesheets/index.css")
       script(src="/javascripts/layout.js")
+      
 
       header(class = 'nav_bar')
         //1 far left -- logo which navigates to landing page
@@ -18,8 +19,8 @@ html
             li(class = "categories_button")
               select(name='chosenCategory', id="", class='search-category-selector')
                   option(value=null) Choose a question category
-                  each category in categoryList
-                      option(value=category.id)=category.name
+                  //- each category in categoryList
+                  //-     option(value=category.id)=category.name
               a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
             li(class = "ask_question_button")
               a(href ='/askQuestions') Ask a question
@@ -39,3 +40,6 @@ html
               a(href="/users/signup" )
                 button(class = "signup-button") Sign up
     block content
+  script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js'
+      integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n'
+      crossorigin='anonymous')
