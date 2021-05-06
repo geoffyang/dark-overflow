@@ -3,12 +3,14 @@ window.addEventListener("DOMContentLoaded", async (event) => {
 
     const upVoteQ = document.querySelector(".fa-caret-square-up")
     const downVoteQ = document.querySelector(".fa-caret-square-down")
-    const upVoteA = document.querySelector(".fa-plus-circle")
-    const downVoteA = document.querySelector(".fa-minus-circle")
+    const upVoteA = document.querySelectorAll(".fa-plus-circle")
+    const downVoteA = document.querySelectorAll(".fa-minus-circle")
     // const deleteQuestion = document.querySelector(".delete-question-btn");
 
-    upVoteQ.addEventListener("click", e => vote(1, e.target.id));
-    downVoteQ.addEventListener("click", e => vote(2, e.target.id));
+    upVoteQ.addEventListener("click", e => vote("questions", 1, e.target.id));
+    downVoteQ.addEventListener("click", e => vote("questions", 2, e.target.id));
+    upVoteA.forEach(upVote => upVote.addEventListener("click", e => vote("answers", 1, e.target.id)))
+    downVoteA.forEach(downVote => downVote.addEventListener("click", e => vote("answers", 2, e.target.id)))
     // deleteQuestion.addEventListener("click", async (e) => {
     //     const target = e.target;
     //     const id = target.id;
@@ -30,13 +32,15 @@ const deleteItem = async function (type, route, id, reroute) {
     }
 };
 
-async function vote(upOrDownCode, questionId) {
+async function vote(voteOnQuestionsOrAnswers, upOrDownCode, questionOrAnswerID) {
     try {
-        await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+        // DELETE questions/:id(\\d+)/vote/:votetype(\\d+)
+        // DELETE answers/:id(\\d+)/vote/:votetype(\\d+)
+        await fetch(`http://localhost:8080/${voteOnQuestionsOrAnswers}/${questionOrAnswerID}/vote`, {
             method: `DELETE`,
         });
         await fetch(
-            `http://localhost:8080/questions/${questionId}/vote/${upOrDownCode}`,
+            `http://localhost:8080/${voteOnQuestionsOrAnswers}/${questionOrAnswerID}/vote/${upOrDownCode}`,
             { method: `POST` }
         );
 

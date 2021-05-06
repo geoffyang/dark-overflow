@@ -12,6 +12,7 @@ router.get("/:id", async (req, res, next) => {
   console.log("getting question");
   const id = req.params.id;
 
+  // join question, answer, questionVote, answerVote
   const question = await Question.findByPk(parseInt(id, 10), {
     include: [
       {
@@ -28,7 +29,7 @@ router.get("/:id", async (req, res, next) => {
     ],
   });
 
-  //database pull for question score
+  //database handle questionVotes
   const questionScore = await QuestionVote.findAll({
     attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
     where: { questionId: id }
@@ -40,19 +41,24 @@ router.get("/:id", async (req, res, next) => {
   }
   await question.save();
 
-  //database pull for answer score
-  // console.log(`Geoffrey ***************`, question.toJSON());
-  for (const answerKey in question.Answers) {
-    console.log(`Geoffrey ***************`, answerKey, `:`, question.Answers[answerKey]);
-  }
-  // const answerScore = await AnswerVote.findAll({
-    // find answers related to one questionId
-
-    // from the db: grab answer AND find the answer votes, sum.
-    // if score is not n.
-
-
-
+  // //database handle answerVotes
+  // let answersArrayForPug = [];
+  // question.Answers.forEach(answerOnPage => {
+  //   /* const answer = grab each answer on the page,
+  //   const answerScore = query for fresh aggregate voteSum
+  //   */
+  //  const answer = await Answer.findByPk(parseInt(answerOnPage.id))
+  //  const answerScore = await AnswerVote.findAll({
+  //    attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
+  //    where: {answerId: answerOnPage.id}
+  //   })
+  //   // save fresh answerScore into the answer.score field
+  //   if (answerScore[0].dataValues.total !== null) {
+  //     answer.score = answerScore[0].dataValues.total;
+  //   } else answer.score = 0;
+  //   await answer.save();
+  //   answersArrayForPug.push({ answer });
+  // });
 
   const categoryList = await Category.findAll();
   let isQuestionAsker = false;
@@ -60,7 +66,10 @@ router.get("/:id", async (req, res, next) => {
     const { userId } = req.session.auth;
     if (userId === question.userId) isQuestionAsker = true;
   }
-  res.render('question', { question, categoryList, isQuestionAsker })
+  res.render('question', {
+    question, categoryList, isQuestionAsker,
+    // answers: answersArrayForPug
+  })
 })
 
 
