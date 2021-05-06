@@ -1,11 +1,13 @@
 window.addEventListener("DOMContentLoaded", async (event) => {
     console.log("hello from questions.js!")
 
-    const upVote = document.querySelector(".fa-caret-square-up")
-    const downVote = document.querySelector(".fa-caret-square-down")
+    const upVoteQ = document.querySelector(".fa-caret-square-up")
+    const downVoteQ = document.querySelector(".fa-caret-square-down")
+    const upVoteQ = document.querySelector(".fa-caret-square-up")
+    const downVoteQ = document.querySelector(".fa-caret-square-down")
 
-    upVote.addEventListener("click", e => vote(1, e.target.id));
-    downVote.addEventListener("click", e => vote(2, e.target.id));
+    upVoteQ.addEventListener("click", e => vote(1, e.target.id));
+    downVoteQ.addEventListener("click", e => vote(2, e.target.id));
 
 })
 
