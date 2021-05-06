@@ -20,7 +20,7 @@ html
                   option(value=null) Choose a question category
                   each category in categoryList
                       option(value=category.id)=category.name
-              //- a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
+              a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
             li(class = "ask_question_button")
               a(href ='/askQuestions') Ask a question
 
@@ -39,6 +39,7 @@ html
               a(href="/users/signup" )
                 button(class = "signup-button") Sign up
     block content
+
 
 
     footer(class='contact-footer') Developed By:
@@ -72,4 +73,3 @@ html
             span | 
             a(href=`mailto:''`) Email
 
-          

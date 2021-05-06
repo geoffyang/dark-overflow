@@ -1,27 +1,36 @@
 extends layout.pug
 include utils.pug
+    append head
+        script(src="https://kit.fontawesome.com/898a425ea4.js" crossorigin="anonymous")
+        script(src="/javascripts/question.js")
 
-append head
-    script(src="https://kit.fontawesome.com/898a425ea4.js" crossorigin="anonymous")
-    script(src="/javascripts/question.js")
-
-block content
-    div
-        h1=question.title
-        h2=question.text
-    if locals.authenticated
-        form(action=`/answerquestion/${question.id}`, method="post")
-            textarea(name="text")
-            button(type="submit") Submit
-        div(id="votesDiv")
-            p=`Score: ${question.dataValues.score}`
-            span Vote here
-            i(class="far fa-caret-square-up", id=question.id)
-            i(class="far fa-caret-square-down" id=question.id)
-
-    else
-        span Please #[a(href="/users/login") log in] to answer questions.
-    div(id='answersDiv') Answers:
-        each answer in question.dataValues.Answers
-            div=answer.text
-
+    block content
+        div
+            h1=question.title
+            h2=question.text
+        if locals.authenticated
+            form(action=`/answerquestion/${question.id}`, method="post")
+                textarea(name="text")
+                button(type="submit") Submit
+            div(id="votesDiv")
+                p=`Question Score: ${question.dataValues.score}`
+                span Vote on question quality
+                i(class="far fa-caret-square-up", id=question.id)
+                i(class="far fa-caret-square-down" id=question.id)
+            div(id='answersDiv') Answers:
+                each answer in question.dataValues.Answers
+                    div=answer.text
+                    if answer.userId = user.id
+                        a(class = "delete-answer-btn" href="#", id = question.id) Delete answer
+                    div=p=`Answer Score: ${answer.score}`
+                        span Vote on answer quality
+                        <i class="fas fa-plus-circle"></i>
+                        <i class="fas fa-minus-circle"></i>
+            div(id = 'deleteDiv')
+                if isQuestionAsker
+                    a(class = "delete-question-btn" href="#", id = question.id) Delete question
+        else
+            span Please #[a(href="/users/login") log in] to answer questions.
+            div(id='answersDiv') Answers:
+                each answer in question.dataValues.Answers
+                    div=answer.text
