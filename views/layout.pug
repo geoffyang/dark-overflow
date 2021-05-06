@@ -18,9 +18,9 @@ html
             li(class = "categories_button")
               select(name='chosenCategory', id="", class='search-category-selector')
                   option(value=null) Choose a question category
-                  //- each category in categoryList
-                  //-     option(value=category.id)=category.name
-              //- a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
+                  each category in categoryList
+                      option(value=category.id)=category.name
+              a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
             li(class = "ask_question_button")
               a(href ='/askQuestions') Ask a question
 
