@@ -37,6 +37,7 @@ router.get('/:id', async (req, res, next) => {
     }
     await question.save();
     const categoryList = await Category.findAll();
+  
     res.render('question', { question, categoryList})
 })
 
@@ -57,7 +58,7 @@ router.get('/:id', async (req, res, next) => {
 });
 */
 router.delete("/:id",
-   requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const question = await Question.findByPk(parseInt(req.params.id, 10),{
           include: [

@@ -81,7 +81,6 @@ router.get('/:id', asyncHandler(async (req, res) => {
     })
 
     const category = await db.Category.findByPk(categoryId);
-    console.log(category.dataValues.name);
     const title = `${category.dataValues.name} Questions`;
     const titleCaps = title.charAt(0).toUpperCase() + title.slice(1);
     const categoryList = await Category.findAll();
