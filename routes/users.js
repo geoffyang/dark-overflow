@@ -149,6 +149,14 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
 
 }));
 
+router.post('/demo', csrfProtection, asyncHandler(async(req, res)=>{
+  const user = await db.Profile.findByPk(1);
+  console.log('HIT******************************************')
+  loginUser(req, res, user);
+  return res.redirect('/');
+
+}));
+
 router.post("/logout", (req, res) => {
 
   logoutUser(req, res)
@@ -158,12 +166,6 @@ router.post("/logout", (req, res) => {
 });
 
 //Demo User
-router.post('/demo', csrfProtection, asyncHandler(async(req, res)=>{
-  const user = await db.Profile.findByPk(1);
-  
-  loginUser(req, res, user);
-  return res.redirect('/');
 
-}));
 
 module.exports = router;
