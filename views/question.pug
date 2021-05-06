@@ -15,16 +15,15 @@ include utils.pug
                 hr(class='question-page-question-box-top-divider')
                 div(class='question-page-question-box-category')
                     p=`${question.Category.dataValues.name}`
+                //- if question.userId === user.id   
                 if locals.authenticated
                     div(class='.question-page-question-voting-icons')
                         - var foundPositiveVote = false
                         - var foundNegativeVote = false
                         each vote in question.dataValues.QuestionVotes
-                            div=vote.voteSum
                             if vote.userId = question.userId
                                 if vote.voteSum === 1
                                     - foundPositiveVote = true;
-                    
                                 if vote.voteSum === -1
                                     - foundNegativeVote = true;   
                         if foundPositiveVote === true

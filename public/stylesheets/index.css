@@ -448,7 +448,7 @@ max-width: 500px;
 
 .question-page-question-box-category {
   position: relative;
-  bottom: -40px;
+  bottom: -60px;
   left: 10px;
   background-color: var(--main-background);
   padding: 7px 10px;
