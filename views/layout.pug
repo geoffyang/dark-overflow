@@ -20,7 +20,6 @@ html
                   option(value=null) Choose a question category
                   each category in categoryList
                       option(value=category.id)=category.name
-              a(href= 'INSERT CATEGORIES ROUTE HERE') Categories
             li(class = "ask_question_button")
               a(href ='/askQuestions') Ask a question
 
@@ -42,7 +41,8 @@ html
 
 
 
-    footer(class='contact-footer') Developed By:
+    footer(class='contact-footer')
+      div(class='contact-footer-header') Developed By:
       div(class='contact-container')
         div(class='contact') Adam Lovett
           div(class='contact-link')
