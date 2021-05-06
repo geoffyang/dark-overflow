@@ -9,13 +9,12 @@ router.get('/', asyncHandler(async (req, res, next) => {
   res.set('Cache-Control', 'no-store')
 
   const questions = await Question.findAll()
-  
+
   questions.forEach(async question => {
     const score = await QuestionVote.findAll({
         attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
         where: {questionId: question.id}
     })
-    console.log(score[0].dataValues.total)
     if (score[0].dataValues.total !== null) {
       question.score = score[0].dataValues.total;
     } else {
@@ -30,10 +29,13 @@ router.get('/', asyncHandler(async (req, res, next) => {
     limit: 10
   })
 
-  console.log(orderedQuestions);
+
+  const categoryList = await Category.findAll();
+
   res.render('index', {
     title: 'Welcome to Dark Overflow, get answers to your javascript problems.',
-    questions: orderedQuestions
+    questions: orderedQuestions,
+    categoryList
   });
 }));
 

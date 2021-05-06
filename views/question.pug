@@ -13,9 +13,11 @@ include utils.pug
                 textarea(name="text")
                 button(type="submit") Submit
             div(id="votesDiv")
-                a.upVoteButton(href="#", id=question.id) Vote here
-                    i(class="far fa-caret-square-up")
-                    i(class="far fa-caret-square-down")
+                p=`Score: ${question.dataValues.score}`
+                span Vote here
+                i(class="far fa-caret-square-up", id=question.id)
+                i(class="far fa-caret-square-down" id=question.id)
+
             div(id = 'deleteDiv')
                 if isQuestionAsker
                     a(class = "delete-question-btn")(href="#", id = question.id) Delete question

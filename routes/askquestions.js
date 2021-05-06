@@ -17,7 +17,26 @@ router.get('/', requireAuth, csrfProtection, async (req, res, next) => {
         csrfToken: req.csrfToken(),
         categoryList
     })
-})
+});
+
+router.get('/:id(\\d+)', requireAuth, csrfProtection, async (req, res, next) => {
+    const id = parseInt(req.params.id, 10);
+    
+    const question = await Question.findByPk(id);
+    const { userId } = req.session.auth;
+    if (question.userId !== userId) {
+        res.redirect(`/questions/${id}`)
+    }
+    const categoryList = await Category.findAll();
+
+    res.render('editQuestions', {
+        title: "Edit a Question",
+        csrfToken: req.csrfToken(),
+        categoryList,
+        question
+    })
+});
+
 
 const questionValidators = [
     check('title')
@@ -27,6 +46,41 @@ const questionValidators = [
         .exists({ checkFalsy: true })
         .withMessage('Please provide a question.')
 ];
+
+router.post('/:id(\\d+)', requireAuth, csrfProtection, questionValidators, async (req, res, next) => {
+    console.log('*****************************************************FIRSTtest');
+    const id = parseInt(req.params.id, 10);
+    const categoryList = await Category.findAll();
+    const { userId } = req.session.auth;
+    const { title, text , chosenCategory } = req.body;
+    const questionErrors = validationResult(req);
+    const question = await Question.findByPk(id);
+    
+
+    let errors = [];
+
+    if (questionErrors.isEmpty()) {
+        question.title = title;
+        question.text = text;
+        question.categoryId = chosenCategory;
+        await question.save();
+        console.log('*****************************************************test');
+        return res.redirect(`/questions/${question.id}`)
+
+    } else {
+        errors = questionErrors.array().map((error) => error.msg);
+    }
+
+    res.render('editQuestions', {
+        title: "Edit a Question",
+        csrfToken: req.csrfToken(),
+        categoryList,
+        question
+    })
+});
+
+
+
 // POST /askQuestions:
 router.post('/', requireAuth, csrfProtection, questionValidators, asyncHandler(async (req, res, next) => {
 
@@ -53,7 +107,6 @@ router.post('/', requireAuth, csrfProtection, questionValidators, asyncHandler(a
         errors = questionErrors.array().map((error) => error.msg);
     }
 
-    console.log(errors);
     res.render('askQuestions', {
         errors,
         csrfToken: req.csrfToken(),
