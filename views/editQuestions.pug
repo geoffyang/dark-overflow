@@ -1,0 +1,21 @@
+extends layout.pug
+include utils.pug
+
+block content
+    div(class = "ask_question_errors")
+        +validationErrorSummary(errors)
+    div(class = "ask_question")
+        div(class = 'title') Edit a Question
+            div(class = 'details')
+                form(action=`/askQuestions/${question.id}` method="post")
+                    input(type="hidden", name="_csrf", value=csrfToken)
+                    +field("Title", "title", question.title )
+                    div(class='ask-question-form-spacing')
+                        +field("Question", "text", question.text, "textarea")
+                    div(class='form-group')
+                        label(for='chosenCategory') Choose a Category
+                        select(name='chosenCategory', id="")
+                            each category in categoryList
+                                option(value=category.id)=category.name
+                    div()
+                        button(type="submit" class ="ask-question-button") Submit

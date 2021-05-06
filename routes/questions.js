@@ -5,24 +5,28 @@ const { requireAuth } = require("../auth");
 const { asyncHandler } = require("./utils");
 const sequelize = require('sequelize');
 const { check, validationResult } = require('express-validator');
+const { log } = require("debug");
 
 // GET /questions/:id
-router.get('/:id', async (req, res, next) => {
-  const id = req.params.id
+router.get("/:id", async (req, res, next) => {
+  console.log("getting question");
+  const id = req.params.id;
+
   const question = await Question.findByPk(parseInt(id, 10), {
     include: [
       {
         model: Answer,
         include: [
           {
-            model: AnswerVote
-          }
-        ]
+
+            model: AnswerVote,
+          },
+        ],
       },
       {
-        model: QuestionVote
-      }
-    ]
+        model: QuestionVote,
+      },
+    ],
   });
 
   //database pull for question score
@@ -32,39 +36,31 @@ router.get('/:id', async (req, res, next) => {
   })
   if (questionScore[0].dataValues.total !== null) {
     question.score = questionScore[0].dataValues.total;
+
+
+
   } else {
     question.score = 0;
   }
   await question.save();
 
+
   //database pull for answer score
   const answerScore = await AnswerVote.findAll({
-    
+
   })
 
   const categoryList = await Category.findAll();
-  res.render('question', { question, categoryList })
+  let isQuestionAsker;
+  const { userId } = req.session.auth;
+  if (userId === question.userId) isQuestionAsker = true;
+  res.render('question', { question, categoryList, isQuestionAsker })
 })
 
-// POST /questions/:id/vote/votetype
-
-/* James' code
-let isUser;
-const { userId } = req.session.auth;
-if (userId === question.userId) isUser = true;
-
-
-console.log(question.dataValues.Answers);
-res.render("question", {
-  isUser,
-  question,
-  categoryList
-});
-});
-*/
 
 //DELETE /questions/:id
-router.delete("/:id",
+router.delete(
+  "/:id",
   requireAuth,
   asyncHandler(async (req, res) => {
     const question = await Question.findByPk(parseInt(req.params.id, 10), {
@@ -89,31 +85,39 @@ router.delete("/:id",
 );
 
 // POST /questions/:id/vote/votetype
-router.post('/:id(\\d+)/vote/:votetype(\\d+)', requireAuth, asyncHandler(async (req, res) => {
-  const questionId = parseInt(req.params.id, 10);
-  let voteSum = parseInt(req.params.votetype, 10);
-  if (voteSum === 2) {
-    voteSum = -1;
-  }
-  const { userId } = req.session.auth;
-  const vote = await QuestionVote.create({ userId, questionId, voteSum });
+router.post(
+  "/:id(\\d+)/vote/:votetype(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const questionId = parseInt(req.params.id, 10);
+    let voteSum = parseInt(req.params.votetype, 10);
+    if (voteSum === 2) {
+      voteSum = -1;
+    }
+    const { userId } = req.session.auth;
+    const vote = await QuestionVote.create({ userId, questionId, voteSum });
 
-  res.send();
-}));
+    res.send();
+  })
+);
 
 // DELETE /questions/:id/vote
-router.delete('/:id(\\d+)/vote', requireAuth, asyncHandler(async (req, res) => {
-  const questionId = parseInt(req.params.id, 10);
-  const { userId } = req.session.auth;
-  const vote = await QuestionVote.findOne({
-    where: {
-      questionId,
-      userId
-    }
-  });
-  vote.destroy();
-  res.send();
-}));
+router.delete(
+  "/:id(\\d+)/vote",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const questionId = parseInt(req.params.id, 10);
+    const { userId } = req.session.auth;
+    const vote = await QuestionVote.findOne({
+      where: {
+        questionId,
+        userId,
+      },
+    });
+    vote.destroy();
+    res.send();
+  })
+);
 
 
 module.exports = router;

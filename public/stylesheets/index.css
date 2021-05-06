@@ -143,6 +143,13 @@ max-width: 500px;
   height: 45px;
 }
 
+.signup-to-togin {
+  margin-top: -60px;
+}
+
+.signup-to-togin a{
+  color: var(--text-color);
+}
 
 /*--------------------------login setup------------------------*/
 .login_user {
@@ -188,6 +195,14 @@ max-width: 500px;
   margin: 0px 0 0px 0;
   width: calc(100%/2- 20px);
   height: 45px;
+}
+
+.login-to-signup {
+  margin-top: -60px;
+}
+
+.login-to-signup a{
+  color: var(--text-color);
 }
 
 /*--------------------------askquestion page setup------------------------*/
