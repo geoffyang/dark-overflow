@@ -443,6 +443,7 @@ max-width: 500px;
 
 .question-page-question-box-text {
   margin-bottom:8px;
+  overflow-wrap: break-word;
 }
 
 .question-page-question-box-category {
@@ -468,17 +469,42 @@ max-width: 500px;
   overflow: hidden;
 }
 
-.question-page-question-voting-icons {
+/* .question-page-question-voting-icons {
   display:flex;
-  flex-direction: row;
+  flex-direction: row; 
   position: relative;
   left: 1100px;
   bottom: -48px;
-}
+} */
 
 .question-page-upvote-question-icon {
-  margin-right: 10px;
+  position: relative;
+  left: 1100px;
+  bottom: -48px;
+  margin-right: 6px;
+  z-index: 1;
 }
+
+.question-page-downvote-question-icon {
+  position: relative;
+  left: 1100px;
+  bottom: -48px;
+  margin-right: 6px;
+  z-index: 1;
+}
+
+.unclickable-vote-button {
+  pointer-events: none;
+}
+
+.upvoted-arrow {
+  color: var(--accent-color);
+}
+
+.downvoted-arrow {
+  color: #3a99be;
+}
+
 
 /*--------------------------search results page setup------------------------*/
 

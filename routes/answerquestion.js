@@ -13,7 +13,7 @@ router.post('/:id(\\d+)', asyncHandler(async(req, res) => {
     const userId = 1;
     const score = 0;
     const answer = await db.Answer.create({ text, score, questionId, userId });
-    res.send();
+    res.end();
 }));
 
 

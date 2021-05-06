@@ -16,13 +16,16 @@ include utils.pug
                 div(class='question-page-question-box-category')
                     p=`${question.Category.dataValues.name}`
                 if locals.authenticated
-                    div(class="question-page-question-voting-icons")
-                        div(class='question-page-upvote-question-icon')
-                            i(class="far fa-caret-square-up", id=question.id)
-                        div(class='question-page-downvote-question-icon')
-                            i(class="far fa-caret-square-down" id=question.id)
+                    div(class='.question-page-question-voting-icons')           
+                        i(class="far fa-caret-square-up question-page-upvote-question-icon", id=question.id)
+                        i(class="far fa-caret-square-down question-page-downvote-question-icon" id=question.id)
+                else 
+                    div(class='.question-page-question-voting-icons')           
+                        i(class="far fa-caret-square-up question-page-upvote-question-icon unclickable-vote-button", id=question.id)
+                        i(class="far fa-caret-square-down question-page-downvote-question-icon unclickable-vote-button" id=question.id)
                 div(class='question-page-question-box-score')
-                    p=`Score: ${question.dataValues.score}`
+                    p=`Score: `
+                        span(class='question-page-question-score')=question.dataValues.score
                 div(class='question-page-question-box-userName')
                     p=`Asked by: ${question.Profile.dataValues.userName}`
         if locals.authenticated
