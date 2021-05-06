@@ -40,7 +40,23 @@ async function vote(upOrDownCode, questionId) {
             { method: `POST` }
         );
 
-        //TBD add class to allow button visual reaction:
+        const upVoteQ = document.querySelector(".fa-caret-square-up");
+        const downVoteQ = document.querySelector(".fa-caret-square-down");
+        const score = document.querySelector(".question-page-question-score");
+
+        if (upOrDownCode === 1) {
+            upVoteQ.classList.add('unclickable-vote-button');
+            upVoteQ.classList.add('upvoted-arrow');
+            downVoteQ.classList.remove('unclickable-vote-button');
+            downVoteQ.classList.remove('downvoted-arrow');
+            score.innerText++;
+        } else {
+            downVoteQ.classList.add('unclickable-vote-button');
+            downVoteQ.classList.add('downvoted-arrow');
+            upVoteQ.classList.remove('unclickable-vote-button');
+            upVoteQ.classList.remove('upvoted-arrow');
+            score.innerText--;
+        }
     } catch (err) {
         console.log("question vote error", err);
     }

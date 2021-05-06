@@ -32,11 +32,13 @@ router.get('/', asyncHandler(async (req, res, next) => {
 
   const categoryList = await Category.findAll();
 
+  req.session.save(() =>
   res.render('index', {
     title: 'Welcome to Dark Overflow, get answers to your javascript problems.',
     questions: orderedQuestions,
     categoryList
-  });
+  }));
+  
 }));
 
 module.exports = router;

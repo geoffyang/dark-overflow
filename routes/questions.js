@@ -105,6 +105,18 @@ router.post(
     const { userId } = req.session.auth;
     const vote = await QuestionVote.create({ userId, questionId, voteSum });
 
+    const question = await Question.findByPk(questionId);
+    const score = await QuestionVote.findAll({
+        attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
+        where: {questionId: question.id}
+    })
+    if (score[0].dataValues.total !== null) {
+      question.score = score[0].dataValues.total;
+    } else {
+      question.score = 0;
+    }
+    await question.save();
+    
     res.send();
   })
 );
