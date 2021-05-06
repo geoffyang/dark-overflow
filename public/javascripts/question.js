@@ -31,6 +31,37 @@ const deleteItem = async function (type, route, id, reroute) {
 };
 
 async function vote(upOrDownCode, questionId) {
+
+    const upVoteQ = document.querySelector(".fa-caret-square-up");
+    const downVoteQ = document.querySelector(".fa-caret-square-down");
+    const score = document.querySelector(".question-page-question-score");
+
+    if (upOrDownCode === 1 && upVoteQ.classList.contains('upvoted-arrow')) {
+        try {
+        await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+            method: `DELETE`,
+        });
+        } catch (err) {
+        console.log("question vote error", err);
+        }
+        upVoteQ.classList.remove('upvoted-arrow');
+        score.innerText--;
+        return;
+    }
+
+    if (upOrDownCode === 2 && downVoteQ.classList.contains('downvoted-arrow')) {
+        try {
+        await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+            method: `DELETE`,
+        });
+        } catch (err) {
+        console.log("question vote error", err);
+        }
+        downVoteQ.classList.remove('downvoted-arrow');
+        score.innerText++;
+        return;
+    }
+
     try {
         await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
             method: `DELETE`,
@@ -40,22 +71,19 @@ async function vote(upOrDownCode, questionId) {
             { method: `POST` }
         );
 
-        const upVoteQ = document.querySelector(".fa-caret-square-up");
-        const downVoteQ = document.querySelector(".fa-caret-square-down");
-        const score = document.querySelector(".question-page-question-score");
 
         if (upOrDownCode === 1) {
-            upVoteQ.classList.add('unclickable-vote-button');
-            upVoteQ.classList.add('upvoted-arrow');
-            downVoteQ.classList.remove('unclickable-vote-button');
-            downVoteQ.classList.remove('downvoted-arrow');
             score.innerText++;
+            if (downVoteQ.classList.contains('downvoted-arrow')) score.innerText++;
+            upVoteQ.classList.add('upvoted-arrow');
+            downVoteQ.classList.remove('downvoted-arrow');
+            
+
         } else {
-            downVoteQ.classList.add('unclickable-vote-button');
-            downVoteQ.classList.add('downvoted-arrow');
-            upVoteQ.classList.remove('unclickable-vote-button');
-            upVoteQ.classList.remove('upvoted-arrow');
             score.innerText--;
+            if (upVoteQ.classList.contains('upvoted-arrow')) score.innerText--;
+            downVoteQ.classList.add('downvoted-arrow');
+            upVoteQ.classList.remove('upvoted-arrow');
         }
     } catch (err) {
         console.log("question vote error", err);
