@@ -17,20 +17,27 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       await deleteItem("Question", "questions", id, "/");
     });
   }
+
   if (deleteAnswers.length) {
+    // Use a for loop to add an event listener to each answer div
     for (let i = 0; i < deleteAnswers.length; i++) {
-      console.log(deleteAnswers.length);
       deleteAnswers[i].addEventListener("click", async (e) => {
         const target = e.target;
         const id = target.id;
-        await deleteItem("Answer", "answers", id);
-        // console.log("attempting reload");
 
-        // $(answerDiv).load("views/question.pug");
+        //pass the appropriate vairables into the deleteItem function
+        removeDiv(id);
+        await deleteItem("Answer", "answers", id);
       });
     }
   }
 });
+
+
+const removeDiv = function (id) {
+  var elemToDelete = document.getElementById(`answer-${id}-div`);
+  elemToDelete.parentNode.removeChild(elemToDelete);
+};
 
 const deleteItem = async function (type, route, id, reroute) {
   console.groupCollapsed(id);
