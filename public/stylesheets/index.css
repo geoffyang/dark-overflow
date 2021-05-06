@@ -542,23 +542,32 @@ max-width: 500px;
 }
 
 /*--------------------------footer setup------------------------*/
-
+ 
 .contact-footer {
   margin-top: 50px;
   margin-bottom: 20px;
   font-size: 16px;
+  border: 1px dashed var(--accent-color);
+  border-radius: 1rem;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: inline-block;
 }
+
 
 .contact-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  
 }
 
 .contact {
   margin-top: 20px;
   margin-left: 40px;
   margin-right: 40px;
+  background-image: radial-gradient(80px 20px at center, #2d4059,  #222831);
 }
 
 .contact-link {
