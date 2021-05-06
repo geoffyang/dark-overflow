@@ -5,7 +5,6 @@ const { requireAuth } = require("../auth");
 const { asyncHandler } = require("./utils");
 
 const sequelize = require('sequelize');
-const { Question, Answer, QuestionVote, AnswerVote } = require('../db/models')
 const { check, validationResult } = require('express-validator');
 
 // GET /questions/:id
