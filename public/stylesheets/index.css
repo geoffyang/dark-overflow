@@ -540,3 +540,32 @@ max-width: 500px;
   left: 220px;
   bottom: -5px;
 }
+
+/*--------------------------footer setup------------------------*/
+
+.contact-footer {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.contact {
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.contact-link {
+  margin-top:5px;
+}
+
+.contact-link a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
