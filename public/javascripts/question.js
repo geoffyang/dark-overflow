@@ -3,17 +3,17 @@ window.addEventListener("DOMContentLoaded", async (event) => {
 
     const upVoteQ = document.querySelector(".fa-caret-square-up")
     const downVoteQ = document.querySelector(".fa-caret-square-down")
-    const upVoteA = document.querySelector(".fa-caret-square-up")
-    const downVoteA = document.querySelector(".fa-caret-square-down")
-    const deleteQuestion = document.querySelector(".delete-question-btn");
+    const upVoteA = document.querySelector(".fa-plus-circle")
+    const downVoteA = document.querySelector(".fa-minus-circle")
+    // const deleteQuestion = document.querySelector(".delete-question-btn");
 
     upVoteQ.addEventListener("click", e => vote(1, e.target.id));
     downVoteQ.addEventListener("click", e => vote(2, e.target.id));
-    deleteQuestion.addEventListener("click", async (e) => {
-        const target = e.target;
-        const id = target.id;
-        await deleteItem("question", "questions", id, "");
-    });
+    // deleteQuestion.addEventListener("click", async (e) => {
+    //     const target = e.target;
+    //     const id = target.id;
+    //     await deleteItem("question", "questions", id, "");
+    // });
 });
 
 const deleteItem = async function (type, route, id, reroute) {

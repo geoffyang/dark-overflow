@@ -20,6 +20,7 @@ include utils.pug
             div(id='answersDiv') Answers:
                 each answer in question.dataValues.Answers
                     div=answer.text
+                    div=answer.score
                     if answer.userId = user.id
                         a(class = "delete-answer-btn" href="#", id = question.id) Delete answer
                     div=p=`Answer Score: ${answer.score}`

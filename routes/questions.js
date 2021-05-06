@@ -18,7 +18,6 @@ router.get("/:id", async (req, res, next) => {
         model: Answer,
         include: [
           {
-
             model: AnswerVote,
           },
         ],
@@ -36,19 +35,24 @@ router.get("/:id", async (req, res, next) => {
   })
   if (questionScore[0].dataValues.total !== null) {
     question.score = questionScore[0].dataValues.total;
-
-
-
   } else {
     question.score = 0;
   }
   await question.save();
 
-
   //database pull for answer score
-  const answerScore = await AnswerVote.findAll({
+  console.log(`Geoffrey ***************`, question.toJSON());
+  for (const answerKey in question.Answers) {
+    console.log(answerKey, `;`, question.Answers[answerKey]);
+  }
+  // const answerScore = await AnswerVote.findAll({
+    // find answers related to one questionId
 
-  })
+    // from the db: grab answer AND find the answer votes, sum.
+    // if score is not n.
+
+
+  
 
   const categoryList = await Category.findAll();
   let isQuestionAsker;
