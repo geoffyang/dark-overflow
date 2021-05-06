@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { Question, Answer, QuestionVote, AnswerVote, Category } = require("../db/models");
+const { Question, Answer, QuestionVote, AnswerVote, Category, Profile } = require("../db/models");
 const { requireAuth } = require("../auth");
 const { asyncHandler } = require("./utils");
 const sequelize = require('sequelize');
@@ -26,6 +26,12 @@ router.get("/:id", async (req, res, next) => {
       {
         model: QuestionVote,
       },
+      {
+        model:Category
+      },
+      {
+        model: Profile
+      }
     ],
   });
 
