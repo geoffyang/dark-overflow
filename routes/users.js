@@ -157,4 +157,10 @@ router.post("/logout", (req, res) => {
 
 });
 
+//Demo User
+router.post('/demo', (req, res)=>{
+  req.session.auth = { userId: 1 };
+  res.redirect('/');
+});
+
 module.exports = router;
