@@ -41,9 +41,9 @@ router.get("/:id", async (req, res, next) => {
   await question.save();
 
   //database pull for answer score
-  console.log(`Geoffrey ***************`, question.toJSON());
+  // console.log(`Geoffrey ***************`, question.toJSON());
   for (const answerKey in question.Answers) {
-    console.log(answerKey, `;`, question.Answers[answerKey]);
+    console.log(`Geoffrey ***************`, answerKey, `:`, question.Answers[answerKey]);
   }
   // const answerScore = await AnswerVote.findAll({
     // find answers related to one questionId
@@ -52,7 +52,7 @@ router.get("/:id", async (req, res, next) => {
     // if score is not n.
 
 
-  
+
 
   const categoryList = await Category.findAll();
   let isQuestionAsker = false;
