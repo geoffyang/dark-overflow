@@ -15,7 +15,8 @@ block content
                     div()
                         button(type="submit" class ="login-button" ) Submit
                 form(action="/demo", method="post")
-                    button(type="submit" class ="demo-user" ) Demo User
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    button(type="submit" class ="login-button" ) Demo User
 
     div(class='login-to-signup')
         span Don't have an account? #[a(href="/users/signup") Sign up] to start asking questions.

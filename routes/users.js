@@ -158,9 +158,12 @@ router.post("/logout", (req, res) => {
 });
 
 //Demo User
-router.post('/demo', (req, res)=>{
-  req.session.auth = { userId: 1 };
-  res.redirect('/');
-});
+router.post('/demo', csrfProtection, asyncHandler(async(req, res)=>{
+  const user = await db.Profile.findByPk(1);
+  
+  loginUser(req, res, user);
+  return res.redirect('/');
+
+}));
 
 module.exports = router;
