@@ -81,6 +81,7 @@ router.delete(
     res.send();
   })
 );
+
 // GET /questions/:id/vote/votetype
 router.post(
   "/:id(\\d+)/vote/:votetype(\\d+)",
