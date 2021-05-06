@@ -51,9 +51,11 @@ router.get("/:id", async (req, res, next) => {
   })
 
   const categoryList = await Category.findAll();
-  let isQuestionAsker;
-  const { userId } = req.session.auth;
-  if (userId === question.userId) isQuestionAsker = true;
+  let isQuestionAsker = false;
+  if (req.session.auth) {
+    const { userId } = req.session.auth;
+    if (userId === question.userId) isQuestionAsker = true;
+  }
   res.render('question', { question, categoryList, isQuestionAsker })
 })
 
