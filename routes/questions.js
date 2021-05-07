@@ -62,6 +62,8 @@ router.get("/:id", async (req, res, next) => {
     const { userId } = req.session.auth;
     if (userId === question.userId) isQuestionAsker = true;
   }
+
+  
   res.render('question', { question, categoryList, isQuestionAsker })
 })
 
@@ -105,7 +107,19 @@ router.post(
     const { userId } = req.session.auth;
     const vote = await QuestionVote.create({ userId, questionId, voteSum });
 
-    res.send();
+    const question = await Question.findByPk(questionId);
+    const score = await QuestionVote.findAll({
+        attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
+        where: {questionId: question.id}
+    })
+    if (score[0].dataValues.total !== null) {
+      question.score = score[0].dataValues.total;
+    } else {
+      question.score = 0;
+    }
+    await question.save();
+    
+    res.end();
   })
 );
 
@@ -123,6 +137,18 @@ router.delete(
       },
     });
     vote.destroy();
+    const question = await Question.findByPk(questionId);
+    const score = await QuestionVote.findAll({
+        attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
+        where: {questionId: question.id}
+    })
+    if (score[0].dataValues.total !== null) {
+      question.score = score[0].dataValues.total;
+    } else {
+      question.score = 0;
+    }
+    await question.save();
+    
     res.send();
   })
 );

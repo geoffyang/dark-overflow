@@ -48,7 +48,7 @@ body {
 
 img {
   max-width: 150px;
-  max-height: 100%;
+  max-height: 50px;
 }
 
 .nav_container {
@@ -78,7 +78,8 @@ img {
 .ask-question-button,
 .search-button,
 .logout-button,
-.search-category-selector {
+.search-category-selector,
+.ask-question-category-selector {
   padding: 5px 15px;
   margin: 5px;
   background-color: var(--accent-color);
@@ -93,10 +94,42 @@ img {
 .ask-question-button:hover,
 .search-button:hover,
 .logout-button:hover,
-.search-category-selector:hover  {
+.search-category-selector:hover,
+.ask-question-category-selector:hover  {
   background-color: #ff562285;
 }
 
+input:-webkit-autofill {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0 50px #222831 inset;
+    -webkit-text-fill-color: var(--text-color);
+    
+}
+
+input {
+    background-color: #222831;
+    color: var(--text-color);
+    border: 1px solid #ff562285;
+    border-radius: 10px;
+}
+    
+textarea {
+    background-color: #222831;
+    color: var(--text-color);
+    border: 1px solid #ff562285;
+    border-radius: 10px;
+    resize: none;
+}
+
+
+input {
+  padding: 5px;
+}
+
+.bump-form-label {
+  position: relative;
+  top: 15px;
+}
 /*--------------------------signup setup------------------------*/
 
 .signup_user {
@@ -151,6 +184,9 @@ max-width: 500px;
   color: var(--text-color);
 }
 
+.form-field-div {
+  margin-bottom: 10px;
+}
 /*--------------------------login setup------------------------*/
 .login_user {
 max-width: 500px;
@@ -272,7 +308,7 @@ max-width: 500px;
   font-size: 30px;
   padding: 10px 30px;
   margin: 20px;
-  border: 3px solid var(--accent-color);
+  border: 3px solid #ff562285;
   border-radius: 1rem;
   display: inline-block;
 }
@@ -361,7 +397,8 @@ max-width: 500px;
   font-weight: 700;
   color: var(--accent-color);
   text-decoration: none;
-  padding: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
   margin-bottom: 5px;
   border-radius: 1rem;
   max-height: 80px;
@@ -369,7 +406,7 @@ max-width: 500px;
 }
 
 .landing-question-box-top-divider {
-  border: 1px solid var(--accent-color);
+  border: 1px solid #ff562285;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -429,25 +466,27 @@ max-width: 500px;
   font-weight: 700;
   color: var(--accent-color);
   text-decoration: none;
-  padding: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
   margin-bottom: 5px;
   border-radius: 1rem;
   overflow-y: hidden;
 }
 
 .question-page-question-box-top-divider {
-  border: 1px solid var(--accent-color);
+  border: 1px solid #ff562285;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
 .question-page-question-box-text {
   margin-bottom:8px;
+  overflow-wrap: break-word;
 }
 
 .question-page-question-box-category {
   position: relative;
-  bottom: -40px;
+  bottom: -60px;
   left: 10px;
   background-color: var(--main-background);
   padding: 7px 10px;
@@ -468,17 +507,42 @@ max-width: 500px;
   overflow: hidden;
 }
 
-.question-page-question-voting-icons {
+/* .question-page-question-voting-icons {
   display:flex;
-  flex-direction: row;
+  flex-direction: row; 
   position: relative;
   left: 1100px;
   bottom: -48px;
-}
+} */
 
 .question-page-upvote-question-icon {
-  margin-right: 10px;
+  position: relative;
+  left: 1100px;
+  bottom: -48px;
+  margin-right: 6px;
+  z-index: 1;
 }
+
+.question-page-downvote-question-icon {
+  position: relative;
+  left: 1100px;
+  bottom: -48px;
+  margin-right: 6px;
+  z-index: 1;
+}
+
+.unclickable-vote-button {
+  pointer-events: none;
+}
+
+.upvoted-arrow {
+  color: var(--accent-color);
+}
+
+.downvoted-arrow {
+  color: #3a99be;
+}
+
 
 /*--------------------------search results page setup------------------------*/
 
@@ -487,7 +551,7 @@ max-width: 500px;
   font-size: 30px;
   padding: 10px 30px;
   margin: 20px;
-  border: 3px solid var(--accent-color);
+  border: 3px solid #ff562285;
   border-radius: 1rem;
   display: inline-block;
 }
@@ -585,7 +649,7 @@ max-width: 500px;
 }
 
 .search-question-box-top-divider {
-  border: 1px solid var(--accent-color);
+  border: 1px solid #ff562285;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -624,7 +688,7 @@ max-width: 500px;
   margin-top: 50px;
   margin-bottom: 20px;
   font-size: 16px;
-  border: 1px dashed var(--accent-color);
+  border: 1px dashed #ff562285;
   border-radius: 1rem;
 
   padding-top: 10px;
