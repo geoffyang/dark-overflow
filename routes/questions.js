@@ -19,7 +19,7 @@ const { log } = require("debug");
 
 // GET /questions/:id
 router.get("/:id", csrfProtection, async (req, res, next) => {
-  console.log("getting question");
+
   const id = req.params.id;
 
   // join question, answer, questionVote, answerVote

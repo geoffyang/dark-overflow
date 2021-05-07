@@ -1,6 +1,5 @@
 window.addEventListener("DOMContentLoaded", async (event) => {
 
-    // console.log("hello from questions.js!");
     const upVoteQ = document.querySelector(".fa-caret-square-up");
     const downVoteQ = document.querySelector(".fa-caret-square-down");
     const upVoteA = document.querySelectorAll(".fa-plus-circle");
@@ -42,7 +41,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
         let chosenCategory = document.querySelector('.edit-question-category-field').value;
         let categoryText = document.querySelector('.edit-question-category-field');
         let categoryTextValue = categoryText.options[categoryText.selectedIndex].text;
-        console.log(categoryTextValue);
         let csrfvalue = document.querySelector('.csrfEdit').value;
         let questionId = document.querySelector('.questionToEditId').value;
         if (title.trim() && text.trim()) {
