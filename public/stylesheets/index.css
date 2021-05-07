@@ -308,7 +308,7 @@ max-width: 500px;
   font-size: 30px;
   padding: 10px 30px;
   margin: 20px;
-  border: 3px solid var(--accent-color);
+  border: 3px solid #ff562285;
   border-radius: 1rem;
   display: inline-block;
 }
@@ -551,7 +551,7 @@ max-width: 500px;
   font-size: 30px;
   padding: 10px 30px;
   margin: 20px;
-  border: 3px solid var(--accent-color);
+  border: 3px solid #ff562285;
   border-radius: 1rem;
   display: inline-block;
 }
@@ -688,7 +688,7 @@ max-width: 500px;
   margin-top: 50px;
   margin-bottom: 20px;
   font-size: 16px;
-  border: 1px dashed var(--accent-color);
+  border: 1px dashed #ff562285;
   border-radius: 1rem;
 
   padding-top: 10px;
