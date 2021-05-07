@@ -599,7 +599,9 @@ input {
 
 /*--------------------------search results page setup------------------------*/
 .no-question-found {
-  /* align-self: center; */
+  position: relative;
+  left: 50px;
+  align-self: center;
   width: 400px;
   color: var(--text-color);
   display: flex;
@@ -612,7 +614,14 @@ input {
   padding: 30px;
   height: 150px;
   text-align: left;
+  
 }
+
+.single-search-result {
+  position: relative;
+  left: 55px;
+}
+
 .no-question-found a {
   color: #ff5722;
 }

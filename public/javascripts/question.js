@@ -2,9 +2,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
 
     const upVoteQ = document.querySelector(".fa-caret-square-up");
     const downVoteQ = document.querySelector(".fa-caret-square-down");
-    const upVoteA = document.querySelectorAll(".fa-plus-circle");
-    const downVoteA = document.querySelectorAll(".fa-minus-circle");
-
     const deleteQuestion = document.querySelector(".delete-question-btn");
     const deleteAnswers = document.querySelectorAll(".delete-answer-btn");
     const answerQuestionButton = document.querySelector(
@@ -23,58 +20,69 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     upVoteQ.addEventListener("click", (e) => questionVote(1, e.target.id));
     downVoteQ.addEventListener("click", (e) => questionVote(2, e.target.id));
 
-    editButton.addEventListener("click", (event) =>{
-        originalTitle = document.querySelector('.question-page-question-box-title').innerText;
-        originalText = document.querySelector('.question-page-question-box-text-paragraph').innerText;
-        document.querySelector(".editQuestionForm").style.display = "block";
+    const upVoteA = document.querySelectorAll(".fa-plus-circle");
+    const downVoteA = document.querySelectorAll(".fa-minus-circle");
+    upVoteA.forEach(upVoteButton => {
+        upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id))
     });
 
-    cancelEditButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        document.querySelector(".editQuestionForm").style.display = "none";
-    })
+    if (editButton) {
+        editButton.addEventListener("click", (event) => {
+            originalTitle = document.querySelector('.question-page-question-box-title').innerText;
+            originalText = document.querySelector('.question-page-question-box-text-paragraph').innerText;
+            document.querySelector(".editQuestionForm").style.display = "block";
+        });
+    }
+    if (cancelEditButton) {
+        cancelEditButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            document.querySelector(".editQuestionForm").style.display = "none";
+        })
+    }
+    if (submitEditButton) {
+        submitEditButton.addEventListener('click', async (event) => {
+            event.preventDefault();
+            let title = document.querySelector('.edit-question-title-field').value;
+            let text = document.querySelector('.edit-question-text-field').value;
+            let chosenCategory = document.querySelector('.edit-question-category-field').value;
+            let categoryText = document.querySelector('.edit-question-category-field');
+            let categoryTextValue = categoryText.options[categoryText.selectedIndex].text;
+            let csrfvalue = document.querySelector('.csrfEdit').value;
+            let questionId = document.querySelector('.questionToEditId').value;
+            if (title.trim() && text.trim()) {
+                try {
+                    const res = await fetch(`http://localhost:8080/askquestions/${questionId}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-Token": csrfvalue
+                        },
 
-    submitEditButton.addEventListener('click', async (event) => {
-        event.preventDefault();
-        let title = document.querySelector('.edit-question-title-field').value;
-        let text = document.querySelector('.edit-question-text-field').value;
-        let chosenCategory = document.querySelector('.edit-question-category-field').value;
-        let categoryText = document.querySelector('.edit-question-category-field');
-        let categoryTextValue = categoryText.options[categoryText.selectedIndex].text;
-        let csrfvalue = document.querySelector('.csrfEdit').value;
-        let questionId = document.querySelector('.questionToEditId').value;
-        if (title.trim() && text.trim()) {
-            try {
-                const res = await fetch(`http://localhost:8080/askquestions/${questionId}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json",
-                            "X-CSRF-Token": csrfvalue},
+                        body: JSON.stringify({ text, title, chosenCategory }),
+                    });
 
-                body: JSON.stringify({ text, title, chosenCategory }),
-            });
-
-                // const data = await res.json();
-                const pageTitle = document.querySelector('.question-page-question-box-title');
-                pageTitle.innerText = title;
-                const pageText = document.querySelector('.question-page-question-box-text-paragraph');
-                pageText.innerText = text;
-                document.querySelector(".editQuestionForm").style.display = "none";
-                const categoryText = document.querySelector('.question-page-question-box-category-paragraph');
-                categoryText.innerText = categoryTextValue;
-            } catch (err) {
-                console.log(err);
+                    // const data = await res.json();
+                    const pageTitle = document.querySelector('.question-page-question-box-title');
+                    pageTitle.innerText = title;
+                    const pageText = document.querySelector('.question-page-question-box-text-paragraph');
+                    pageText.innerText = text;
+                    document.querySelector(".editQuestionForm").style.display = "none";
+                    const categoryText = document.querySelector('.question-page-question-box-category-paragraph');
+                    categoryText.innerText = categoryTextValue;
+                } catch (err) {
+                    console.log(err);
+                }
             }
-        }
 
-        if (!title.trim()) {
-            document.querySelector('.edit-question-title-field').value = originalTitle;
-        }
+            if (!title.trim()) {
+                document.querySelector('.edit-question-title-field').value = originalTitle;
+            }
 
-        if (!text.trim()) {
-            document.querySelector('.edit-question-text-field').value = originalText;
-        }
-    })
-
+            if (!text.trim()) {
+                document.querySelector('.edit-question-text-field').value = originalText;
+            }
+        })
+    }
     answerQuestionButton.addEventListener("click", async (e) => {
         e.preventDefault();
 
@@ -104,15 +112,15 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     }
 
     if (deleteAnswers.length) {
-    // Use a for loop to add an event listener to each answer div
+        // Use a for loop to add an event listener to each answer div
 
-    console.log(`upvoteA array: ${upVoteA} length ${upVoteA.length}`);
-    upVoteA.forEach(upVoteButton => {
-        upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
-    })
-    downVoteA.forEach(downVoteButton => {
-        downVoteButton.addEventListener("click", (e) => answerVote(2, e.target.id));
-    })
+        console.log(`upvoteA array: ${upVoteA} length ${upVoteA.length}`);
+        upVoteA.forEach(upVoteButton => {
+            upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
+        })
+        downVoteA.forEach(downVoteButton => {
+            downVoteButton.addEventListener("click", (e) => answerVote(2, e.target.id));
+        })
 
 
 
@@ -128,6 +136,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
         }
     }
 });
+
 
 const removeDiv = function (id) {
     var elemToDelete = document.getElementById(`answer-${id}-div`);
@@ -156,11 +165,11 @@ async function postAnswer(route, answerTextBox) {
     try {
         const res = await fetch(`http://localhost:8080/${route}`, {
 
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
 
-        body: JSON.stringify({ textToSend }),
-    });
+            body: JSON.stringify({ textToSend }),
+        });
 
 
         const data = await res.json();
@@ -182,33 +191,33 @@ async function questionVote(upOrDownCode, questionId) {
         try {
             await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
 
-            method: `DELETE`,
-        });
+                method: `DELETE`,
+            });
         } catch (err) {
             console.log("question vote error", err);
         }
-            upVoteQ.classList.remove("upvoted-arrow");
-            score.innerText--;
-            return;
+        upVoteQ.classList.remove("upvoted-arrow");
+        score.innerText--;
+        return;
     }
 
     if (upOrDownCode === 2 && downVoteQ.classList.contains("downvoted-arrow")) {
         try {
             await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
                 method: `DELETE`,
-        });
+            });
         } catch (err) {
             console.log("question vote error", err);
         }
-            downVoteQ.classList.remove("downvoted-arrow");
-            score.innerText++;
-    return;
+        downVoteQ.classList.remove("downvoted-arrow");
+        score.innerText++;
+        return;
     }
 
     try {
-        if (downVoteQ.classList.contains("downvoted-arrow") || upVoteQ.classList.contains("upvoted-arrow") ){
+        if (downVoteQ.classList.contains("downvoted-arrow") || upVoteQ.classList.contains("upvoted-arrow")) {
             await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
-                    method: `DELETE`,
+                method: `DELETE`,
             });
         }
         await fetch(
@@ -235,14 +244,15 @@ async function questionVote(upOrDownCode, questionId) {
 
 
 async function answerVote(upOrDownCode, answerId) {
+
+    const score = document.querySelector(`${answerId}.question-page-answer-score`)
+    const upvoteButton = document.querySelector(`${answerId}.fa-plus-circle`)
+    const downvoteButton = document.querySelector(`${answerId}.fa-minus-circle`)
+
     //answerId has an 'A' prefix that needs to be removed
     answerId = answerId.slice(1);
 
-    // const upVoteA = document.querySelector(".fa-caret-square-up");
-    // const downVoteA = document.querySelector(".fa-caret-square-down");
-    const score = document.querySelector(".question-page-answer-score");
-
-    // // fresh upvote
+    // // previously voted
     // if (upOrDownCode === 1 && upVoteQ.classList.contains("upvoted-arrow")) {
     //     try {
     //         await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
@@ -256,7 +266,7 @@ async function answerVote(upOrDownCode, answerId) {
     //     return;
     // }
 
-    // // fresh downvote
+    // // previously voted
     // if (upOrDownCode === 2 && downVoteQ.classList.contains("downvoted-arrow")) {
     //     try {
     //         await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
@@ -270,18 +280,27 @@ async function answerVote(upOrDownCode, answerId) {
     //     return;
     // }
 
-    //geoff answer vote upvote logic
-    if (upOrDownCode === 1) {
+    // fresh vote
+    try {
+        await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+            method: `DELETE`,
+        });
+        await fetch(
+            `http://localhost:8080/answers/${answerId}/vote/${upOrDownCode}`,
+            { method: `POST` }
+        );
 
-        score.innerText++;
-        if (downVoteQ.classList.contains("downvoted-arrow")) score.innerText++;
-        upVoteQ.classList.add("upvoted-arrow");
-        downVoteQ.classList.remove("downvoted-arrow");
-    } else {
-        score.innerText--;
-        if (upVoteQ.classList.contains("upvoted-arrow")) score.innerText--;
-        downVoteQ.classList.add("downvoted-arrow");
-        upVoteQ.classList.remove("upvoted-arrow");
+        if (upOrDownCode === 1) { //upvote
+            if (downvoteButton.classList.contains("downvoted-arrow")) score.innerText++;
+            upvoteButton.classList.add("upvoted-arrow");
+            downvoteButton.classList.remove("downvoted-arrow");
+        } else { //downvote
+            if (upvoteButton.classList.contains("upvoted-arrow")) score.innerText--;
+            downvoteButton.classList.add("downvoted-arrow");
+            upvoteButton.classList.remove("upvoted-arrow");
+        }
+
+    } catch (err) {
+        console.log("question vote error", err);
     }
-} 
-
+}
