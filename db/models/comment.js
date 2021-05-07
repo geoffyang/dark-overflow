@@ -1,19 +1,23 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Comment = sequelize.define('Comment', {
-    text: DataTypes.TEXT,
-    score: DataTypes.INTEGER,
-    answerId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
-  }, {});
-  Comment.associate = function(models) {
-    Comment.belongsTo (models.Profile, {foreignKey: 'userId'})
+  const Comment = sequelize.define(
+    "Comment",
+    {
+      text: DataTypes.TEXT,
+      score: DataTypes.INTEGER,
+      answerId: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
+    },
+    {}
+  );
+  Comment.associate = function (models) {
+    Comment.belongsTo(models.Profile, { foreignKey: "userId" });
     Comment.hasMany(models.CommentVote, {
       foreignKey: "commentId",
       onDelete: "CASCADE",
       hooks: true,
     });
-    Comment.belongsTo (models.Answer, {foreignKey: 'answerId'})
+    Comment.belongsTo(models.Answer, { foreignKey: "answerId" });
   };
   return Comment;
 };

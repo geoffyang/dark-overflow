@@ -14,9 +14,9 @@ module.exports = {
 
 */
     return queryInterface.bulkInsert('Answers', [{
-        text: 'this',
+        text: 'This link may help you https://www.guru99.com/fact-table-vs-dimension-table.html',
         score: 0,
-        questionId: 1,
+        questionId: 5,
         userId: 100,
         createdAt: new Date(),
         updatedAt: new Date()
