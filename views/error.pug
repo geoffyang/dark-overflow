@@ -3,4 +3,11 @@ extends layout
 block content
   h1= message
   h2= error.status
-  pre #{error.stack}
+  if error.status = 404
+    div
+      img(src="https://i2.wp.com/brightestyoungthings.com/wp-content/uploads/2015/05/Screen-Shot-2015-05-04-at-4.10.17-PM.png?w=352&quality=100&ssl=1" alt="404IMG" class = "not-found-img"  )
+
+      if error.typeOf === "question"
+        div We couldn't find that question. Sorry about that.
+      else
+        div We couldn't find that page
