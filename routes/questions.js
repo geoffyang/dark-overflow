@@ -41,9 +41,11 @@ router.get("/:id", async (req, res, next) => {
   }
   await question.save();
 
-  // //database handle answerVotes
+
+  
+  // database handle answerVotes
   // let answersArrayForPug = [];
-  // question.Answers.forEach(answerOnPage => {
+  // question.Answers.forEach(async (answerOnPage) => {
   //   /* const answer = grab each answer on the page,
   //   const answerScore = query for fresh aggregate voteSum
   //   */
@@ -51,14 +53,24 @@ router.get("/:id", async (req, res, next) => {
   //  const answerScore = await AnswerVote.findAll({
   //    attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
   //    where: {answerId: answerOnPage.id}
-  //   })
+  //  })
+  //   console.log("answer#", answer.dataValues.id, "answersScore:", answerScore[0].dataValues.total);
   //   // save fresh answerScore into the answer.score field
   //   if (answerScore[0].dataValues.total !== null) {
   //     answer.score = answerScore[0].dataValues.total;
   //   } else answer.score = 0;
   //   await answer.save();
-  //   answersArrayForPug.push({ answer });
+  //   // console.log("*******ANSWER********", answer);
+  //   answersArrayForPug.push( {answer} );
   // });
+
+  // const newAnswers = Answer.findAll({
+  //   where: {
+  //     id: {
+  //       [Op.in]:
+  //     }
+  //   }
+  // })
 
   const categoryList = await Category.findAll();
   let isQuestionAsker = false;
@@ -66,6 +78,8 @@ router.get("/:id", async (req, res, next) => {
     const { userId } = req.session.auth;
     if (userId === question.userId) isQuestionAsker = true;
   }
+
+  // console.log("*****************", (answersArrayForPug));
   res.render('question', {
     question, categoryList, isQuestionAsker,
     // answers: answersArrayForPug
