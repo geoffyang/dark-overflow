@@ -43,6 +43,7 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
         model: Profile,
       },
     ],
+    order: [[Answer, 'score', 'DESC']],
   });
   if (!question) {
     console.log("making question error");
