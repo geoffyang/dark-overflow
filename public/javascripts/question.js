@@ -2,8 +2,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     // console.log("hello from questions.js!");
     const upVoteQ = document.querySelector(".fa-caret-square-up");
     const downVoteQ = document.querySelector(".fa-caret-square-down");
-    const upVoteA = document.querySelectorAll(".fa-plus-circle");
-    const downVoteA = document.querySelectorAll(".fa-minus-circle");
     const deleteQuestion = document.querySelector(".delete-question-btn");
     const deleteAnswers = document.querySelectorAll(".delete-answer-btn");
     const answerQuestionButton = document.querySelector(
@@ -15,7 +13,8 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     upVoteQ.addEventListener("click", (e) => questionVote(1, e.target.id));
     downVoteQ.addEventListener("click", (e) => questionVote(2, e.target.id));
 
-    // console.log(`upvoteA array: ${upVoteA} length ${upVoteA.length}`);
+    const upVoteA = document.querySelectorAll(".fa-plus-circle");
+    const downVoteA = document.querySelectorAll(".fa-minus-circle");
     upVoteA.forEach(upVoteButton => {
         upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
     })
@@ -163,16 +162,14 @@ async function questionVote(upOrDownCode, questionId) {
 
 async function answerVote(upOrDownCode, answerId) {
 
-    // const upVoteA = document.querySelector(".fa-plus-circle");
-    // const downVoteA = document.querySelector(".fa-minus-circle");
-    // const score = document.querySelector(".question-page-answer-score");
-    const scores = document.querySelectorAll(".question-page-answer-score");
     const score = document.querySelector(`${answerId}.question-page-answer-score`)
+    const upvoteButton = document.querySelector(`${answerId}.fa-plus-circle`)
+    const downvoteButton = document.querySelector(`${answerId}.fa-minus-circle`)
 
     //answerId has an 'A' prefix that needs to be removed
     answerId = answerId.slice(1);
 
-    // // fresh upvote
+    // // previously voted
     // if (upOrDownCode === 1 && upVoteQ.classList.contains("upvoted-arrow")) {
     //     try {
     //         await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
@@ -186,7 +183,7 @@ async function answerVote(upOrDownCode, answerId) {
     //     return;
     // }
 
-    // // fresh downvote
+    // // previously voted
     // if (upOrDownCode === 2 && downVoteQ.classList.contains("downvoted-arrow")) {
     //     try {
     //         await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
@@ -200,7 +197,7 @@ async function answerVote(upOrDownCode, answerId) {
     //     return;
     // }
 
-    // why is this voting again?
+    // fresh vote
     try {
         await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
             method: `DELETE`,
@@ -210,16 +207,14 @@ async function answerVote(upOrDownCode, answerId) {
             { method: `POST` }
         );
 
-        if (upOrDownCode === 1) {
-            score.innerText++;
-            if (downVoteQ.classList.contains("downvoted-arrow")) score.innerText++;
-            upVoteQ.classList.add("upvoted-arrow");
-            downVoteQ.classList.remove("downvoted-arrow");
-        } else {
-            score.innerText--;
-            if (upVoteQ.classList.contains("upvoted-arrow")) score.innerText--;
-            downVoteQ.classList.add("downvoted-arrow");
-            upVoteQ.classList.remove("upvoted-arrow");
+        if (upOrDownCode === 1) { //upvote
+            if (downvoteButton.classList.contains("downvoted-arrow")) score.innerText++;
+            upvoteButton.classList.add("upvoted-arrow");
+            downvoteButton.classList.remove("downvoted-arrow");
+        } else { //downvote
+            if (upvoteButton.classList.contains("upvoted-arrow")) score.innerText--;
+            downvoteButton.classList.add("downvoted-arrow");
+            upvoteButton.classList.remove("upvoted-arrow");
         }
     } catch (err) {
         console.log("question vote error", err);
