@@ -9,19 +9,22 @@ block content
             div(class = 'details')
                 form(action="/users/signup", method="post")
                     input(type="hidden" name ="_csrf" value = csrfToken)
-
-                    +field("Username", "userName", user.userName,"","Enter your username" )
-
-                    +field("First Name", "firstName", user.firstName, "", "Enter your first name"  )
-
-                    +field("Last Name", "lastName", user.lastName, "", "Enter your last name"  )
-
-                    +field("Email", "email", user.email, "email", "Enter your email"  )
-
-                    +field("Password", "password", "", "password", "Enter your password" )
-
-                    +field("Confirm your password", "confirmPassword", "", "password", "Confirm password" )
+                    div(class='form-field-div')
+                        +field("Username", "userName", user.userName,"","Enter your username" )
+                    div(class='form-field-div')
+                        +field("First Name", "firstName", user.firstName, "", "Enter your first name"  )
+                    div(class='form-field-div')
+                        +field("Last Name", "lastName", user.lastName, "", "Enter your last name"  )
+                    div(class='form-field-div')
+                        +field("Email", "email", user.email, "email", "Enter your email"  )
+                    div(class='form-field-div')
+                        +field("Password", "password", "", "password", "Enter your password" )
+                    div(class='form-field-div')
+                        +field("Confirm your password", "confirmPassword", "", "password", "Confirm password" )
                     div()
                         button(type="submit" class ="signup-button" ) Submit
+                form(action="/users/demo", method="post")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    button(type="submit" class ="login-button" ) Demo User                        
     div(class='signup-to-togin')
         span Already have an account? #[a(href="/users/login") Log in] to start asking questions.

@@ -5,20 +5,48 @@ include utils.pug
         script(src="/javascripts/question.js")
 
     block content
-        div
-            h1=question.title
-            h2=question.text
+        div(class='question-page-question-box-container')
+            div(class='question-page-question-box')
+                div(class='question-page-question-title-text-wrapper')
+                    div(class='question-page-question-box-title')=question.title
+                hr(class='question-page-question-box-top-divider')
+                div(class='question-page-question-box-text')
+                    p=question.text
+                hr(class='question-page-question-box-top-divider')
+                div(class='question-page-question-box-category')
+                    p=`${question.Category.dataValues.name}`
+                //- if question.userId === user.id   
+                if locals.authenticated
+                    div(class='.question-page-question-voting-icons')
+                        - var foundPositiveVote = false
+                        - var foundNegativeVote = false
+                        each vote in question.dataValues.QuestionVotes
+                            if vote.userId = question.userId
+                                if vote.voteSum === 1
+                                    - foundPositiveVote = true;
+                                if vote.voteSum === -1
+                                    - foundNegativeVote = true;   
+                        if foundPositiveVote === true
+                            i(class="far fa-caret-square-up question-page-upvote-question-icon upvoted-arrow", id=question.id)
+                        else 
+                            i(class="far fa-caret-square-up question-page-upvote-question-icon", id=question.id)
+                        if foundNegativeVote
+                            i(class="far fa-caret-square-down question-page-downvote-question-icon downvoted-arrow" id=question.id)
+                        else 
+                            i(class="far fa-caret-square-down question-page-downvote-question-icon" id=question.id)
+                else 
+                    div(class='.question-page-question-voting-icons')           
+                        i(class="far fa-caret-square-up question-page-upvote-question-icon unclickable-vote-button", id=question.id)
+                        i(class="far fa-caret-square-down question-page-downvote-question-icon unclickable-vote-button" id=question.id)
+                div(class='question-page-question-box-score')
+                    p=`Score: `
+                        span(class='question-page-question-score')=question.dataValues.score
+                div(class='question-page-question-box-userName')
+                    p=`Asked by: ${question.Profile.dataValues.userName}`
         if locals.authenticated
             form(action=`/answerquestion/${question.id}`, method="post")
                 textarea(name="text")
                 button(type="submit") Submit
-            div(id="votesDiv")
-                p=`Question Score: ${question.dataValues.score}`
-                span Vote on question quality
-                i(class="far fa-caret-square-up", id=question.id)
-                i(class="far fa-caret-square-down" id=question.id)
-
-
 
             div(id='answersDiv') Answers:
                 each answer in answers

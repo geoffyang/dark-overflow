@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { Question, Answer, QuestionVote, AnswerVote, Category } = require("../db/models");
+const { Question, Answer, QuestionVote, AnswerVote, Category, Profile } = require("../db/models");
 const { requireAuth } = require("../auth");
 const { asyncHandler } = require("./utils");
 const sequelize = require('sequelize');
@@ -26,6 +26,12 @@ router.get("/:id", async (req, res, next) => {
       {
         model: QuestionVote,
       },
+      {
+        model:Category
+      },
+      {
+        model: Profile
+      }
     ],
   });
 
@@ -81,11 +87,11 @@ router.get("/:id", async (req, res, next) => {
     if (userId === question.userId) isQuestionAsker = true;
   }
 
-  // console.log("*****************", (answersArrayForPug));
   res.render('question', {
     question, categoryList, isQuestionAsker,
     answers: answersArray
   })
+
 })
 
 
@@ -128,7 +134,19 @@ router.post(
     const { userId } = req.session.auth;
     const vote = await QuestionVote.create({ userId, questionId, voteSum });
 
-    res.send();
+    const question = await Question.findByPk(questionId);
+    const score = await QuestionVote.findAll({
+        attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
+        where: {questionId: question.id}
+    })
+    if (score[0].dataValues.total !== null) {
+      question.score = score[0].dataValues.total;
+    } else {
+      question.score = 0;
+    }
+    await question.save();
+    
+    res.end();
   })
 );
 
@@ -146,6 +164,18 @@ router.delete(
       },
     });
     vote.destroy();
+    const question = await Question.findByPk(questionId);
+    const score = await QuestionVote.findAll({
+        attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
+        where: {questionId: question.id}
+    })
+    if (score[0].dataValues.total !== null) {
+      question.score = score[0].dataValues.total;
+    } else {
+      question.score = 0;
+    }
+    await question.save();
+    
     res.send();
   })
 );
