@@ -34,7 +34,7 @@ body {
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 /* Track */
@@ -49,6 +49,9 @@ body {
   border-radius: 10px;
 }
 
+body {
+  overflow-x: hidden;
+}
 /* Handle on hover */
 /* ::-webkit-scrollbar-thumb:hover {
   background: #555;
