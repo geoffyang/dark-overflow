@@ -486,7 +486,7 @@ max-width: 500px;
 
 .question-page-question-box-category {
   position: relative;
-  bottom: -60px;
+  bottom: -80px;
   left: 10px;
   background-color: var(--main-background);
   padding: 7px 10px;
@@ -543,7 +543,20 @@ max-width: 500px;
   color: #3a99be;
 }
 
+.question-page-delete-and-edit-question {
+  position: relative;
+  left: 950px;
+  bottom: -63px;
+}
 
+.question-page-delete-question-icon {
+  margin-right: 8px;
+}
+
+.fa-caret-square-up,
+.fa-caret-square-down {
+  font-size: 16px;
+}
 /*--------------------------search results page setup------------------------*/
 
 

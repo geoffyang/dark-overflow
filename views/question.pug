@@ -17,6 +17,10 @@ include utils.pug
                     p=`${question.Category.dataValues.name}`
                 //- if question.userId === user.id   
                 if locals.authenticated
+                    if isQuestionAsker
+                        div(class='question-page-delete-and-edit-question')
+                            i(class="fas fa-trash delete-question-btn question-page-delete-question-icon" id = question.id)
+                            i(class="fas fa-edit edit-question-btn question-page-edit-question-icon" id = question.id)
                     div(class='.question-page-question-voting-icons')
                         - var foundPositiveVote = false
                         - var foundNegativeVote = false
@@ -57,9 +61,9 @@ include utils.pug
                         span Vote on answer quality
                         <i class="fas fa-plus-circle"></i>
                         <i class="fas fa-minus-circle"></i>
-            div(id = 'deleteDiv')
-                if isQuestionAsker
-                    a(class = "delete-question-btn" href="#", id = question.id) Delete question
+            //- div(id = 'deleteDiv')
+            //-     if isQuestionAsker
+            //-         a(class = "delete-question-btn" href="#", id = question.id) Delete question
         else
             span Please #[a(href="/users/login") log in] to answer questions.
             div(id='answersDiv') Answers:
