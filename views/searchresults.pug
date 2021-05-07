@@ -3,14 +3,35 @@ extends layout
 block content
     h1(class='search-page-title')=title
 
+    //- if !questions.length
+    //-     div(class = "no-question-found")
+    //-         div We couldnt find any questions about that...
+    //-         a(href ='/askQuestions') Why not ask one here?
+    //- else
+    div(class='search-question-box-container')
         if !questions.length
             div(class = "no-question-found")
                 div We couldnt find any questions about that...
                 a(href ='/askQuestions') Why not ask one here?
         else
-            div(class='search-question-box-container')
-                - var n =1
-                each question in questions
+            - var n =1
+            each question in questions
+                if (questions.length === 1)
+                    div(class=`search-question-${n++} search-question-box single-search-result` )
+                        div(class='search-question-title-text-wrapper')
+                            div(class='search-question-box-title')
+                                a(href=`/questions/${question.dataValues.id}` class='search-question-box-title')=question.dataValues.title
+                            hr(class='search-question-box-top-divider')
+                            div(class='search-question-box-text')
+                                p=question.dataValues.text
+                        hr(class='search-question-box-top-divider')
+                        div(class='search-question-box-category')
+                            p=`${question.Category.dataValues.name}`
+                        div(class='search-question-box-score')
+                            p=`Score: ${question.dataValues.score}`
+                        div(class='search-question-box-userName')
+                            p=`Asked by: ${question.Profile.dataValues.userName}`
+                else
                     div(class=`search-question-${n++} search-question-box` )
                         div(class='search-question-title-text-wrapper')
                             div(class='search-question-box-title')
@@ -25,3 +46,4 @@ block content
                             p=`Score: ${question.dataValues.score}`
                         div(class='search-question-box-userName')
                             p=`Asked by: ${question.Profile.dataValues.userName}`
+
