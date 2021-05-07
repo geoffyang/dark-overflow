@@ -1,10 +1,20 @@
 var express = require("express");
 var router = express.Router();
-const { Question, Answer, QuestionVote, AnswerVote, Category, Profile } = require("../db/models");
+const {
+  Question,
+  Answer,
+  QuestionVote,
+  AnswerVote,
+  Category,
+  Profile,
+} = require("../db/models");
 const { requireAuth } = require("../auth");
+
 const { csrfProtection, asyncHandler, } = require("./utils");
 const sequelize = require('sequelize');
 const { check, validationResult } = require('express-validator');
+validationResult } = require("express-validator");
+
 const { log } = require("debug");
 
 // GET /questions/:id
@@ -27,27 +37,34 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
         model: QuestionVote,
       },
       {
-        model:Category
+        model: Category,
       },
       {
-        model: Profile
-      }
+        model: Profile,
+      },
     ],
   });
+  if (!question) {
+    console.log("making question error");
+    let error = {
+      status: 404,
+      typeOf: "question",
+      message: "Not found",
+    };
 
+    next(error);
+  }
   //database handle questionVotes
   const questionScore = await QuestionVote.findAll({
-    attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
-    where: { questionId: id }
-  })
+    attributes: [[sequelize.fn("sum", sequelize.col("voteSum")), "total"]],
+    where: { questionId: id },
+  });
   if (questionScore[0].dataValues.total !== null) {
     question.score = questionScore[0].dataValues.total;
   } else {
     question.score = 0;
   }
   await question.save();
-
-
 
   // database handle answerVotes
   // let answersArrayForPug = [];
@@ -87,6 +104,7 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
     if (userId === question.userId) isQuestionAsker = true;
   }
 
+
   res.render('question', {
     question, categoryList, isQuestionAsker,
     answers: answersArray,
@@ -94,6 +112,7 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
   })
 
 })
+
 
 
 //DELETE /questions/:id
@@ -137,16 +156,16 @@ router.post(
 
     const question = await Question.findByPk(questionId);
     const score = await QuestionVote.findAll({
-        attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
-        where: {questionId: question.id}
-    })
+      attributes: [[sequelize.fn("sum", sequelize.col("voteSum")), "total"]],
+      where: { questionId: question.id },
+    });
     if (score[0].dataValues.total !== null) {
       question.score = score[0].dataValues.total;
     } else {
       question.score = 0;
     }
     await question.save();
-    
+
     res.end();
   })
 );
@@ -167,19 +186,18 @@ router.delete(
     vote.destroy();
     const question = await Question.findByPk(questionId);
     const score = await QuestionVote.findAll({
-        attributes: [[sequelize.fn('sum', sequelize.col('voteSum')), 'total']],
-        where: {questionId: question.id}
-    })
+      attributes: [[sequelize.fn("sum", sequelize.col("voteSum")), "total"]],
+      where: { questionId: question.id },
+    });
     if (score[0].dataValues.total !== null) {
       question.score = score[0].dataValues.total;
     } else {
       question.score = 0;
     }
     await question.save();
-    
+
     res.send();
   })
 );
-
 
 module.exports = router;
