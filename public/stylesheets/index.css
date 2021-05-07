@@ -124,6 +124,11 @@ textarea {
 input {
   padding: 5px;
 }
+
+.bump-form-label {
+  position: relative;
+  top: 15px;
+}
 /*--------------------------signup setup------------------------*/
 
 .signup_user {
@@ -178,6 +183,9 @@ max-width: 500px;
   color: var(--text-color);
 }
 
+.form-field-div {
+  margin-bottom: 10px;
+}
 /*--------------------------login setup------------------------*/
 .login_user {
 max-width: 500px;
