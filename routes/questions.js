@@ -9,14 +9,17 @@ const {
   Profile,
 } = require("../db/models");
 const { requireAuth } = require("../auth");
-const { asyncHandler } = require("./utils");
-const sequelize = require("sequelize");
-const { check, validationResult } = require("express-validator");
+
+const { csrfProtection, asyncHandler, } = require("./utils");
+const sequelize = require('sequelize');
+const { check, validationResult } = require('express-validator');
+
+
 const { log } = require("debug");
 
 // GET /questions/:id
-router.get("/:id", async (req, res, next) => {
-  console.log("getting question");
+router.get("/:id", csrfProtection, async (req, res, next) => {
+
   const id = req.params.id;
 
   // join question, answer, questionVote, answerVote
@@ -101,13 +104,16 @@ router.get("/:id", async (req, res, next) => {
     if (userId === question.userId) isQuestionAsker = true;
   }
 
-  res.render("question", {
-    question,
-    categoryList,
-    isQuestionAsker,
+
+  res.render('question', {
+    question, categoryList, isQuestionAsker,
     answers: answersArray,
-  });
-});
+    csrfToken: req.csrfToken()
+  })
+
+})
+
+
 
 //DELETE /questions/:id
 router.delete(
