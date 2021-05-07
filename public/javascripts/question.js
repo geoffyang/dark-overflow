@@ -21,6 +21,8 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     const cancelEditButton = document.querySelector('.cancel-edit-question-button');
     let originalTitle = '';
     let originalText = '';
+    upVoteQ.addEventListener("click", (e) => questionVote(1, e.target.id));
+    downVoteQ.addEventListener("click", (e) => questionVote(2, e.target.id));
 
     editButton.addEventListener("click", (event) =>{
         originalTitle = document.querySelector('.question-page-question-box-title').innerText;
@@ -75,10 +77,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
         }
     })
 
-
-
-
-
     answerQuestionButton.addEventListener("click", async (e) => {
         e.preventDefault();
 
@@ -110,10 +108,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     if (deleteAnswers.length) {
     // Use a for loop to add an event listener to each answer div
 
-  
-
-    upVoteQ.addEventListener("click", (e) => questionVote(1, e.target.id));
-    downVoteQ.addEventListener("click", (e) => questionVote(2, e.target.id));
     console.log(`upvoteA array: ${upVoteA} length ${upVoteA.length}`);
     upVoteA.forEach(upVoteButton => {
         upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
@@ -214,9 +208,6 @@ async function questionVote(upOrDownCode, questionId) {
     }
 
     try {
-        await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
-            method: `DELETE`,
-        });
         await fetch(
             `http://localhost:8080/questions/${questionId}/vote/${upOrDownCode}`,
             { method: `POST` }
@@ -289,11 +280,5 @@ async function answerVote(upOrDownCode, answerId) {
         downVoteQ.classList.add("downvoted-arrow");
         upVoteQ.classList.remove("upvoted-arrow");
     }
-    } catch (err) {
-    console.log("question vote error", err);
-    }
-}
-
-
-}
+} 
 

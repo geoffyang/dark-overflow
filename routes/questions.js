@@ -13,7 +13,7 @@ const { requireAuth } = require("../auth");
 const { csrfProtection, asyncHandler, } = require("./utils");
 const sequelize = require('sequelize');
 const { check, validationResult } = require('express-validator');
-validationResult } = require("express-validator");
+
 
 const { log } = require("debug");
 
