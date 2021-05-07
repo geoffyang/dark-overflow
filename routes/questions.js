@@ -21,7 +21,6 @@ const { log } = require("debug");
 router.get("/:id", csrfProtection, async (req, res, next) => {
 
   const id = req.params.id;
-
   // join question, answer, questionVote, answerVote
   const question = await Question.findByPk(parseInt(id, 10), {
     include: [

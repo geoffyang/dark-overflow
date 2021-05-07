@@ -88,7 +88,7 @@ include utils.pug
                 button( class = "answer-question-button" id = question.id type="submit") Submit
         else
             span Please #[a(href="/users/login") log in] to answer questions.
-        div(id='answersDiv') Answers:
+        div(id='answersDiv')
             each answer in question.dataValues.Answers
                 div(id=`answer-${answer.id}-div`)=answer.text
                     if locals.authenticated
@@ -117,7 +117,7 @@ include utils.pug
                                 else
                                     i(class="far fa-caret-square-down answer-downvote-arrow" id=`A${answer.id}-down`)
                         else
-                            div(class='.question-page-answer-voting-icons')=THasfafefefwef
+                            div(class='.question-page-answer-voting-icons')
                                 i(class="far fa-caret-square-up answer-upvote-arrow unclickable-vote-button", id=`A${answer.id}-up`)
                                 i(class="far fa-caret-square-down answer-downvote-arrow unclickable-vote-button" id=`A${answer.id}-down`)
 
