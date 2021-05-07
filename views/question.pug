@@ -25,7 +25,7 @@ include utils.pug
                             i(class="fas fa-edit edit-question-btn question-page-edit-question-icon" id = question.id)
                         div(class = "ask_question editQuestionForm")
                             div(class = 'title') Edit Your Question
-                                div(class = 'details')                       
+                                div(class = 'details')
                                     form(action=`/askQuestions/${question.id}` method="post")
                                         input(type="hidden" class="questionToEditId" value=question.id)
                                         input(type="hidden", name="_csrf", class='csrfEdit' value=csrfToken)
@@ -95,7 +95,7 @@ include utils.pug
 
                         div(class='question-page-answer-box')
                             p=`Answer Score: `
-                                span(class = 'question-page-answer-score')=answer.score
+                                span(class = 'question-page-answer-score' id=`A${answer.id}`)=answer.score
                             p= "Vote on answer quality"
                             i(class="fas fa-plus-circle" id=`A${answer.id}`)
                             i(class="fas fa-minus-circle" id=`A${answer.id}`)
