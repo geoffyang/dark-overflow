@@ -22,9 +22,17 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     const id = e.target.id;
 
     const answerId = await postAnswer(`answerquestion/${id}`, answerTextBox);
+
     const newAnswerDiv = document.createElement("div");
+
     newAnswerDiv.setAttribute("id", `answer=${answerId}`);
-    newAnswerDiv.innerHTML = answerId;
+
+    //NEED the answer DIV to have the same styling as the rest of them
+
+    newAnswerDiv.innerHTML = answerTextBox.value;
+
+    answerTextBox.value = "";
+
     answersDiv.appendChild(newAnswerDiv);
   });
 
@@ -91,63 +99,59 @@ async function postAnswer(route, answerTextBox) {
 }
 
 async function vote(upOrDownCode, questionId) {
+  const upVoteQ = document.querySelector(".fa-caret-square-up");
+  const downVoteQ = document.querySelector(".fa-caret-square-down");
+  const score = document.querySelector(".question-page-question-score");
 
-    const upVoteQ = document.querySelector(".fa-caret-square-up");
-    const downVoteQ = document.querySelector(".fa-caret-square-down");
-    const score = document.querySelector(".question-page-question-score");
-
-    if (upOrDownCode === 1 && upVoteQ.classList.contains('upvoted-arrow')) {
-        try {
-        await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
-            method: `DELETE`,
-        });
-        } catch (err) {
-        console.log("question vote error", err);
-        }
-        upVoteQ.classList.remove('upvoted-arrow');
-        score.innerText--;
-        return;
-    }
-
-    if (upOrDownCode === 2 && downVoteQ.classList.contains('downvoted-arrow')) {
-        try {
-        await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
-            method: `DELETE`,
-        });
-        } catch (err) {
-        console.log("question vote error", err);
-        }
-        downVoteQ.classList.remove('downvoted-arrow');
-        score.innerText++;
-        return;
-    }
-
+  if (upOrDownCode === 1 && upVoteQ.classList.contains("upvoted-arrow")) {
     try {
-        await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
-            method: `DELETE`,
-        });
-        await fetch(
-            `http://localhost:8080/questions/${questionId}/vote/${upOrDownCode}`,
-            { method: `POST` }
-        );
-
-
-        if (upOrDownCode === 1) {
-            score.innerText++;
-            if (downVoteQ.classList.contains('downvoted-arrow')) score.innerText++;
-            upVoteQ.classList.add('upvoted-arrow');
-            downVoteQ.classList.remove('downvoted-arrow');
-
-
-        } else {
-            score.innerText--;
-            if (upVoteQ.classList.contains('upvoted-arrow')) score.innerText--;
-            downVoteQ.classList.add('downvoted-arrow');
-            upVoteQ.classList.remove('upvoted-arrow');
-        }
+      await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+        method: `DELETE`,
+      });
     } catch (err) {
-        console.log("question vote error", err);
+      console.log("question vote error", err);
     }
+    upVoteQ.classList.remove("upvoted-arrow");
+    score.innerText--;
+    return;
+  }
+
+  if (upOrDownCode === 2 && downVoteQ.classList.contains("downvoted-arrow")) {
+    try {
+      await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+        method: `DELETE`,
+      });
+    } catch (err) {
+      console.log("question vote error", err);
+    }
+    downVoteQ.classList.remove("downvoted-arrow");
+    score.innerText++;
+    return;
+  }
+
+  try {
+    await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+      method: `DELETE`,
+    });
+    await fetch(
+      `http://localhost:8080/questions/${questionId}/vote/${upOrDownCode}`,
+      { method: `POST` }
+    );
+
+    if (upOrDownCode === 1) {
+      score.innerText++;
+      if (downVoteQ.classList.contains("downvoted-arrow")) score.innerText++;
+      upVoteQ.classList.add("upvoted-arrow");
+      downVoteQ.classList.remove("downvoted-arrow");
+    } else {
+      score.innerText--;
+      if (upVoteQ.classList.contains("upvoted-arrow")) score.innerText--;
+      downVoteQ.classList.add("downvoted-arrow");
+      upVoteQ.classList.remove("upvoted-arrow");
+    }
+  } catch (err) {
+    console.log("question vote error", err);
+  }
 }
 
 async function extractResponse(res) {
