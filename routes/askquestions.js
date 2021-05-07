@@ -65,18 +65,21 @@ router.post('/:id(\\d+)', requireAuth, csrfProtection, questionValidators, async
         question.categoryId = chosenCategory;
         await question.save();
         console.log('*****************************************************test');
-        return res.redirect(`/questions/${question.id}`)
+        //return res.redirect(`/questions/${question.id}`)
+        res.json()
 
     } else {
         errors = questionErrors.array().map((error) => error.msg);
     }
 
-    res.render('editQuestions', {
-        title: "Edit a Question",
-        csrfToken: req.csrfToken(),
-        categoryList,
-        question
-    })
+    res.json();
+
+    // res.render('editQuestions', {
+    //     title: "Edit a Question",
+    //     csrfToken: req.csrfToken(),
+    //     categoryList,
+    //     question
+    // })
 });
 
 
