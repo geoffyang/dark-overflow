@@ -3,6 +3,8 @@ include utils.pug
     append head
         script(src="https://kit.fontawesome.com/898a425ea4.js" crossorigin="anonymous")
         script(src="/javascripts/question.js")
+    //shove each question into a  separate DIV with an ID of its ID?
+    // delete button to have the same id as the answer it's attached to
 
     block content
         div(class='question-page-question-box-container')
@@ -15,7 +17,7 @@ include utils.pug
                 hr(class='question-page-question-box-top-divider')
                 div(class='question-page-question-box-category')
                     p=`${question.Category.dataValues.name}`
-                //- if question.userId === user.id   
+                //- if question.userId === user.id
                 if locals.authenticated
                     if isQuestionAsker
                         div(class='question-page-delete-and-edit-question')
@@ -29,17 +31,17 @@ include utils.pug
                                 if vote.voteSum === 1
                                     - foundPositiveVote = true;
                                 if vote.voteSum === -1
-                                    - foundNegativeVote = true;   
+                                    - foundNegativeVote = true;
                         if foundPositiveVote === true
                             i(class="far fa-caret-square-up question-page-upvote-question-icon upvoted-arrow", id=question.id)
-                        else 
+                        else
                             i(class="far fa-caret-square-up question-page-upvote-question-icon", id=question.id)
                         if foundNegativeVote
                             i(class="far fa-caret-square-down question-page-downvote-question-icon downvoted-arrow" id=question.id)
-                        else 
+                        else
                             i(class="far fa-caret-square-down question-page-downvote-question-icon" id=question.id)
-                else 
-                    div(class='.question-page-question-voting-icons')           
+                else
+                    div(class='.question-page-question-voting-icons')
                         i(class="far fa-caret-square-up question-page-upvote-question-icon unclickable-vote-button", id=question.id)
                         i(class="far fa-caret-square-down question-page-downvote-question-icon unclickable-vote-button" id=question.id)
                 div(class='question-page-question-box-score')
@@ -48,19 +50,19 @@ include utils.pug
                 div(class='question-page-question-box-userName')
                     p=`Asked by: ${question.Profile.dataValues.userName}`
         if locals.authenticated
-            form(action=`/answerquestion/${question.id}`, method="post")
-                textarea(name="text")
-                button(type="submit") Submit
-            
+            form(action=`/answerquestion/${question.id}`, method="post" )
+                textarea(name="text" id="answer-text-box")
+                button( class = "answer-question-button" id = question.id type="submit") Submit
+
             div(id='answersDiv') Answers:
                 each answer in question.dataValues.Answers
-                    div=answer.text
-                    if answer.userId = user.id
-                        a(class = "delete-answer-btn" href="#", id = question.id) Delete answer
-                    div=p=`Answer Score: ${answer.score}`
-                        span Vote on answer quality
-                        <i class="fas fa-plus-circle"></i>
-                        <i class="fas fa-minus-circle"></i>
+                    div(id=`answer-${answer.id}-div`)=answer.text
+                        if answer.userId = user.id
+                            a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
+                        div=p=`Answer Score: ${answer.score}`
+                            span Vote on answer quality
+                            i(class="fas fa-plus-circle" id=answer.id)
+                            i(class="fas fa-minus-circle" id=answer.id)
             div(id = 'deleteDiv')
                 if isQuestionAsker
                     a(class = "delete-question-btn" href="#", id = question.id) Delete question
