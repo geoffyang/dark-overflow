@@ -206,6 +206,11 @@ async function questionVote(upOrDownCode, questionId) {
     }
 
     try {
+        if (downVoteQ.classList.contains("downvoted-arrow") || upVoteQ.classList.contains("upvoted-arrow") ){
+            await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+                    method: `DELETE`,
+            });
+        }
         await fetch(
             `http://localhost:8080/questions/${questionId}/vote/${upOrDownCode}`,
             { method: `POST` }
