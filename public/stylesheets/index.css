@@ -32,6 +32,8 @@ body {
   background-color: var(--main-background);
   color: var(--text-color);
 }
+
+/* Scrollbar setup */
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -48,9 +50,13 @@ body {
   background: var(--accent-color);
   border-radius: 10px;
 }
+/* scrollbar intersection */
+::-webkit-scrollbar-corner {
+  background-image: url("../images/corner-image.png");
+}
+/* Handle on hover
+ ::-webkit-scrollbar-thumb:hover {
 
-/* Handle on hover */
-/* ::-webkit-scrollbar-thumb:hover {
   background: #555;
 } */
 /*------------------------Navbar setup-------------------------*/
@@ -568,7 +574,6 @@ input {
   color: #3a99be;
 }
 
-
 .question-page-delete-and-edit-question {
   position: relative;
   left: 950px;
@@ -588,7 +593,7 @@ input {
   display: none;
   position: fixed;
   z-index: 3;
-  left:700px;
+  left: 700px;
   top: 0px;
 }
 
