@@ -549,7 +549,24 @@ input {
 }
 
 /*--------------------------search results page setup------------------------*/
+.no-question-found {
+  /* align-self: center; */
+  width: 400px;
+  color: var(--text-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
+  background-color: var(--secondary-background);
+  border: 1px solid var(--accent-color);
+  border-radius: 2rem;
+  padding: 30px;
+  height: 150px;
+  text-align: left;
+}
+.no-question-found a {
+  color: #ff5722;
+}
 .search-page-title {
   font-size: 30px;
   padding: 10px 30px;
