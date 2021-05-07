@@ -6,12 +6,30 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   const downVoteA = document.querySelector(".fa-caret-square-down");
   const deleteQuestion = document.querySelector(".delete-question-btn");
   const deleteAnswers = document.querySelectorAll(".delete-answer-btn");
-  const answerDiv = document.querySelector("#answersDiv");
+  const answerQuestionButton = document.querySelector(
+    ".answer-question-button"
+  );
+  const answersDiv = document.getElementById("answersDiv");
+
+  const answerTextBox = document.getElementById("answer-text-box");
+
   upVoteQ.addEventListener("click", (e) => vote(1, e.target.id));
   downVoteQ.addEventListener("click", (e) => vote(2, e.target.id));
 
+  answerQuestionButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const id = e.target.id;
+
+    const answerId = await postAnswer(`answerquestion/${id}`, answerTextBox);
+    const newAnswerDiv = document.createElement("div");
+    newAnswerDiv.setAttribute("id", `answer=${answerId}`);
+    newAnswerDiv.innerHTML = answerId;
+    answersDiv.appendChild(newAnswerDiv);
+  });
+
   if (deleteQuestion) {
-    addEventListener("click", async (e) => {
+    deleteQuestion.addEventListener("click", async (e) => {
       const target = e.target;
       const id = target.id;
       await deleteItem("Question", "questions", id, "/");
@@ -33,7 +51,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   }
 });
 
-
 const removeDiv = function (id) {
   var elemToDelete = document.getElementById(`answer-${id}-div`);
   elemToDelete.parentNode.removeChild(elemToDelete);
@@ -54,6 +71,25 @@ const deleteItem = async function (type, route, id, reroute) {
   }
 };
 
+async function postAnswer(route, answerTextBox) {
+  textToSend = answerTextBox.value;
+
+  try {
+    const res = await fetch(`http://localhost:8080/${route}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+
+      body: JSON.stringify({ textToSend }),
+    });
+
+    const data = await res.json();
+    const answerId = data.answerId;
+    return answerId;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function vote(upOrDownCode, questionId) {
   try {
     await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
@@ -69,6 +105,7 @@ async function vote(upOrDownCode, questionId) {
     console.log("question vote error", err);
   }
 }
+
 async function extractResponse(res) {
   if (!res.ok) throw res;
   const data = await res.json();

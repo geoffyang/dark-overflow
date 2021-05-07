@@ -28,9 +28,9 @@ include utils.pug
                 div(class='question-page-question-box-userName')
                     p=`Asked by: ${question.Profile.dataValues.userName}`
         if locals.authenticated
-            form(action=`/answerquestion/${question.id}`, method="post")
-                textarea(name="text")
-                button(type="submit") Submit
+            form(action=`/answerquestion/${question.id}`, method="post" )
+                textarea(name="text" id="answer-text-box")
+                button( class = "answer-question-button" id = question.id type="submit") Submit
 
             div(id='answersDiv') Answers:
                 each answer in question.dataValues.Answers
