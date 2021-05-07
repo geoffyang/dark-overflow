@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", async (event) => {
 
-    const upVoteQ = document.querySelector(".fa-caret-square-up");
-    const downVoteQ = document.querySelector(".fa-caret-square-down");
+    const upVoteQ = document.querySelector(".question-page-upvote-question-icon");
+    const downVoteQ = document.querySelector(".question-page-downvote-question-icon");
     const deleteQuestion = document.querySelector(".delete-question-btn");
     const deleteAnswers = document.querySelectorAll(".delete-answer-btn");
     const answerQuestionButton = document.querySelector(
@@ -20,11 +20,15 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     upVoteQ.addEventListener("click", (e) => questionVote(1, e.target.id));
     downVoteQ.addEventListener("click", (e) => questionVote(2, e.target.id));
 
-    const upVoteA = document.querySelectorAll(".fa-plus-circle");
-    const downVoteA = document.querySelectorAll(".fa-minus-circle");
+    const upVoteA = document.querySelectorAll(".answer-upvote-arrow");
+    const downVoteA = document.querySelectorAll(".answer-downvote-arrow");
     upVoteA.forEach(upVoteButton => {
-        upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id))
-    });
+            upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
+    })
+
+    downVoteA.forEach(downVoteButton => {
+        downVoteButton.addEventListener("click", (e) => answerVote(2, e.target.id));
+    })
 
     if (editButton) {
         editButton.addEventListener("click", (event) => {
@@ -83,25 +87,28 @@ window.addEventListener("DOMContentLoaded", async (event) => {
             }
         })
     }
-    answerQuestionButton.addEventListener("click", async (e) => {
-        e.preventDefault();
 
-        const id = e.target.id;
+    if (answerQuestionButton) {
+        answerQuestionButton.addEventListener("click", async (e) => {
+            e.preventDefault();
 
-        const answerId = await postAnswer(`answerquestion/${id}`, answerTextBox);
+            const id = e.target.id;
 
-        const newAnswerDiv = document.createElement("div");
+            const answerId = await postAnswer(`answerquestion/${id}`, answerTextBox);
 
-        newAnswerDiv.setAttribute("id", `answer=${answerId}`);
+            const newAnswerDiv = document.createElement("div");
 
-        //NEED the answer DIV to have the same styling as the rest of them
+            newAnswerDiv.setAttribute("id", `answer=${answerId}`);
 
-        newAnswerDiv.innerHTML = answerTextBox.value;
+            //NEED the answer DIV to have the same styling as the rest of them
 
-        answerTextBox.value = "";
+            newAnswerDiv.innerHTML = answerTextBox.value;
 
-        answersDiv.appendChild(newAnswerDiv);
-    });
+            answerTextBox.value = "";
+
+            answersDiv.appendChild(newAnswerDiv);
+        });
+    };
 
     if (deleteQuestion) {
         deleteQuestion.addEventListener("click", async (e) => {
@@ -113,17 +120,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
 
     if (deleteAnswers.length) {
         // Use a for loop to add an event listener to each answer div
-
-        console.log(`upvoteA array: ${upVoteA} length ${upVoteA.length}`);
-        upVoteA.forEach(upVoteButton => {
-            upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
-        })
-        downVoteA.forEach(downVoteButton => {
-            downVoteButton.addEventListener("click", (e) => answerVote(2, e.target.id));
-        })
-
-
-
         for (let i = 0; i < deleteAnswers.length; i++) {
             deleteAnswers[i].addEventListener("click", async (e) => {
                 const target = e.target;
@@ -183,8 +179,8 @@ async function postAnswer(route, answerTextBox) {
 
 async function questionVote(upOrDownCode, questionId) {
 
-    const upVoteQ = document.querySelector(".fa-caret-square-up");
-    const downVoteQ = document.querySelector(".fa-caret-square-down");
+    const upVoteQ = document.querySelector(".question-page-upvote-question-icon");
+    const downVoteQ = document.querySelector(".question-page-downvote-question-icon");
     const score = document.querySelector(".question-page-question-score");
 
     if (upOrDownCode === 1 && upVoteQ.classList.contains("upvoted-arrow")) {
@@ -245,46 +241,53 @@ async function questionVote(upOrDownCode, questionId) {
 
 async function answerVote(upOrDownCode, answerId) {
 
-    const score = document.querySelector(`${answerId}.question-page-answer-score`)
-    const upvoteButton = document.querySelector(`${answerId}.fa-plus-circle`)
-    const downvoteButton = document.querySelector(`${answerId}.fa-minus-circle`)
-
-    //answerId has an 'A' prefix that needs to be removed
     answerId = answerId.slice(1);
+    answerId = answerId.split('-')[0];
+    const score = document.getElementById(`A${answerId}-score`)
+    const upvoteButton = document.getElementById(`A${answerId}-up`);
+    const downvoteButton = document.getElementById(`A${answerId}-down`);
 
-    // // previously voted
-    // if (upOrDownCode === 1 && upVoteQ.classList.contains("upvoted-arrow")) {
-    //     try {
-    //         await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
-    //             method: `DELETE`,
-    //         });
-    //     } catch (err) {
-    //         console.log("question vote error", err);
-    //     }
-    //     upVoteQ.classList.remove("upvoted-arrow");
-    //     score.innerText--;
-    //     return;
-    // }
+    console.log(score, upvoteButton, downvoteButton);
 
-    // // previously voted
-    // if (upOrDownCode === 2 && downVoteQ.classList.contains("downvoted-arrow")) {
-    //     try {
-    //         await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
-    //             method: `DELETE`,
-    //         });
-    //     } catch (err) {
-    //         console.log("question vote error", err);
-    //     }
-    //     downVoteQ.classList.remove("downvoted-arrow");
-    //     score.innerText++;
-    //     return;
-    // }
+    // console.log(upvoteButton);
+    // console.log(downvoteButton);
+    //answerId has an 'A' prefix that needs to be removed
+
+    // previously voted
+    if (upOrDownCode === 1 && upvoteButton.classList.contains("upvoted-arrow")) {
+        try {
+            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+                method: `DELETE`,
+            });
+        } catch (err) {
+            console.log("question vote error", err);
+        }
+        upvoteButton.classList.remove("upvoted-arrow");
+        score.innerText--;
+        return;
+    }
+
+    // previously voted
+    if (upOrDownCode === 2 && downvoteButton.classList.contains("downvoted-arrow")) {
+        try {
+            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+                method: `DELETE`,
+            });
+        } catch (err) {
+            console.log("question vote error", err);
+        }
+        downvoteButton.classList.remove("downvoted-arrow");
+        score.innerText++;
+        return;
+    }
 
     // fresh vote
     try {
-        await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
-            method: `DELETE`,
-        });
+        if (downvoteButton.classList.contains("downvoted-arrow") || upvoteButton.classList.contains("upvoted-arrow")) {
+            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+                method: `DELETE`,
+            });
+        }
         await fetch(
             `http://localhost:8080/answers/${answerId}/vote/${upOrDownCode}`,
             { method: `POST` }
@@ -292,10 +295,12 @@ async function answerVote(upOrDownCode, answerId) {
 
         if (upOrDownCode === 1) { //upvote
             if (downvoteButton.classList.contains("downvoted-arrow")) score.innerText++;
+            score.innerText++;
             upvoteButton.classList.add("upvoted-arrow");
             downvoteButton.classList.remove("downvoted-arrow");
         } else { //downvote
             if (upvoteButton.classList.contains("upvoted-arrow")) score.innerText--;
+            score.innerText--;
             downvoteButton.classList.add("downvoted-arrow");
             upvoteButton.classList.remove("upvoted-arrow");
         }
