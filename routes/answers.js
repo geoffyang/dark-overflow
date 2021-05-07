@@ -9,7 +9,7 @@ router.post(
   requireAuth,
   asyncHandler(async (req, res) => {
     const answerId = parseInt(req.params.id, 10);
-    const voteSum = parseInt(req.params.votetype, 10);
+    let voteSum = parseInt(req.params.votetype, 10);
     if (voteSum === 2) voteSum = -1;
     const { userId } = req.session.auth;
     const vote = await db.AnswerVote.create({ userId, answerId, voteSum });

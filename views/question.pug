@@ -17,7 +17,7 @@ include utils.pug
                 hr(class='question-page-question-box-top-divider')
                 div(class='question-page-question-box-category')
                     p=`${question.Category.dataValues.name}`
-                //- if question.userId === user.id   
+                //- if question.userId === user.id
                 if locals.authenticated
                     div(class='.question-page-question-voting-icons')
                         - var foundPositiveVote = false
@@ -27,17 +27,17 @@ include utils.pug
                                 if vote.voteSum === 1
                                     - foundPositiveVote = true;
                                 if vote.voteSum === -1
-                                    - foundNegativeVote = true;   
+                                    - foundNegativeVote = true;
                         if foundPositiveVote === true
                             i(class="far fa-caret-square-up question-page-upvote-question-icon upvoted-arrow", id=question.id)
-                        else 
+                        else
                             i(class="far fa-caret-square-up question-page-upvote-question-icon", id=question.id)
                         if foundNegativeVote
                             i(class="far fa-caret-square-down question-page-downvote-question-icon downvoted-arrow" id=question.id)
-                        else 
+                        else
                             i(class="far fa-caret-square-down question-page-downvote-question-icon" id=question.id)
-                else 
-                    div(class='.question-page-question-voting-icons')           
+                else
+                    div(class='.question-page-question-voting-icons')
                         i(class="far fa-caret-square-up question-page-upvote-question-icon unclickable-vote-button", id=question.id)
                         i(class="far fa-caret-square-down question-page-downvote-question-icon unclickable-vote-button" id=question.id)
                 div(class='question-page-question-box-score')
@@ -57,8 +57,8 @@ include utils.pug
                             a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
                         div=p=`Answer Score: ${answer.score}`
                             span Vote on answer quality
-                            <i class="fas fa-plus-circle"></i>
-                            <i class="fas fa-minus-circle"></i>
+                            i(class="fas fa-plus-circle" id=answer.id)
+                            i(class="fas fa-minus-circle" id=answer.id)
             div(id = 'deleteDiv')
                 if isQuestionAsker
                     a(class = "delete-question-btn" href="#", id = question.id) Delete question
