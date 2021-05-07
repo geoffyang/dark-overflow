@@ -78,7 +78,8 @@ img {
 .ask-question-button,
 .search-button,
 .logout-button,
-.search-category-selector {
+.search-category-selector,
+.ask-question-category-selector {
   padding: 5px 15px;
   margin: 5px;
   background-color: var(--accent-color);
@@ -93,10 +94,36 @@ img {
 .ask-question-button:hover,
 .search-button:hover,
 .logout-button:hover,
-.search-category-selector:hover  {
+.search-category-selector:hover,
+.ask-question-category-selector:hover  {
   background-color: #ff562285;
 }
 
+input:-webkit-autofill {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0 50px #222831 inset;
+    -webkit-text-fill-color: var(--text-color);
+    
+}
+
+input {
+    background-color: #222831;
+    color: var(--text-color);
+    border: 1px solid #ff562285;
+    border-radius: 10px;
+}
+    
+textarea {
+    background-color: #222831;
+    color: var(--text-color);
+    border: 1px solid #ff562285;
+    border-radius: 10px;
+}
+
+
+input {
+  padding: 5px;
+}
 /*--------------------------signup setup------------------------*/
 
 .signup_user {
