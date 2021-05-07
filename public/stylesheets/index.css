@@ -370,7 +370,7 @@ max-width: 500px;
 }
 
 .landing-question-box-top-divider {
-  border: 1px solid var(--accent-color);
+  border: 1px solid #ff562285;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -438,7 +438,7 @@ max-width: 500px;
 }
 
 .question-page-question-box-top-divider {
-  border: 1px solid var(--accent-color);
+  border: 1px solid #ff562285;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -613,7 +613,7 @@ max-width: 500px;
 }
 
 .search-question-box-top-divider {
-  border: 1px solid var(--accent-color);
+  border: 1px solid #ff562285;
   border-radius: 5px;
   margin-bottom: 10px;
 }
