@@ -14,7 +14,8 @@ window.addEventListener("DOMContentLoaded", async (event) => {
 
     upVoteQ.addEventListener("click", (e) => questionVote(1, e.target.id));
     downVoteQ.addEventListener("click", (e) => questionVote(2, e.target.id));
-    console.log(`upvoteA array: ${upVoteA} length ${upVoteA.length}`);
+
+    // console.log(`upvoteA array: ${upVoteA} length ${upVoteA.length}`);
     upVoteA.forEach(upVoteButton => {
         upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
     })
@@ -161,12 +162,15 @@ async function questionVote(upOrDownCode, questionId) {
 }
 
 async function answerVote(upOrDownCode, answerId) {
+
+    // const upVoteA = document.querySelector(".fa-plus-circle");
+    // const downVoteA = document.querySelector(".fa-minus-circle");
+    // const score = document.querySelector(".question-page-answer-score");
+    const scores = document.querySelectorAll(".question-page-answer-score");
+    const score = document.querySelector(`${answerId}.question-page-answer-score`)
+
     //answerId has an 'A' prefix that needs to be removed
     answerId = answerId.slice(1);
-
-    // const upVoteA = document.querySelector(".fa-caret-square-up");
-    // const downVoteA = document.querySelector(".fa-caret-square-down");
-    const score = document.querySelector(".question-page-answer-score");
 
     // // fresh upvote
     // if (upOrDownCode === 1 && upVoteQ.classList.contains("upvoted-arrow")) {
@@ -196,34 +200,7 @@ async function answerVote(upOrDownCode, answerId) {
     //     return;
     // }
 
-    //geoff answer vote upvote logic
-    if (upOrDownCode === 1) {
-        console.log("success upvote");
-        try {
-            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
-                method: `DELETE`,
-            });
-        } catch (err) {
-            console.log("question vote error", err);
-        }
-        score.innerText--;
-        return;
-    }
-
-    //geoff answer vote downvote logic
-    if (upOrDownCode === 2 ) {
-        try {
-            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
-                method: `DELETE`,
-            });
-        } catch (err) {
-            console.log("question vote error", err);
-        }
-        score.innerText++;
-        return;
-    }
-
-    // ?
+    // why is this voting again?
     try {
         await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
             method: `DELETE`,

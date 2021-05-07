@@ -4,6 +4,7 @@ const { asyncHandler } = require("./utils");
 const db = require("../db/models");
 const { requireAuth } = require("../auth");
 
+// post answer vote
 router.post(
   "/:id(\\d+)/vote/:votetype(\\d+)",
   requireAuth,
@@ -17,6 +18,7 @@ router.post(
   })
 );
 
+// delete answer vote - may be wrong
 router.delete(
   "/:id(\\d+)/vote",
   requireAuth,
@@ -35,6 +37,8 @@ router.delete(
   })
 );
 
+
+// delete answer
 router.delete(
   "/:id",
   requireAuth,

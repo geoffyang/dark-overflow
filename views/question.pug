@@ -57,7 +57,7 @@ include utils.pug
                             a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
                         div(class='question-page-answer-box')
                             p=`Answer Score: `
-                                span(class = 'question-page-answer-score')=answer.score
+                                span(class = 'question-page-answer-score' id=`A${answer.id}`)=answer.score
                             p= "Vote on answer quality"
                             i(class="fas fa-plus-circle" id=`A${answer.id}`)
                             i(class="fas fa-minus-circle" id=`A${answer.id}`)
