@@ -24,7 +24,6 @@ const deleteItem = async function (type, route, id, reroute) {
         const res = await fetch(`/${route}/${id}`, {
             method: "DELETE",
         });
-        window.alert(`${type} sucessfully deleted.`);
         window.location.href = "http://localhost:8080/";
     } catch (err) {
         window.alert("error: " + err);

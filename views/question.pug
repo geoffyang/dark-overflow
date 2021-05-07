@@ -17,6 +17,10 @@ include utils.pug
                     p=`${question.Category.dataValues.name}`
                 //- if question.userId === user.id   
                 if locals.authenticated
+                    if isQuestionAsker
+                        div(class='question-page-delete-and-edit-question')
+                            i(class="fas fa-trash delete-question-btn question-page-delete-question-icon" id = question.id)
+                            i(class="fas fa-edit edit-question-btn question-page-edit-question-icon" id = question.id)
                     div(class='.question-page-question-voting-icons')
                         - var foundPositiveVote = false
                         - var foundNegativeVote = false
