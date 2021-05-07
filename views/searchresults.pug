@@ -2,20 +2,26 @@ extends layout
 
 block content
     h1(class='search-page-title')=title
-    div(class='search-question-box-container')
-        - var n =1
-        each question in questions
-            div(class=`search-question-${n++} search-question-box` )
-                div(class='search-question-title-text-wrapper')
-                    div(class='search-question-box-title')
-                        a(href=`/questions/${question.dataValues.id}` class='search-question-box-title')=question.dataValues.title
-                    hr(class='search-question-box-top-divider')
-                    div(class='search-question-box-text')
-                        p=question.dataValues.text
-                hr(class='search-question-box-top-divider')
-                div(class='search-question-box-category')
-                    p=`${question.Category.dataValues.name}`
-                div(class='search-question-box-score')
-                    p=`Score: ${question.dataValues.score}`
-                div(class='search-question-box-userName')
-                    p=`Asked by: ${question.Profile.dataValues.userName}`
+
+        if !questions.length
+            div(class = "no-question-found")
+                div We couldnt find any questions about that...
+                a(href ='/askQuestions') Why not ask one here?
+        else
+            div(class='search-question-box-container')
+                - var n =1
+                each question in questions
+                    div(class=`search-question-${n++} search-question-box` )
+                        div(class='search-question-title-text-wrapper')
+                            div(class='search-question-box-title')
+                                a(href=`/questions/${question.dataValues.id}` class='search-question-box-title')=question.dataValues.title
+                            hr(class='search-question-box-top-divider')
+                            div(class='search-question-box-text')
+                                p=question.dataValues.text
+                        hr(class='search-question-box-top-divider')
+                        div(class='search-question-box-category')
+                            p=`${question.Category.dataValues.name}`
+                        div(class='search-question-box-score')
+                            p=`Score: ${question.dataValues.score}`
+                        div(class='search-question-box-userName')
+                            p=`Asked by: ${question.Profile.dataValues.userName}`
