@@ -67,16 +67,16 @@ const removeDiv = function (id) {
 const deleteItem = async function (type, route, id, reroute) {
   console.groupCollapsed(id);
 
-  try {
-    const res = await fetch(`/${route}/${id}`, {
-      method: "DELETE",
-    });
-    window.alert(`${type} sucessfully deleted.`);
 
-    if (reroute) window.location.href = reroute;
-  } catch (err) {
-    window.alert("error: " + err);
-  }
+    try {
+        const res = await fetch(`/${route}/${id}`, {
+            method: "DELETE",
+        });
+        window.location.href = "http://localhost:8080/";
+    } catch (err) {
+        window.alert("error: " + err);
+    }
+
 };
 
 async function postAnswer(route, answerTextBox) {

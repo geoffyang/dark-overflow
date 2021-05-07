@@ -476,7 +476,7 @@ input {
 
 .question-page-question-box-category {
   position: relative;
-  bottom: -60px;
+  bottom: -70px;
   left: 10px;
   background-color: var(--main-background);
   padding: 7px 10px;
@@ -519,6 +519,21 @@ input {
   bottom: -48px;
   margin-right: 6px;
   z-index: 1;
+}
+
+.question-page-delete-and-edit-question {
+  position: relative;
+  left: 950px;
+  bottom: -63px;
+}
+
+.question-page-delete-question-icon {
+  margin-right: 5px;
+}
+
+.fa-caret-square-up,
+.fa-caret-square-down {
+  font-size: 16px;
 }
 
 .unclickable-vote-button {
