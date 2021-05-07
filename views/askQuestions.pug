@@ -13,8 +13,8 @@ block content
                     div(class='ask-question-form-spacing')
                         +field("Question", "text", "", "textarea")
                     div(class='form-group')
-                        label(for='chosenCategory') Choose a Category
-                        select(name='chosenCategory', id="")
+                        label(for='chosenCategory') 
+                        select(name='chosenCategory', id="" class='ask-question-category-selector')
                             each category in categoryList
                                 option(value=category.id)=category.name
                     div()
