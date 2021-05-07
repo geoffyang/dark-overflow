@@ -13,16 +13,49 @@ include utils.pug
                     div(class='question-page-question-box-title')=question.title
                 hr(class='question-page-question-box-top-divider')
                 div(class='question-page-question-box-text')
-                    p=question.text
+                    p(class='question-page-question-box-text-paragraph')=question.text
                 hr(class='question-page-question-box-top-divider')
                 div(class='question-page-question-box-category')
-                    p=`${question.Category.dataValues.name}`
+                    p(class='question-page-question-box-category-paragraph')=`${question.Category.dataValues.name}`
                 //- if question.userId === user.id
                 if locals.authenticated
                     if isQuestionAsker
                         div(class='question-page-delete-and-edit-question')
                             i(class="fas fa-trash delete-question-btn question-page-delete-question-icon" id = question.id)
                             i(class="fas fa-edit edit-question-btn question-page-edit-question-icon" id = question.id)
+                        div(class = "ask_question editQuestionForm")
+                            div(class = 'title') Edit Your Question
+                                div(class = 'details')                       
+                                    form(action=`/askQuestions/${question.id}` method="post")
+                                        input(type="hidden" class="questionToEditId" value=question.id)
+                                        input(type="hidden", name="_csrf", class='csrfEdit' value=csrfToken)
+                                        div(class='form-field-div')
+                                            div(class='form-group')
+                                                label(for='title') Title
+                                                input(type='text' name='title' class="edit-question-title-field" value=question.title)
+                                        div(class='ask-question-form-spacing')
+                                        div(class='form-field-div')
+                                            div(class='form-group')
+                                                label(for='text') Question
+                                                    textarea(name='text' class='form-control edit-question-text-field')=question.text
+                                        div(class='form-field-div')
+                                            div(class='form-group')
+                                                label(for='chosenCategory') Choose a Category
+                                                    select(name='chosenCategory', id="" class='edit-question-category-field')
+                                                        each category in categoryList
+                                                            option(value=category.id)=category.name
+                                        div()
+                                            button(type="submit" class ="ask-question-button submit-question-edit-button") Submit
+                                            button(type="submit" class="ask-question-button cancel-edit-question-button") Cancel
+                                //- div(class='ask-question-form-spacing')
+                                //-     +field("Question", "text", question.text, "textarea")
+                                //- div(class='form-group')
+                                //-     label(for='chosenCategory') Choose a Category
+                                //-     select(name='chosenCategory', id="")
+                                //-         each category in categoryList
+                                //-             option(value=category.id)=category.name
+                                //- div()
+                                //-     button(type="submit" class ="ask-question-button") Submit
                     div(class='.question-page-question-voting-icons')
                         - var foundPositiveVote = false
                         - var foundNegativeVote = false
@@ -63,9 +96,6 @@ include utils.pug
                             span Vote on answer quality
                             i(class="fas fa-plus-circle" id=answer.id)
                             i(class="fas fa-minus-circle" id=answer.id)
-            div(id = 'deleteDiv')
-                if isQuestionAsker
-                    a(class = "delete-question-btn" href="#", id = question.id) Delete question
         else
             span Please #[a(href="/users/login") log in] to answer questions.
             div(id='answersDiv') Answers:

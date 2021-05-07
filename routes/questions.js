@@ -2,13 +2,13 @@ var express = require("express");
 var router = express.Router();
 const { Question, Answer, QuestionVote, AnswerVote, Category, Profile } = require("../db/models");
 const { requireAuth } = require("../auth");
-const { asyncHandler } = require("./utils");
+const { csrfProtection, asyncHandler, } = require("./utils");
 const sequelize = require('sequelize');
 const { check, validationResult } = require('express-validator');
 const { log } = require("debug");
 
 // GET /questions/:id
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", csrfProtection, async (req, res, next) => {
   console.log("getting question");
   const id = req.params.id;
 
@@ -89,7 +89,8 @@ router.get("/:id", async (req, res, next) => {
 
   res.render('question', {
     question, categoryList, isQuestionAsker,
-    answers: answersArray
+    answers: answersArray,
+    csrfToken: req.csrfToken()
   })
 
 })
