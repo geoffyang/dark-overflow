@@ -23,5 +23,8 @@ block content
                         +field("Confirm your password", "confirmPassword", "", "password", "Confirm password" )
                     div()
                         button(type="submit" class ="signup-button" ) Submit
+                form(action="/users/demo", method="post")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    button(type="submit" class ="login-button" ) Demo User                        
     div(class='signup-to-togin')
         span Already have an account? #[a(href="/users/login") Log in] to start asking questions.
