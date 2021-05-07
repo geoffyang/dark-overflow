@@ -46,7 +46,7 @@ body {
   object-fit: contain;
 }
 
-img {
+img.logo {
   max-width: 150px;
   max-height: 50px;
 }
@@ -95,32 +95,30 @@ img {
 .search-button:hover,
 .logout-button:hover,
 .search-category-selector:hover,
-.ask-question-category-selector:hover  {
+.ask-question-category-selector:hover {
   background-color: #ff562285;
 }
 
 input:-webkit-autofill {
-    background-color: transparent !important;
-    -webkit-box-shadow: 0 0 0 50px #222831 inset;
-    -webkit-text-fill-color: var(--text-color);
-    
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 50px #222831 inset;
+  -webkit-text-fill-color: var(--text-color);
 }
 
 input {
-    background-color: #222831;
-    color: var(--text-color);
-    border: 1px solid #ff562285;
-    border-radius: 10px;
-}
-    
-textarea {
-    background-color: #222831;
-    color: var(--text-color);
-    border: 1px solid #ff562285;
-    border-radius: 10px;
-    resize: none;
+  background-color: #222831;
+  color: var(--text-color);
+  border: 1px solid #ff562285;
+  border-radius: 10px;
 }
 
+textarea {
+  background-color: #222831;
+  color: var(--text-color);
+  border: 1px solid #ff562285;
+  border-radius: 10px;
+  resize: none;
+}
 
 input {
   padding: 5px;
@@ -133,13 +131,13 @@ input {
 /*--------------------------signup setup------------------------*/
 
 .signup_user {
-max-width: 500px;
+  max-width: 500px;
   width: 100%;
   background: var(--secondary-background);
   padding: 25px 30px;
   border-radius: 10px;
   margin: 100px auto;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--accent-color);
 }
 .signup_user .title {
@@ -152,7 +150,6 @@ max-width: 500px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
 }
 
 .signup_user .details {
@@ -170,9 +167,8 @@ max-width: 500px;
   list-style-type: none;
 }
 .signup_user .form-control {
-
   margin: 0px 0 0px 0;
-  width: calc(100%/2- 20px);
+  width: calc(100% / 2- 20px);
   height: 45px;
 }
 
@@ -180,7 +176,7 @@ max-width: 500px;
   margin-top: -60px;
 }
 
-.signup-to-togin a{
+.signup-to-togin a {
   color: var(--text-color);
 }
 
@@ -189,13 +185,13 @@ max-width: 500px;
 }
 /*--------------------------login setup------------------------*/
 .login_user {
-max-width: 500px;
+  max-width: 500px;
   width: 100%;
   background: var(--secondary-background);
   padding: 25px 30px;
   border-radius: 10px;
   margin: 100px auto;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--accent-color);
 }
 .login_user .title {
@@ -208,7 +204,6 @@ max-width: 500px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
 }
 
 .login_user .details {
@@ -227,9 +222,8 @@ max-width: 500px;
 }
 
 .login_user .form-control {
-
   margin: 0px 0 0px 0;
-  width: calc(100%/2- 20px);
+  width: calc(100% / 2- 20px);
   height: 45px;
 }
 
@@ -237,19 +231,19 @@ max-width: 500px;
   margin-top: -60px;
 }
 
-.login-to-signup a{
+.login-to-signup a {
   color: var(--text-color);
 }
 
 /*--------------------------askquestion page setup------------------------*/
 .ask_question {
-max-width: 500px;
+  max-width: 500px;
   width: 100%;
   background: var(--secondary-background);
   padding: 25px 30px;
   border-radius: 10px;
   margin: 100px auto;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--accent-color);
 }
 .ask_question .title {
@@ -262,19 +256,18 @@ max-width: 500px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
 }
 .ask-question-form-spacing {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.ask_question form .form-group input{
+.ask_question form .form-group input {
   width: 350px;
   padding: 10px;
 }
 
-.ask_question form .form-group textarea{
+.ask_question form .form-group textarea {
   height: 400px;
   width: 350px;
   padding: 10px;
@@ -296,9 +289,8 @@ max-width: 500px;
 }
 
 .ask_question .form-control {
-
   margin: 0px 0 0px 0;
-  width: calc(100%/2- 20px);
+  width: calc(100% / 2- 20px);
   height: 45px;
 }
 
@@ -317,7 +309,7 @@ max-width: 500px;
   margin-bottom: 20px;
 }
 
-.landing-page-top-10 p{
+.landing-page-top-10 p {
   font-size: 25px;
   color: var(--accent-color);
 }
@@ -367,22 +359,21 @@ max-width: 500px;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
-  grid-template-areas: 
+  grid-template-areas:
     "landing-question-1 landing-question-2"
     "landing-question-3 landing-question-4"
     "landing-question-5 landing-question-6 "
     "landing-question-7 landing-question-8 "
     "landing-question-9 landing-question-10 ";
-    gap: 40px 120px;
+  gap: 40px 120px;
 }
-
 
 .landing-question-box {
   color: var(--text-color);
   background-color: var(--secondary-background);
   border: 1px solid var(--accent-color);
   border-radius: 2rem;
-  padding:30px;
+  padding: 30px;
   width: 400px;
   height: 400px;
   text-align: left;
@@ -441,18 +432,17 @@ max-width: 500px;
 
 /*--------------------------question page setup------------------------*/
 .question-page-question-box-container {
-  display:grid;
+  display: grid;
   justify-content: center;
   margin-top: 20px;
 }
-
 
 .question-page-question-box {
   color: var(--text-color);
   background-color: var(--secondary-background);
   border: 1px solid var(--accent-color);
   border-radius: 2rem;
-  padding:30px;
+  padding: 30px;
   width: 1200px;
   text-align: left;
 }
@@ -480,13 +470,13 @@ max-width: 500px;
 }
 
 .question-page-question-box-text {
-  margin-bottom:8px;
+  margin-bottom: 8px;
   overflow-wrap: break-word;
 }
 
 .question-page-question-box-category {
   position: relative;
-  bottom: -60px;
+  bottom: -70px;
   left: 10px;
   background-color: var(--main-background);
   padding: 7px 10px;
@@ -509,7 +499,7 @@ max-width: 500px;
 
 /* .question-page-question-voting-icons {
   display:flex;
-  flex-direction: row; 
+  flex-direction: row;
   position: relative;
   left: 1100px;
   bottom: -48px;
@@ -531,6 +521,21 @@ max-width: 500px;
   z-index: 1;
 }
 
+.question-page-delete-and-edit-question {
+  position: relative;
+  left: 950px;
+  bottom: -63px;
+}
+
+.question-page-delete-question-icon {
+  margin-right: 5px;
+}
+
+.fa-caret-square-up,
+.fa-caret-square-down {
+  font-size: 16px;
+}
+
 .unclickable-vote-button {
   pointer-events: none;
 }
@@ -543,9 +548,7 @@ max-width: 500px;
   color: #3a99be;
 }
 
-
 /*--------------------------search results page setup------------------------*/
-
 
 .search-page-title {
   font-size: 30px;
@@ -560,7 +563,7 @@ max-width: 500px;
   margin-bottom: 20px;
 }
 
-.search-page-top-10 p{
+.search-page-top-10 p {
   font-size: 25px;
   color: var(--accent-color);
 }
@@ -605,20 +608,18 @@ max-width: 500px;
   grid-area: search-question-10;
 }
 
-
-
 .search-question-box-container {
   justify-content: center;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
-  grid-template-areas: 
+  grid-template-areas:
     "search-question-1 search-question-2"
     "search-question-3 search-question-4"
     "search-question-5 search-question-6 "
     "search-question-7 search-question-8 "
     "search-question-9 search-question-10 ";
-    gap: 40px 120px;
+  gap: 40px 120px;
 }
 
 .search-question-box {
@@ -626,7 +627,7 @@ max-width: 500px;
   background-color: var(--secondary-background);
   border: 1px solid var(--accent-color);
   border-radius: 2rem;
-  padding:30px;
+  padding: 30px;
   width: 400px;
   height: 400px;
   text-align: left;
@@ -683,7 +684,7 @@ max-width: 500px;
 }
 
 /*--------------------------footer setup------------------------*/
- 
+
 .contact-footer {
   margin-top: 50px;
   margin-bottom: 20px;
@@ -696,23 +697,21 @@ max-width: 500px;
   display: inline-block;
 }
 
-
 .contact-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
 }
 
 .contact {
   margin-top: 20px;
   margin-left: 40px;
   margin-right: 40px;
-  background-image: radial-gradient(80px 20px at center, #2d4059,  #222831);
+  background-image: radial-gradient(80px 20px at center, #2d4059, #222831);
 }
 
 .contact-link {
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 .contact-link a {

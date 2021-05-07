@@ -1,6 +1,6 @@
 # Welcome to Dark Overflow
 
-DarkOverflow is a community dedicated in helping your journey into Javascript.  Ask questions when you are stuck.  Look up topics by category or search for solutions to previously answered questions.  Share your code with others. Easy on the eyes for your late night codding sessions.
+DarkOverflow is a community dedicated in helping your journey into Javascript.  Ask questions when you are stuck.  Look up topics by category or search for solutions to previously answered questions.  Upvote the best questions and solutions.  Downvote the answers that weren't helpful.  Share your code with others. Easy on the eyes for your late night codding sessions.  Dark Overflow turns you into a Javascrip Pro.
 
 
 

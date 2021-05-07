@@ -83,6 +83,7 @@ const deleteItem = async function (type, route, id, reroute) {
     } catch (err) {
         window.alert("error: " + err);
     }
+
 };
 
 async function postAnswer(route, answerTextBox) {
