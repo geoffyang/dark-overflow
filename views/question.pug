@@ -21,12 +21,15 @@ include utils.pug
 
 
             div(id='answersDiv') Answers:
-                each answer in question.dataValues.Answers
-                    div=answer.text
-                    div=answer.score
+                each answer in answers
+                    ul
+                        li= `AN ANSWER VOTE IN HERE:`
+                        each val, key in answer
+                            li= key + ': ' + val
                     if answer.userId = user.id
                         a(class = "delete-answer-btn" href="#", id = question.id) Delete answer
-                    div=p=`Answer Score: ${question.dataValues.answer.score}`
+
+                    div=p=`Answer Score: `
                         span Vote on answer quality
                         i(class="fas fa-plus-circle" id=answer.id)
                         i(class="fas fa-minus-circle" id=answer.id)

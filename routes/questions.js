@@ -42,7 +42,7 @@ router.get("/:id", async (req, res, next) => {
   await question.save();
 
 
-  
+
   // database handle answerVotes
   // let answersArrayForPug = [];
   // question.Answers.forEach(async (answerOnPage) => {
@@ -71,7 +71,9 @@ router.get("/:id", async (req, res, next) => {
   //     }
   //   }
   // })
+  // question.toJSON().Answers.forEach(ansObj => console.log(`Here are your answer votes ${ansObj.AnswerVotes}`))
 
+  const answersArray = question.toJSON().Answers;
   const categoryList = await Category.findAll();
   let isQuestionAsker = false;
   if (req.session.auth) {
@@ -82,7 +84,7 @@ router.get("/:id", async (req, res, next) => {
   // console.log("*****************", (answersArrayForPug));
   res.render('question', {
     question, categoryList, isQuestionAsker,
-    // answers: answersArrayForPug
+    answers: answersArray
   })
 })
 
