@@ -151,6 +151,19 @@ input {
   position: relative;
   top: 15px;
 }
+
+/*--------------------------login/signup prompt setup------------------------*/
+
+.login-or-signup-prompt {
+  margin-top:10px;
+  margin-bottom: -5px;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.login-or-signup-prompt a {
+  color: var(--text-color);
+}
 /*--------------------------signup setup------------------------*/
 
 .signup_user {

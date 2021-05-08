@@ -17,7 +17,6 @@ include utils.pug
                 hr(class='question-page-question-box-top-divider')
                 div(class='question-page-question-box-category')
                     p(class='question-page-question-box-category-paragraph')=`${question.Category.dataValues.name}`
-                //- if question.userId === user.id
                 if locals.authenticated
                     if isQuestionAsker
                         div(class='question-page-delete-and-edit-question')
