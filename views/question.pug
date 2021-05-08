@@ -58,12 +58,12 @@ include utils.pug
                     div(class='.question-page-question-voting-icons')
                         - var foundPositiveVote = false
                         - var foundNegativeVote = false
-                        each vote in question.dataValues.QuestionVotes
-                            if vote.userId = question.userId
-                                if vote.voteSum === 1
-                                    - foundPositiveVote = true;
-                                if vote.voteSum === -1
-                                    - foundNegativeVote = true;
+                            each vote in question.dataValues.QuestionVotes
+                                if vote.userId === user.id
+                                    if vote.voteSum === 1
+                                        - foundPositiveVote = true;
+                                    if vote.voteSum === -1
+                                        - foundNegativeVote = true;
                         if foundPositiveVote === true
                             i(class="far fa-caret-square-up question-page-upvote-question-icon upvoted-arrow", id=question.id)
                         else
@@ -102,7 +102,7 @@ include utils.pug
                                 - var foundPositiveVote = false
                                 - var foundNegativeVote = false
                                 each vote in answer.dataValues.AnswerVotes
-                                    if vote.userId = answer.userId
+                                    if vote.userId === user.id
                                         if vote.voteSum === 1
                                             - foundPositiveVote = true;
                                         if vote.voteSum === -1
