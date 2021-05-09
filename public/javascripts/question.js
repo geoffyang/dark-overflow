@@ -6,11 +6,16 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   const answerQuestionButton = document.querySelector(
     ".answer-question-button"
   );
+  const cancelAnswerButton = document.querySelector(".cancel-answer-button");
+
+  const openAnswerQuestion = document.querySelector(".open-answer-question");
+
   const answersDiv = document.getElementById("answersDiv");
 
-  const answerTextBox = document.getElementById("answer-text-box");
+  const answerTextBox = document.querySelector(".answer-text-box");
 
   const editButton = document.querySelector(".edit-question-btn ");
+
   const submitEditButton = document.querySelector(
     ".submit-question-edit-button"
   );
@@ -39,6 +44,20 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       document.querySelector(".editQuestionForm").style.display = "block";
     });
   }
+
+  if (openAnswerQuestion) {
+    openAnswerQuestion.addEventListener("click", (e) => {
+      document.querySelector(".answerQuestionForm").style.display = "block";
+    });
+  }
+  if (cancelAnswerButton) {
+    cancelAnswerButton.addEventListener("click", (e) => {
+      console.log("button click");
+      e.preventDefault();
+      document.querySelector(".answerQuestionForm").style.display = "none";
+    });
+  }
+
   if (cancelEditButton) {
     cancelEditButton.addEventListener("click", (event) => {
       event.preventDefault();
@@ -118,6 +137,11 @@ window.addEventListener("DOMContentLoaded", async (event) => {
 
     newAnswerDiv.setAttribute("id", `answer=${answerId}`);
 
+    newAnswerDiv.setAttribute("class", "answer-div");
+
+    const newAnswerDelete = document.createElement("BUTTON");
+    newAnswerDelete.innerHTML = "jasl;kdj";
+
     //NEED the answer DIV to have the same styling as the rest of them
 
     newAnswerDiv.innerHTML = answerTextBox.value;
@@ -125,6 +149,9 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     answerTextBox.value = "";
 
     answersDiv.appendChild(newAnswerDiv);
+    newAnswerDiv.appendChild(newAnswerDelete);
+    newAnswerDelete.setAttribute("class", "button");
+    document.querySelector(".answerQuestionForm").style.display = "none";
   });
 
   if (deleteQuestion) {

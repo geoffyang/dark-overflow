@@ -24,6 +24,7 @@ include utils.pug
                         form(action=`/answerquestion/${question.id}`, method="post" )
                             textarea(name="text" class="answer-text-box form-control")
                             button( class = "answer-question-button button" id = question.id type="submit") Submit
+                            button(class= "cancel-answer-button button") Cancel
                     if isQuestionAsker
                         div(class='question-page-delete-and-edit-question')
                             i(class="fas fa-trash delete-question-btn question-page-delete-question-icon" id = question.id)
@@ -88,23 +89,22 @@ include utils.pug
                 div(class='question-page-question-box-userName')
                     p=`Asked by: ${question.Profile.dataValues.userName}`
         if locals.authenticated
-            button(class = 'answer-question-button button') Answer this question
+            button(class = 'open-answer-question button') Answer this question
             div(id='answersDiv') Answers:
                 each answer in question.dataValues.Answers
-                    div(id=`answer-${answer.id}-div`)=answer.text
-                        if answer.userId = user.id
-                           button(class = "delete-answer-btn anchor-button")
-                            a(href="#", id = answer.id) Delete answer
-
+                    div(class ="answer-div" id=`answer-${answer.id}-div`)
+                        div(class=answer-text)=answer.text
                         div(class='question-page-answer-box')
                             p=`Answer Score: `
                                 span(class = 'question-page-answer-score' id=`A${answer.id}`)=answer.score
                             p= "Vote on answer quality"
                             i(class="fas fa-plus-circle" id=`A${answer.id}`)
                             i(class="fas fa-minus-circle" id=`A${answer.id}`)
-
+                        if answer.userId = user.id
+                            button(class = "delete-answer-btn anchor-button")
+                                a(href="#", id = answer.id) Delete answer
         else
             span Please #[a(href="/users/login") log in] to answer questions.
             div(id='answersDiv') Answers:
                 each answer in question.dataValues.Answers
-                    div=answer.text
+                    div(class = "answer-div")=answer.text

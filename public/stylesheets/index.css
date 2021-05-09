@@ -490,6 +490,17 @@ input {
   width: 1200px;
   text-align: left;
 }
+.answer-div {
+  background-color: var(--secondary-background);
+  padding: 20px;
+  margin: 5px auto;
+  align-items: flex;
+  border: 1px solid var(--accent-color);
+  border-radius: 2rem;
+  width: 700px;
+  justify-content: space-around;
+  align-items: center;
+}
 
 /* .question-page-question-title-text-wrapper {
 

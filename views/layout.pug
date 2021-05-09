@@ -17,10 +17,10 @@ html
         nav(class = "nav_container")
           ul
             li(class = "categories_button")
-              //- select(name='chosenCategory', id="", class='search-category-selector')
-              //-     option(value=null) Choose a question category
-              //-     each category in categoryList
-              //-         option(value=category.id)=category.name
+              select(name='chosenCategory', id="", class='search-category-selector')
+                  option(value=null) Choose a question category
+                  each category in categoryList
+                      option(value=category.id)=category.name
             li(class = "ask_question_button")
               a(href ='/askQuestions') Ask a question
 
