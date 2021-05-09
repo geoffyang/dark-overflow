@@ -5,10 +5,11 @@ html
       link(rel="stylesheet" href="/stylesheets/index.css")
       script(src="/javascripts/layout.js")
 
+
       header(class = 'nav_bar')
         //1 far left -- logo which navigates to landing page
-        a(href="/" class = logo)
-          img(src="/images/DO_white-transparent.png")
+        a(href="/" )
+          img(src="/images/DO_black-transparent.png" class = "logo")
         //2 search bar
         form(action="/searchresults", method="post")
           input(type="text" name="searchString" placeholder="Search..")
@@ -37,8 +38,12 @@ html
 
               a(href="/users/signup" )
                 button(class = "signup-button") Sign up
-    block content
 
+    if !locals.authenticated
+        div(class='login-or-signup-prompt')
+          span Please #[a(href="/users/login") log in] or #[a(href="/users/signup") sign up] to start asking questions.
+    block content
+    
 
 
     footer(class='contact-footer')
@@ -72,4 +77,3 @@ html
             a(href='#') LinkedIn 
             span | 
             a(href=`mailto:''`) Email
-

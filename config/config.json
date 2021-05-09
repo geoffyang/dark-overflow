@@ -5,6 +5,7 @@
     "database": "dark_overflow_db",
     "host": "localhost",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging": false
   }
 }

@@ -26,7 +26,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: 100,
+          id: 200,
           userName: "grug",
           firstName: "Grug",
           lastName: "Stevens",
@@ -51,6 +51,10 @@ module.exports = {
 
       Example:
 
-    */ return queryInterface.bulkDelete('Profiles', null, {});
+    */ return queryInterface.bulkDelete(
+      "Profiles",
+      null,
+      {}
+    );
   },
 };
