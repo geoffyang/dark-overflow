@@ -18,8 +18,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   deleteQuestion.addEventListener("click", async (e) => {
     const target = e.target;
     const id = target.id;
-
-
     const res = await fetch(`/questions/${id}`, {
       method: "DELETE",
     });
