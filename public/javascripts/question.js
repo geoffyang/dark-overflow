@@ -1,6 +1,7 @@
 window.addEventListener("DOMContentLoaded", async (event) => {
-  const upVoteQ = document.querySelector(".fa-caret-square-up");
-  const downVoteQ = document.querySelector(".fa-caret-square-down");
+
+      const upVoteQ = document.querySelector(".question-page-upvote-question-icon");
+    const downVoteQ = document.querySelector(".question-page-downvote-question-icon");
   const deleteQuestion = document.querySelector(".delete-question-btn");
   const deleteAnswers = document.querySelectorAll(".delete-answer-btn");
   const answerQuestionButton = document.querySelector(
@@ -27,8 +28,8 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   upVoteQ.addEventListener("click", (e) => questionVote(1, e.target.id));
   downVoteQ.addEventListener("click", (e) => questionVote(2, e.target.id));
 
-  const upVoteA = document.querySelectorAll(".fa-plus-circle");
-  const downVoteA = document.querySelectorAll(".fa-minus-circle");
+  const upVoteA = document.querySelectorAll(".answer-upvote-arrow");
+    const downVoteA = document.querySelectorAll(".answer-downvote-arrow");;
   upVoteA.forEach((upVoteButton) => {
     upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
   });
@@ -132,7 +133,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     const id = e.target.id;
 
     const answerId = await postAnswer(`answerquestion/${id}`, answerTextBox);
-    
+
 
     const newAnswerDiv = document.createElement("div");
 

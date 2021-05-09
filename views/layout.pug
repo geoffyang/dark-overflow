@@ -37,7 +37,11 @@ html
                 button(class="login-button button") Sign in
 
               a(href="/users/signup" )
-                button(class = "signup-button button") Sign up
+                button(class = "signup-button") Sign up
+
+    if !locals.authenticated
+        div(class='login-or-signup-prompt')
+          span Please #[a(href="/users/login") log in] or #[a(href="/users/signup") sign up] to start asking questions.
     block content
 
 
