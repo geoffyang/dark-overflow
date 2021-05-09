@@ -36,14 +36,14 @@ include utils.pug
                                         div(class='form-field-div')
                                             div(class='form-group')
                                                 label(for='text') Question
-                                                    textarea(name='text' class='form-control edit-question-text-field')=question.text
+                                                textarea(name='text' class='form-control edit-question-text-field')=question.text
                                         div(class='form-field-div')
                                             div(class='form-group')
                                                 label(for='chosenCategory') Choose a Category
-                                                    select(name='chosenCategory', id="" class='edit-question-category-field')
-                                                        each category in categoryList
-                                                            option(value=category.id)=category.name
-                                        div()
+                                                select(name='chosenCategory', id="" class='edit-question-category-field')
+                                                    each category in categoryList
+                                                        option(value=category.id)=category.name
+                                        div(class='edit-question-form-button-wrapper')
                                             button(type="submit" class ="ask-question-button submit-question-edit-button") Submit
                                             button(type="submit" class="ask-question-button cancel-edit-question-button") Cancel
                                 //- div(class='ask-question-form-spacing')
@@ -82,41 +82,50 @@ include utils.pug
                 div(class='question-page-question-box-userName')
                     p=`Asked by: ${question.Profile.dataValues.userName}`
         if locals.authenticated
-            form(action=`/answerquestion/${question.id}`, method="post" )
-                textarea(name="text" id="answer-text-box")
-                button( class = "answer-question-button" id = question.id type="submit") Submit
+            div(class="add-answer-wrapper")
+                div(class = "add-answer")
+                    div(class = 'title') Have an answer?
+                        div(class = 'details')
+                        form(action=`/answerquestion/${question.id}`, method="post" )
+                            div(class='form-field-div')
+                                    div(class='form-group')
+                                        label(for="answer-text") 
+                                        textarea(name="answer-text" class="answer-text-box" id="answer-text-box")
+                            div()
+                                button( class = "answer-question-button" id = question.id type="submit") Submit
         else
             span Please #[a(href="/users/login") log in] to answer questions.
-        div(id='answersDiv')
+        div(id='answersDiv' class='wrapper-for-all-answers')
             each answer in question.dataValues.Answers
-                div(id=`answer-${answer.id}-div`)=answer.text
-                    if locals.authenticated
-                        if answer.userId = user.id
-                            a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
-
-                    div(class='question-page-answer-box')
-                        p=`Answer Score: `
-                            span(class = 'question-page-answer-score' id=`A${answer.id}-score`)=answer.score
+                div(class="question-page-answer-box-outer-wrapper")
+                    div(id=`answer-${answer.id}-div`)=answer.text
                         if locals.authenticated
-                            div(class='.question-page-answer-voting-icons')
-                                - var foundPositiveVote = false
-                                - var foundNegativeVote = false
-                                each vote in answer.dataValues.AnswerVotes
-                                    if vote.userId === user.id
-                                        if vote.voteSum === 1
-                                            - foundPositiveVote = true;
-                                        if vote.voteSum === -1
-                                            - foundNegativeVote = true;
-                                if foundPositiveVote === true
-                                    i(class="far fa-caret-square-up answer-upvote-arrow upvoted-arrow", id=`A${answer.id}-up`)
-                                else
-                                    i(class="far fa-caret-square-up answer-upvote-arrow", id=`A${answer.id}-up`)
-                                if foundNegativeVote
-                                    i(class="far fa-caret-square-down answer-downvote-arrow downvoted-arrow" id=`A${answer.id}-down`)
-                                else
-                                    i(class="far fa-caret-square-down answer-downvote-arrow" id=`A${answer.id}-down`)
-                        else
-                            div(class='.question-page-answer-voting-icons')
-                                i(class="far fa-caret-square-up answer-upvote-arrow unclickable-vote-button", id=`A${answer.id}-up`)
-                                i(class="far fa-caret-square-down answer-downvote-arrow unclickable-vote-button" id=`A${answer.id}-down`)
+                            if answer.userId = user.id
+                                a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
+
+                        div(class='question-page-answer-box')
+                            p=`Answer Score: `
+                                span(class = 'question-page-answer-score' id=`A${answer.id}-score`)=answer.score
+                            if locals.authenticated
+                                div(class='.question-page-answer-voting-icons')
+                                    - var foundPositiveVote = false
+                                    - var foundNegativeVote = false
+                                    each vote in answer.dataValues.AnswerVotes
+                                        if vote.userId === user.id
+                                            if vote.voteSum === 1
+                                                - foundPositiveVote = true;
+                                            if vote.voteSum === -1
+                                                - foundNegativeVote = true;
+                                    if foundPositiveVote === true
+                                        i(class="far fa-caret-square-up answer-upvote-arrow upvoted-arrow", id=`A${answer.id}-up`)
+                                    else
+                                        i(class="far fa-caret-square-up answer-upvote-arrow", id=`A${answer.id}-up`)
+                                    if foundNegativeVote
+                                        i(class="far fa-caret-square-down answer-downvote-arrow downvoted-arrow" id=`A${answer.id}-down`)
+                                    else
+                                        i(class="far fa-caret-square-down answer-downvote-arrow" id=`A${answer.id}-down`)
+                            else
+                                div(class='.question-page-answer-voting-icons')
+                                    i(class="far fa-caret-square-up answer-upvote-arrow unclickable-vote-button", id=`A${answer.id}-up`)
+                                    i(class="far fa-caret-square-down answer-downvote-arrow unclickable-vote-button" id=`A${answer.id}-down`)
 
