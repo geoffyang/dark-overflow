@@ -13,14 +13,14 @@ html
         //2 search bar
         form(action="/searchresults", method="post")
           input(type="text" name="searchString" placeholder="Search..")
-          button(type="submit" class ="search-button" ) Go
+          button(type="submit" class ="search-button button" ) Go
         nav(class = "nav_container")
           ul
             li(class = "categories_button")
-              select(name='chosenCategory', id="", class='search-category-selector')
-                  option(value=null) Choose a question category
-                  each category in categoryList
-                      option(value=category.id)=category.name
+              //- select(name='chosenCategory', id="", class='search-category-selector')
+              //-     option(value=null) Choose a question category
+              //-     each category in categoryList
+              //-         option(value=category.id)=category.name
             li(class = "ask_question_button")
               a(href ='/askQuestions') Ask a question
 
@@ -30,14 +30,14 @@ html
           div
             span Welcome #{user.userName}
             form(action= "/users/logout" method= "post" )
-              button(type= "submit" class="logout-button") Logout
+              button(type= "submit" class="logout-button button") Logout
         else
             div(class = "login_signup")
               a(href="/users/login" )
-                button(class="login-button") Sign in
+                button(class="login-button button") Sign in
 
               a(href="/users/signup" )
-                button(class = "signup-button") Sign up
+                button(class = "signup-button button") Sign up
     block content
 
 
@@ -47,29 +47,29 @@ html
       div(class='contact-container')
         div(class='contact') Adam Lovett
           div(class='contact-link')
-            a(href='https://github.com/adamLovettApps') Github 
-            span | 
-            a(href='#') LinkedIn 
-            span | 
+            a(href='https://github.com/adamLovettApps') Github
+            span |
+            a(href='#') LinkedIn
+            span |
             a(href=`mailto:''`) Email
         div(class='contact') Andrew Musta
           div(class='contact-link')
-            a(href='https://github.com/enomilan') Github 
-            span | 
-            a(href='#') LinkedIn 
-            span | 
+            a(href='https://github.com/enomilan') Github
+            span |
+            a(href='#') LinkedIn
+            span |
             a(href=`mailto:''`) Email
         div(class='contact') Geoffery Yang
           div(class='contact-link')
-            a(href='https://github.com/geoffyang') Github 
-            span | 
-            a(href='#') LinkedIn 
-            span | 
+            a(href='https://github.com/geoffyang') Github
+            span |
+            a(href='#') LinkedIn
+            span |
             a(href=`mailto:''`) Email
         div(class='contact') James Mayfield
           div(class='contact-link')
-            a(href='https://github.com/Jodm522') Github 
-            span | 
-            a(href='#') LinkedIn 
-            span | 
+            a(href='https://github.com/Jodm522') Github
+            span |
+            a(href='#') LinkedIn
+            span |
             a(href=`mailto:''`) Email

@@ -19,6 +19,11 @@ include utils.pug
                     p(class='question-page-question-box-category-paragraph')=`${question.Category.dataValues.name}`
                 //- if question.userId === user.id
                 if locals.authenticated
+                    div(class="answerQuestionForm")
+                        label(for='text' class="answer-question-box-title") Your Answer:
+                        form(action=`/answerquestion/${question.id}`, method="post" )
+                            textarea(name="text" class="answer-text-box form-control")
+                            button( class = "answer-question-button button" id = question.id type="submit") Submit
                     if isQuestionAsker
                         div(class='question-page-delete-and-edit-question')
                             i(class="fas fa-trash delete-question-btn question-page-delete-question-icon" id = question.id)
@@ -45,8 +50,8 @@ include utils.pug
                                                         each category in categoryList
                                                             option(value=category.id)=category.name
                                         div()
-                                            button(type="submit" class ="ask-question-button submit-question-edit-button") Submit
-                                            button(type="submit" class="ask-question-button cancel-edit-question-button") Cancel
+                                            button(type="submit" class ="ask-question-button submit-question-edit-button button") Submit
+                                            button(type="submit" class="ask-question-button cancel-edit-question-button button") Cancel
                                 //- div(class='ask-question-form-spacing')
                                 //-     +field("Question", "text", question.text, "textarea")
                                 //- div(class='form-group')
@@ -83,15 +88,13 @@ include utils.pug
                 div(class='question-page-question-box-userName')
                     p=`Asked by: ${question.Profile.dataValues.userName}`
         if locals.authenticated
-            form(action=`/answerquestion/${question.id}`, method="post" )
-                textarea(name="text" id="answer-text-box")
-                button( class = "answer-question-button" id = question.id type="submit") Submit
-
+            button(class = 'answer-question-button button') Answer this question
             div(id='answersDiv') Answers:
                 each answer in question.dataValues.Answers
                     div(id=`answer-${answer.id}-div`)=answer.text
                         if answer.userId = user.id
-                            a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
+                           button(class = "delete-answer-btn anchor-button")
+                            a(href="#", id = answer.id) Delete answer
 
                         div(class='question-page-answer-box')
                             p=`Answer Score: `
@@ -99,9 +102,6 @@ include utils.pug
                             p= "Vote on answer quality"
                             i(class="fas fa-plus-circle" id=`A${answer.id}`)
                             i(class="fas fa-minus-circle" id=`A${answer.id}`)
-            div(id = 'deleteDiv')
-                if isQuestionAsker
-                    a(class = "delete-question-btn" href="#", id = question.id) Delete question
 
         else
             span Please #[a(href="/users/login") log in] to answer questions.

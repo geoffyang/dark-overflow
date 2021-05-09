@@ -13,9 +13,9 @@ block content
                     div(class='ask-question-form-spacing')
                         +field("Question", "text", "", "textarea")
                     div(class='form-group')
-                        label(for='chosenCategory') 
+                        label(for='chosenCategory')
                         select(name='chosenCategory', id="" class='ask-question-category-selector')
                             each category in categoryList
                                 option(value=category.id)=category.name
                     div()
-                        button(type="submit" class ="ask-question-button") Submit
+                        button(type="submit" class ="ask-question-button button") Submit

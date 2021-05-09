@@ -14,7 +14,6 @@ router.post(
     const userId = 1;
     const score = 0;
     const answer = await db.Answer.create({ text, score, questionId, userId });
-    console.log(answer.id);
     res.json({ answerId: answer.id });
   })
 );
