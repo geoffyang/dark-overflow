@@ -1,7 +1,8 @@
 window.addEventListener("DOMContentLoaded", async (event) => {
-
-      const upVoteQ = document.querySelector(".question-page-upvote-question-icon");
-    const downVoteQ = document.querySelector(".question-page-downvote-question-icon");
+  const upVoteQ = document.querySelector(".question-page-upvote-question-icon");
+  const downVoteQ = document.querySelector(
+    ".question-page-downvote-question-icon"
+  );
   const deleteQuestion = document.querySelector(".delete-question-btn");
   const deleteAnswers = document.querySelectorAll(".delete-answer-btn");
   const answerQuestionButton = document.querySelector(
@@ -29,7 +30,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   downVoteQ.addEventListener("click", (e) => questionVote(2, e.target.id));
 
   const upVoteA = document.querySelectorAll(".answer-upvote-arrow");
-    const downVoteA = document.querySelectorAll(".answer-downvote-arrow");;
+  const downVoteA = document.querySelectorAll(".answer-downvote-arrow");
   upVoteA.forEach((upVoteButton) => {
     upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
   });
@@ -53,7 +54,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   }
   if (cancelAnswerButton) {
     cancelAnswerButton.addEventListener("click", (e) => {
-
       e.preventDefault();
       document.querySelector(".answerQuestionForm").style.display = "none";
     });
@@ -134,7 +134,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
 
     const answerId = await postAnswer(`answerquestion/${id}`, answerTextBox);
 
-
     const newAnswerDiv = document.createElement("div");
 
     newAnswerDiv.setAttribute("id", `answer-${id}-div`);
@@ -161,6 +160,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     newAnswerDiv.appendChild(newAnswerText);
     newAnswerDiv.appendChild(newAnswerButtons);
     document.querySelector(".answerQuestionForm").style.display = "none";
+    location.reload();
   });
 
   if (deleteQuestion) {
@@ -173,7 +173,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
 
   if (deleteAnswers.length) {
     // Use a for loop to add an event listener to each answer div
-
 
     upVoteA.forEach((upVoteButton) => {
       upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
