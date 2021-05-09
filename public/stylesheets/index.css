@@ -102,7 +102,9 @@ img.logo {
 .search-button,
 .logout-button,
 .search-category-selector,
-.ask-question-category-selector {
+.ask-question-category-selector,
+.answer-question-button,
+.edit-question-category-field {
   padding: 5px 15px;
   margin: 5px;
   background-color: var(--accent-color);
@@ -118,7 +120,8 @@ img.logo {
 .search-button:hover,
 .logout-button:hover,
 .search-category-selector:hover,
-.ask-question-category-selector:hover {
+.ask-question-category-selector:hover,
+.answer-question-button:hover {
   background-color: #ff562285;
 }
 
@@ -219,6 +222,57 @@ input {
 .form-field-div {
   margin-bottom: 10px;
 }
+
+
+
+
+
+
+/*--------------------------answer form setup------------------------*/
+
+.add-answer-wrapper {
+  margin-top:-80px;
+}
+
+.add-answer {
+  max-width: 1200px;
+  width: 100%;
+  background: var(--secondary-background);
+  padding: 25px 30px;
+  border-radius: 2rem;
+  margin: 100px auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--accent-color);
+}
+.add-answer .title {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.add-answer form .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.add-answer .details {
+  margin-top: 20px;
+}
+
+.answer-text-box {
+  height: 150px;
+  width: 1150px;
+  padding: 10px;
+}
+
+.add-answer .form-control {
+  margin: 0px 0 0px 0;
+  width: calc(100% / 2- 20px);
+  height: 45px;
+}
+
+
 /*--------------------------login setup------------------------*/
 .login_user {
   max-width: 500px;
@@ -607,6 +661,31 @@ input {
   left:700px;
   top: 0px;
 }
+
+.edit-question-form-button-wrapper {
+  position: relative;
+  left: 130px;
+}
+
+
+/*--------------------------answer box setup------------------------*/
+
+.wrapper-for-all-answers {
+  margin-top: -80px;
+}
+.question-page-answer-box-outer-wrapper {
+  color: var(--text-color);
+  background-color: var(--secondary-background);
+  border: 1px solid var(--accent-color);
+  border-radius: 1rem;
+  padding: 30px;
+  width: 900px;
+  text-align: left;
+  margin-bottom: 20px;
+  position: relative;
+  left: 500px;
+}
+
 
 /*--------------------------search results page setup------------------------*/
 .no-question-found {
