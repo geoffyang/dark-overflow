@@ -52,7 +52,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   }
   if (cancelAnswerButton) {
     cancelAnswerButton.addEventListener("click", (e) => {
-      console.log("button click");
+
       e.preventDefault();
       document.querySelector(".answerQuestionForm").style.display = "none";
     });
@@ -132,31 +132,38 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     const id = e.target.id;
 
     const answerId = await postAnswer(`answerquestion/${id}`, answerTextBox);
+    
 
     const newAnswerDiv = document.createElement("div");
 
-    newAnswerDiv.setAttribute("id", `answer=${answerId}`);
-
+    newAnswerDiv.setAttribute("id", `answer-${id}-div`);
     newAnswerDiv.setAttribute("class", "answer-div");
+    const newAnswerButtons = document.createElement("div");
 
     const newAnswerDelete = document.createElement("BUTTON");
-    newAnswerDelete.innerHTML = "jasl;kdj";
-
-    //NEED the answer DIV to have the same styling as the rest of them
-
-    newAnswerDiv.innerHTML = answerTextBox.value;
-
-    answerTextBox.value = "";
-
-    answersDiv.appendChild(newAnswerDiv);
-    newAnswerDiv.appendChild(newAnswerDelete);
+    newAnswerDelete.innerHTML = "Delete answer";
     newAnswerDelete.setAttribute("class", "button");
+
+    newAnswerDelete.addEventListener("click", async (e) => {
+      e.preventDefault();
+      removeDiv(id);
+
+      await deleteItem("Answer", "answers", answerId);
+    });
+
+    newAnswerButtons.appendChild(newAnswerDelete);
+
+    const newAnswerText = document.createElement("div");
+    newAnswerText.innerHTML = answerTextBox.value;
+    answerTextBox.value = "";
+    answersDiv.appendChild(newAnswerDiv);
+    newAnswerDiv.appendChild(newAnswerText);
+    newAnswerDiv.appendChild(newAnswerButtons);
     document.querySelector(".answerQuestionForm").style.display = "none";
   });
 
   if (deleteQuestion) {
     deleteQuestion.addEventListener("click", async (e) => {
-      console.log("button clicked");
       const target = e.target;
       const id = target.id;
       await deleteItem("Question", "questions", id, "/");
@@ -166,7 +173,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   if (deleteAnswers.length) {
     // Use a for loop to add an event listener to each answer div
 
-    console.log(`upvoteA array: ${upVoteA} length ${upVoteA.length}`);
+
     upVoteA.forEach((upVoteButton) => {
       upVoteButton.addEventListener("click", (e) => answerVote(1, e.target.id));
     });
@@ -222,6 +229,7 @@ async function postAnswer(route, answerTextBox) {
 
     const data = await res.json();
     const answerId = data.answerId;
+
     return answerId;
   } catch (err) {
     console.log(err);
