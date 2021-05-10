@@ -48,6 +48,8 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
     order: [[Answer, 'score', 'DESC']],
   });
 
+  console.log(question.dataValues.Answers[3])
+
   if (!question) {
     console.log("making question error");
     let error = {
