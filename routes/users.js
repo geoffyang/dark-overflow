@@ -170,7 +170,7 @@ router.post(
   "/demo",
   csrfProtection,
   asyncHandler(async (req, res) => {
-    const user = await db.Profile.findByPk(100);
+    const user = await db.Profile.findByPk(1);
 
     loginUser(req, res, user);
     return res.redirect("/");
