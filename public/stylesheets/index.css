@@ -860,6 +860,19 @@ input {
   margin-bottom: 10px;
 }
 
+.question-page-question-box-bottom-divider {
+  border: 1px solid #ff562285;
+  border-radius: 5px;
+  margin-bottom: -40px;
+}
+
+.question-page-answer-box-divider {
+  border: 1px solid #ff562285;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
 .question-page-question-box-text {
   margin-bottom: 8px;
   overflow-wrap: break-word;
@@ -995,6 +1008,50 @@ input {
   top: 100px;
 }
 
+.open-answer-question {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.answer-upvote-arrow {
+  font-size: 16px;
+  position: relative;
+  left: 800px;
+  top: 10px;
+}
+
+.answer-downvote-arrow {
+  font-size: 16px;
+  position: relative;
+  left: 808px;
+  top: 10px;
+}
+
+.answer-score-text-box {
+  font-size: 16px;
+  position: relative;
+  left: 700px;
+  top: 25px;
+}
+
+.delete-answer-btn {
+  position: relative;
+  left: 650px;
+  top: 42px;
+}
+
+.edit-answer-btn {
+  
+  position: relative;
+  left: 655px;
+  top: 42px;
+}
+
+.question-page-answer-box-username {
+  position: relative;
+  left: 700px;
+  top: 25px;
+}
 /*--------------------------answer box setup------------------------*/
 
 .wrapper-for-all-answers {
