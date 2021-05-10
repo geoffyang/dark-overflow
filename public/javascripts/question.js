@@ -23,6 +23,8 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   const cancelEditButton = document.querySelector(
     ".cancel-edit-question-button"
   );
+
+  
   let originalTitle = "";
   let originalText = "";
   upVoteQ.addEventListener("click", (e) => questionVote(1, e.target.id));
@@ -179,12 +181,13 @@ window.addEventListener("DOMContentLoaded", async (event) => {
   }
 
   if (deleteAnswers.length) {
+    //console.log(deleteAnswers);
     // Use a for loop to add an event listener to each answer div
     for (let i = 0; i < deleteAnswers.length; i++) {
       deleteAnswers[i].addEventListener("click", async (e) => {
         const target = e.target;
         const id = target.id;
-
+        console.log(deleteAnswers);
         //pass the appropriate vairables into the deleteItem function
         removeDiv(id);
         await deleteItem("Answer", "answers", id);
@@ -208,7 +211,7 @@ const deleteItem = async function (type, route, id, reroute) {
     const res = await fetch(`/${route}/${id}`, {
       method: "DELETE",
     });
-    window.alert(`${type} sucessfully deleted.`);
+
 
     if (reroute) window.location.href = reroute;
   } catch (err) {
