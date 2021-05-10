@@ -54,9 +54,9 @@ app.use('/answerquestion', answerQuestionRouter);
 app.use('/searchresults', searchRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+// app.use(function (req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -64,9 +64,17 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  // destructure categoryList on err object and pass to render
+  const categoryList = err.categoryList.map(({ dataValues: { id, name } }) => {
+    return { "id": id, "name": name };
+  })
+
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { categoryList });
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error', {categoryList});
 });
 
 //testing comment
