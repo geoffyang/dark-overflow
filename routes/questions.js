@@ -48,7 +48,7 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
     order: [[Answer, 'score', 'DESC']],
   });
 
-  
+  // categoryList query moved up from line 106, passed to custom error obj
   const categoryList = await Category.findAll();
   if (!question) {
     console.log("making question error");
@@ -104,7 +104,7 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
   // question.toJSON().Answers.forEach(ansObj => console.log(`Here are your answer votes ${ansObj.AnswerVotes}`))
 
   const answersArray = question.toJSON().Answers;
-  // moved categoryList query up to top
+  // moved categoryList query up to line 52
   let isQuestionAsker = false;
   if (req.session.auth) {
     const { userId } = req.session.auth;
