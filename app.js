@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
 const { sequelize } = require('./db/models');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -17,7 +18,7 @@ const searchRouter = require('./routes/searchresults')
 const { restoreUser, requireAuth } = require('./auth.js')
 
 const app = express();
-
+app.use(cors);
 // view engine setup
 app.set('view engine', 'pug');
 
