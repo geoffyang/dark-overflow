@@ -1051,6 +1051,13 @@ input {
   position: relative;
   left: 700px;
   top: 25px;
+  margin-bottom: 10px;
+} 
+
+.question-page-answer-box-username-answerer {
+  position: relative;
+  left: 700px;
+  top: 30px;
 }
 /*--------------------------answer box setup------------------------*/
 
@@ -1063,7 +1070,7 @@ input {
   color: var(--text-color);
   background-color: var(--secondary-background);
   border: 1px solid var(--accent-color);
-  border-radius: 1rem;
+  border-radius: 2rem;
   padding: 30px;
   width: 900px;
   text-align: left;

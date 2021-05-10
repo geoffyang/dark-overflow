@@ -85,14 +85,23 @@ include utils.pug
                 div(id=`answer-${answer.id}-div` class="question-page-answer-box-outer-wrapper")
                     div()=answer.text
                     hr(class='question-page-answer-box-divider')
-                    div(class='question-page-answer-box-username')
-                        p=`Answered by: `
-                            span= answer.dataValues.Profile.userName
-                    if locals.authenticated
+                    if !locals.authenticated
+                        div(class='question-page-answer-box-username')
+                            p=`Answered by: `
+                                span= answer.dataValues.Profile.userName
+                    else
+                        if answer.userId !== user.id
+                            div(class='question-page-answer-box-username')
+                                p=`Answered by: `
+                                    span= answer.dataValues.Profile.userName
+                        else
+                            div(class='question-page-answer-box-username-answerer')
+                                p=`Answered by: `
+                                    span= answer.dataValues.Profile.userName
                         if answer.userId === user.id
                             i(class=`fas fa-trash delete-answer-btn` id = answer.id)
                             i(class="fas fa-edit edit-answer-btn" id = answer.id)
-                            //- a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
+                                //- a(class = "delete-answer-btn" href="#", id = answer.id) Delete answer
                     div(class='question-page-answer-box')
                         div(class='answer-score-text-box')
                             p=`Score: `

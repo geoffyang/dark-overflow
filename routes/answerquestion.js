@@ -10,8 +10,8 @@ router.post(
     const text = req.body.textToSend;
 
     const questionId = parseInt(req.params.id, 10);
-    //const { userId } = req.session.auth;
-    const userId = 1;
+    const { userId } = req.session.auth;
+
     const score = 0;
     const answer = await db.Answer.create({ text, score, questionId, userId });
     res.json({ answerId: answer.id });
