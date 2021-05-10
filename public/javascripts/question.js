@@ -146,7 +146,8 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       const newAnswerDiv = document.createElement("div");
 
       newAnswerDiv.setAttribute("id", `answer-${id}-div`);
-      newAnswerDiv.setAttribute("class", "answer-div");
+
+      newAnswerDiv.setAttribute("class", "question-page-answer-box-outer-wrapper");
       const newAnswerButtons = document.createElement("div");
 
       const newAnswerDelete = document.createElement("BUTTON");
@@ -167,7 +168,57 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       answerTextBox.value = "";
       answersDiv.appendChild(newAnswerDiv);
       newAnswerDiv.appendChild(newAnswerText);
-      newAnswerDiv.appendChild(newAnswerButtons);
+      const answerHr = document.createElement('hr');
+      answerHr.setAttribute('class', 'question-page-answer-box-divider')
+
+
+      newAnswerDiv.appendChild(answerHr);
+      const usernameBox = document.createElement('div');
+      let userForBox = document.getElementById('layout-greeter').innerText;
+      userForBox = userForBox.split(' ')[1];
+      usernameBox.setAttribute('class', 'question-page-answer-box-username-answerer');
+      usernameBox.innerText = `Answered by: ${userForBox}`;
+      newAnswerDiv.appendChild(usernameBox);
+      //newAnswerDiv.appendChild(newAnswerButtons);
+      const deleteAnswerButton = document.createElement('i');
+      deleteAnswerButton.setAttribute('class', 'fas');
+      deleteAnswerButton.classList.add('fa-trash');
+      deleteAnswerButton.classList.add('delete-answer-btn');
+      deleteAnswerButton.setAttribute('id', id);
+      const editAnswerButton = document.createElement('i');
+      editAnswerButton.setAttribute('class', 'fas');
+      editAnswerButton.classList.add('fa-edit');
+      editAnswerButton.classList.add('edit-answer-btn');
+      editAnswerButton.setAttribute('id', id);
+      console.log(deleteAnswerButton);
+      newAnswerDiv.appendChild(deleteAnswerButton);
+      deleteAnswerButton.addEventListener("click", async (e) => {
+        newAnswerDiv.parentNode.removeChild(newAnswerDiv);
+        await deleteItem("Answer", "answers", answerId);
+      });
+      newAnswerDiv.appendChild(editAnswerButton);
+      newAnswerDiv.style.paddingBottom = "30px";
+      const scoreBox = document.createElement('div');
+      scoreBox.setAttribute('class', 'answer-score-text-box');
+      const scorePara = document.createElement('p');
+      scorePara.innerHTML = `Score: <span 'question-page-answer-score' id=A${answerId}-score>0</span>`
+      scoreBox.appendChild(scorePara);
+      newAnswerDiv.appendChild(scoreBox);
+      const upvoteAnswerButton = document.createElement('i');
+      upvoteAnswerButton.setAttribute('class', 'far');
+      upvoteAnswerButton.classList.add('fa-caret-square-up');
+      upvoteAnswerButton.classList.add('answer-upvote-arrow');
+      upvoteAnswerButton.setAttribute('id', `A${answerId}-up`);
+      newAnswerDiv.appendChild(upvoteAnswerButton);
+      const downvoteAnswerButton = document.createElement('i');
+      downvoteAnswerButton.setAttribute('class', 'far');
+      downvoteAnswerButton.classList.add('fa-caret-square-down');
+      downvoteAnswerButton.classList.add('answer-upvote-arrow');
+      downvoteAnswerButton.setAttribute('id', `A${answerId}-down`);
+      newAnswerDiv.appendChild(downvoteAnswerButton);
+      upvoteAnswerButton.style.marginRight = "8px";
+      upvoteAnswerButton.addEventListener("click", (e) => answerVote(1, e.target.id));
+      downvoteAnswerButton.addEventListener("click", (e) => answerVote(2, e.target.id));
       document.querySelector(".answerQuestionForm").style.display = "none";
     });
   }

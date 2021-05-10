@@ -1059,6 +1059,10 @@ input {
   left: 700px;
   top: 30px;
 }
+
+.new-answer-padding {
+  padding-bottom:200px;
+}
 /*--------------------------answer box setup------------------------*/
 
 .wrapper-for-all-answers {
