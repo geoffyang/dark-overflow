@@ -31,6 +31,7 @@ body {
   text-align: center;
   background-color: var(--main-background);
   color: var(--text-color);
+  overflow-x: hidden;
 }
 /* dropdown list setup */
 option {
@@ -874,7 +875,7 @@ input {
   z-index: 10;
   top: 50%;
   position: absolute;
-  left: 50%;
+  left: 650px;
   margin-top: -212px;
 }
 .answer-text-box {
@@ -984,11 +985,16 @@ input {
   left: 130px;
 }
 
+.wrapper-for-all-answers {
+  top: 100px;
+}
 
 /*--------------------------answer box setup------------------------*/
 
 .wrapper-for-all-answers {
-  margin-top: -80px;
+  margin: auto;
+  width:900px;
+
 }
 .question-page-answer-box-outer-wrapper {
   color: var(--text-color);
@@ -999,7 +1005,7 @@ input {
   width: 900px;
   text-align: left;
   margin-bottom: 20px;
-  position: relative;
+  
   left: 500px;
 }
 
