@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
 const { sequelize } = require('./db/models');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -17,6 +18,8 @@ const searchRouter = require('./routes/searchresults')
 const { restoreUser, requireAuth } = require('./auth.js')
 
 const app = express();
+
+
 
 // view engine setup
 app.set('view engine', 'pug');
@@ -41,7 +44,10 @@ app.use(
 
 // create Session table if it doesn't already exist
 store.sync();
-
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    next();
+});
 app.use(restoreUser);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

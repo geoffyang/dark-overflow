@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  if !locals.authenticated
+    div(class='login-or-signup-prompt')
+      span Please #[a(href="/users/login") log in] or #[a(href="/users/signup") sign up] to start asking questions.
   h1(class='landing-page-title') Welcome to Dark Overflow 
   .content-slider
     .slider

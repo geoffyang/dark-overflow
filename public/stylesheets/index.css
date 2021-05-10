@@ -824,6 +824,7 @@ input {
   border-radius: 2rem;
   padding: 30px;
   width: 1200px;
+  margin-bottom: 20px;
   text-align: left;
 }
 .answer-div {
@@ -1062,6 +1063,11 @@ input {
 
 .new-answer-padding {
   padding-bottom:200px;
+}
+
+.open-answer-question {
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
 /*--------------------------answer box setup------------------------*/
 

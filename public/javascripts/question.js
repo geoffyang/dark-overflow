@@ -89,7 +89,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       if (title.trim() && text.trim()) {
         try {
           const res = await fetch(
-            `http://localhost:8080/askquestions/${questionId}`,
+            `/askquestions/${questionId}`,
             {
               method: "POST",
               headers: {
@@ -190,7 +190,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       editAnswerButton.classList.add('fa-edit');
       editAnswerButton.classList.add('edit-answer-btn');
       editAnswerButton.setAttribute('id', id);
-      console.log(deleteAnswerButton);
       newAnswerDiv.appendChild(deleteAnswerButton);
       deleteAnswerButton.addEventListener("click", async (e) => {
         newAnswerDiv.parentNode.removeChild(newAnswerDiv);
@@ -238,7 +237,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       deleteAnswers[i].addEventListener("click", async (e) => {
         const target = e.target;
         const id = target.id;
-        console.log(deleteAnswers);
         //pass the appropriate vairables into the deleteItem function
         removeDiv(id);
         await deleteItem("Answer", "answers", id);
@@ -274,7 +272,7 @@ async function postAnswer(route, answerTextBox) {
   textToSend = answerTextBox.value;
 
   try {
-    const res = await fetch(`http://localhost:8080/${route}`, {
+    const res = await fetch(`/${route}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
 
@@ -297,7 +295,7 @@ async function questionVote(upOrDownCode, questionId) {
 
   if (upOrDownCode === 1 && upVoteQ.classList.contains("upvoted-arrow")) {
     try {
-      await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+      await fetch(`/questions/${questionId}/vote`, {
         method: `DELETE`,
       });
     } catch (err) {
@@ -310,7 +308,7 @@ async function questionVote(upOrDownCode, questionId) {
 
   if (upOrDownCode === 2 && downVoteQ.classList.contains("downvoted-arrow")) {
     try {
-      await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+      await fetch(`/questions/${questionId}/vote`, {
         method: `DELETE`,
       });
     } catch (err) {
@@ -326,12 +324,12 @@ async function questionVote(upOrDownCode, questionId) {
       downVoteQ.classList.contains("downvoted-arrow") ||
       upVoteQ.classList.contains("upvoted-arrow")
     ) {
-      await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+      await fetch(`/questions/${questionId}/vote`, {
         method: `DELETE`,
       });
     }
     await fetch(
-      `http://localhost:8080/questions/${questionId}/vote/${upOrDownCode}`,
+      `/questions/${questionId}/vote/${upOrDownCode}`,
       { method: `POST` }
     );
 
@@ -363,7 +361,7 @@ async function answerVote(upOrDownCode, answerId) {
     // previously voted
     if (upOrDownCode === 1 && upvoteButton.classList.contains("upvoted-arrow")) {
         try {
-            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+            await fetch(`/answers/${answerId}/vote`, {
                 method: `DELETE`,
             });
         } catch (err) {
@@ -377,7 +375,7 @@ async function answerVote(upOrDownCode, answerId) {
     // previously voted
     if (upOrDownCode === 2 && downvoteButton.classList.contains("downvoted-arrow")) {
         try {
-            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+            await fetch(`/answers/${answerId}/vote`, {
                 method: `DELETE`,
             });
         } catch (err) {
@@ -391,12 +389,12 @@ async function answerVote(upOrDownCode, answerId) {
     // fresh vote
     try {
         if (downvoteButton.classList.contains("downvoted-arrow") || upvoteButton.classList.contains("upvoted-arrow")) {
-            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+            await fetch(`/answers/${answerId}/vote`, {
                 method: `DELETE`,
             });
         }
         await fetch(
-            `http://localhost:8080/answers/${answerId}/vote/${upOrDownCode}`,
+            `/answers/${answerId}/vote/${upOrDownCode}`,
             { method: `POST` }
         );
 
