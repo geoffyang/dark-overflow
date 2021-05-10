@@ -26,7 +26,7 @@ html
         //5 if logged in, need logout button on far right
         if locals.authenticated
           div
-            span Welcome #{user.userName}
+            span(class='layout-greeter' id='layout-greeter') Welcome #{user.userName}
             div(class='logged-in-nav-buttons')
               a(href ='/askQuestions')
                 button(class="ask-question-button button") Ask a Question
