@@ -69,9 +69,7 @@ app.use(function (err, req, res, next) {
     return { "id": id, "name": name };
   })
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error', { categoryList });
+
   // render the error page
   res.status(err.status || 500);
   res.render('error', {categoryList});
