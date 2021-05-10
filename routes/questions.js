@@ -48,17 +48,18 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
     order: [[Answer, 'score', 'DESC']],
   });
 
-  console.log(question.dataValues.Answers[3])
-
+  // categoryList query moved up from line 106, passed to custom error obj
+  const categoryList = await Category.findAll();
   if (!question) {
     console.log("making question error");
     let error = {
       status: 404,
       typeOf: "question",
       message: "Not found",
+      categoryList: categoryList
     };
 
-    next(error);
+    return next(error);
   }
   //database handle questionVotes
   const questionScore = await QuestionVote.findAll({
@@ -103,7 +104,7 @@ router.get("/:id", csrfProtection, async (req, res, next) => {
   // question.toJSON().Answers.forEach(ansObj => console.log(`Here are your answer votes ${ansObj.AnswerVotes}`))
 
   const answersArray = question.toJSON().Answers;
-  const categoryList = await Category.findAll();
+  // moved categoryList query up to line 52
   let isQuestionAsker = false;
   if (req.session.auth) {
     const { userId } = req.session.auth;
