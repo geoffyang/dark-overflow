@@ -21,23 +21,24 @@ html
                   option(value=null) Choose a question category
                   each category in categoryList
                       option(value=category.id)=category.name
-            li(class = "ask_question_button")
-              a(href ='/askQuestions') Ask a question
 
 
         //5 if logged in, need logout button on far right
         if locals.authenticated
           div
             span Welcome #{user.userName}
-            form(action= "/users/logout" method= "post" )
-              button(type= "submit" class="logout-button button") Logout
+            div(class='logged-in-nav-buttons')
+              a(href ='/askQuestions')
+                button(class="ask-question-button button") Ask a Question
+              form(action= "/users/logout" method= "post" )
+                button(type= "submit" class="logout-button button") Logout
         else
             div(class = "login_signup")
               a(href="/users/login" )
                 button(class="login-button button") Sign in
 
               a(href="/users/signup" )
-                button(class = "signup-button") Sign up
+                button(class = "signup-button button") Sign up
 
     if !locals.authenticated
         div(class='login-or-signup-prompt')
