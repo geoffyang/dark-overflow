@@ -190,7 +190,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       editAnswerButton.classList.add('fa-edit');
       editAnswerButton.classList.add('edit-answer-btn');
       editAnswerButton.setAttribute('id', id);
-      console.log(deleteAnswerButton);
       newAnswerDiv.appendChild(deleteAnswerButton);
       deleteAnswerButton.addEventListener("click", async (e) => {
         newAnswerDiv.parentNode.removeChild(newAnswerDiv);
@@ -238,7 +237,6 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       deleteAnswers[i].addEventListener("click", async (e) => {
         const target = e.target;
         const id = target.id;
-        console.log(deleteAnswers);
         //pass the appropriate vairables into the deleteItem function
         removeDiv(id);
         await deleteItem("Answer", "answers", id);
@@ -396,7 +394,7 @@ async function answerVote(upOrDownCode, answerId) {
             });
         }
         await fetch(
-            `/${answerId}/vote/${upOrDownCode}`,
+            `/answers/${answerId}/vote/${upOrDownCode}`,
             { method: `POST` }
         );
 
