@@ -824,6 +824,7 @@ input {
   border-radius: 2rem;
   padding: 30px;
   width: 1200px;
+  margin-bottom: 10px;
   text-align: left;
 }
 .answer-div {
