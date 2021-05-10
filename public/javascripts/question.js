@@ -89,7 +89,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       if (title.trim() && text.trim()) {
         try {
           const res = await fetch(
-            `http://localhost:8080/askquestions/${questionId}`,
+            `/askquestions/${questionId}`,
             {
               method: "POST",
               headers: {
@@ -274,7 +274,7 @@ async function postAnswer(route, answerTextBox) {
   textToSend = answerTextBox.value;
 
   try {
-    const res = await fetch(`http://localhost:8080/${route}`, {
+    const res = await fetch(`/${route}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
 
@@ -297,7 +297,7 @@ async function questionVote(upOrDownCode, questionId) {
 
   if (upOrDownCode === 1 && upVoteQ.classList.contains("upvoted-arrow")) {
     try {
-      await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+      await fetch(`/questions/${questionId}/vote`, {
         method: `DELETE`,
       });
     } catch (err) {
@@ -310,7 +310,7 @@ async function questionVote(upOrDownCode, questionId) {
 
   if (upOrDownCode === 2 && downVoteQ.classList.contains("downvoted-arrow")) {
     try {
-      await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+      await fetch(`/questions/${questionId}/vote`, {
         method: `DELETE`,
       });
     } catch (err) {
@@ -326,12 +326,12 @@ async function questionVote(upOrDownCode, questionId) {
       downVoteQ.classList.contains("downvoted-arrow") ||
       upVoteQ.classList.contains("upvoted-arrow")
     ) {
-      await fetch(`http://localhost:8080/questions/${questionId}/vote`, {
+      await fetch(`/questions/${questionId}/vote`, {
         method: `DELETE`,
       });
     }
     await fetch(
-      `http://localhost:8080/questions/${questionId}/vote/${upOrDownCode}`,
+      `/questions/${questionId}/vote/${upOrDownCode}`,
       { method: `POST` }
     );
 
@@ -363,7 +363,7 @@ async function answerVote(upOrDownCode, answerId) {
     // previously voted
     if (upOrDownCode === 1 && upvoteButton.classList.contains("upvoted-arrow")) {
         try {
-            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+            await fetch(`/answers/${answerId}/vote`, {
                 method: `DELETE`,
             });
         } catch (err) {
@@ -377,7 +377,7 @@ async function answerVote(upOrDownCode, answerId) {
     // previously voted
     if (upOrDownCode === 2 && downvoteButton.classList.contains("downvoted-arrow")) {
         try {
-            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+            await fetch(`/answers/${answerId}/vote`, {
                 method: `DELETE`,
             });
         } catch (err) {
@@ -391,12 +391,12 @@ async function answerVote(upOrDownCode, answerId) {
     // fresh vote
     try {
         if (downvoteButton.classList.contains("downvoted-arrow") || upvoteButton.classList.contains("upvoted-arrow")) {
-            await fetch(`http://localhost:8080/answers/${answerId}/vote`, {
+            await fetch(`/answers/${answerId}/vote`, {
                 method: `DELETE`,
             });
         }
         await fetch(
-            `http://localhost:8080/answers/${answerId}/vote/${upOrDownCode}`,
+            `/${answerId}/vote/${upOrDownCode}`,
             { method: `POST` }
         );
 
