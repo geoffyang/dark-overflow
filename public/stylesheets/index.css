@@ -1011,7 +1011,7 @@ input {
 
 .open-answer-question {
   margin-top: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .answer-upvote-arrow {
@@ -1074,7 +1074,7 @@ input {
 .wrapper-for-all-answers {
   margin: auto;
   width:900px;
-
+  margin-top: 10px;
 }
 .question-page-answer-box-outer-wrapper {
   color: var(--text-color);
