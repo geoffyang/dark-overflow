@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "dark_overflow_user",
-    "password": "password1",
-    "database": "dark_overflow_db",
-    "host": "localhost",
-    "dialect": "postgres",
-    "operatorsAliases": false,
-    "logging": false
+    // "username": "dark_overflow_user",
+    // "password": "password1",
+    // "database": "dark_overflow_db",
+    // "host": "localhost",
+    // "dialect": "postgres",
+    // "operatorsAliases": false,
+    // "logging": false
   }
 }
