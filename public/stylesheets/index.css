@@ -1065,8 +1065,9 @@ input {
   padding-bottom:200px;
 }
 
-.open-answer-question button {
-  margin-bottom: 10px;
+.open-answer-question {
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
 /*--------------------------answer box setup------------------------*/
 
